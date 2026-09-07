@@ -1,0 +1,58 @@
+site_name: 網路課程筆記 - 實體層與資料連接層
+site_description: 課程整理，寫給沒上課也能看懂的人
+theme:
+  name: material
+  language: zh-TW
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切換深色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切換淺色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - content.code.copy
+    - search.suggest
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 首頁: index.md
+  - 實體層 Physical Layer:
+      - 概論: physical-layer/index.md
+      - 傳輸媒介: physical-layer/media.md
+      - 訊號與編碼: physical-layer/signal-encoding.md
+      - 調變技術: physical-layer/modulation.md
+      - 傳輸模式: physical-layer/transmission-modes.md
+      - 常見標準: physical-layer/standards.md
+  - 資料連接層 Data Link Layer:
+      - 概論: data-link-layer/index.md
+      - 成框 Framing: data-link-layer/framing.md
+      - 錯誤偵測與更正: data-link-layer/error-detection.md
+      - 流量控制: data-link-layer/flow-control.md
+      - MAC 子層: data-link-layer/mac-sublayer.md
+      - 常見協定: data-link-layer/protocols.md
