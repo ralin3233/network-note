@@ -107,12 +107,12 @@ Manchester     |   |    |  |   |   |   |   |    |   |   |  |   |
 
 ```mermaid
 graph TD
-    subgraph 方向維度
+    subgraph SG_DIR ["方向維度"]
     S["單工 (Simplex)<br>單向廣播 (如收音機、電視)"]
     HD["半雙工 (Half-Duplex)<br>雙向但不可同時 (如對講機、早期 Hub)"]
     FD["全雙工 (Full-Duplex)<br>雙向且可同時傳收 (如現代 Switch、電話)"]
     end
-    subgraph 線路維度
+    subgraph SG_LINE ["線路維度"]
     PAR["並列傳輸 (Parallel)<br>多條線同時送多個 bits (如舊型印表機 LPT)"]
     SER["串列傳輸 (Serial)<br>單條線路依序送 bit (如 USB, PCIe, Ethernet)"]
     end

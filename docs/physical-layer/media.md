@@ -10,7 +10,7 @@
 
 ```mermaid
 graph LR
-    subgraph 導向式媒介
+    subgraph SG_GUIDED ["導向式媒介"]
     TP["雙絞線 (Twisted Pair)<br>雙金屬線互相纏繞<br>成本低、靈活、短中距離"]
     COAX["同軸電纜 (Coaxial)<br>中心導體 + 金屬屏蔽網<br>抗干擾好、早期有線電視"]
     FIBER["光纖 (Fiber Optic)<br>高純度玻璃纖維 (全反射)<br>頻寬極大、長距離骨幹"]

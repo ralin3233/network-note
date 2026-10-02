@@ -1,164 +1,500 @@
-# 5. 無線傳輸與調變技術 (Wireless Transmission & Modulation)
+# 4. 數位調變、解調與適應性傳輸機制 (Modulation, Demodulation & AMC)
 
-在前面的章節中，我們從單一**正弦波**出發，了解了**方波的傅立葉構成**與**頻寬極限**。本節將帶你進入實體層最精彩的篇章：**如何將資料透過無線電波（空中大氣）發射到千家萬戶？**
+在前面章節中，我們掌握了正弦波通式、方波傅立葉展開以及頻寬與頻譜搬移的五大性質。
+
+本章將進入實體層最核心的應用領域：**如何將電腦中的數位位元（0 與 1），透過類比正弦電磁波發射到空中？接收端如何精準解調還原？在雜訊多變的環境下，系統如何動態選擇最佳調變策略？**
 
 ---
 
-## 為什麼無線傳輸不能直接發射數位方波？
+## 為什麼需要調變？從位元到電波 (Bits $\to$ Wave)
 
-在有線電纜中，我們可以直接用高低電壓（基頻傳輸）送出 0 與 1。但在無線通訊中，這在物理上是**完全不可行**的，原因有二：
+電腦內部只認識離散的 **0 與 1**（數位基頻訊號），但大氣傳輸介質只能有效傳播連續變化的 **高頻電磁波**（類比帶通訊號）。
+
+```mermaid
+graph LR
+    BITS["數位資料 (Bits)<br/>1 0 1 1 0 0 1"] -->|"調變 (Modulation)"| WAVE["類比高頻波形 (Wave)<br/>s(t) = A cos(2πfc t + θ)"]
+    WAVE -->|"大氣無線傳播"| RECV["接收端天線"]
+    RECV -->|"解調 (Demodulation)"| RESTORE["還原數位位元<br/>1 0 1 1 0 0 1"]
+```
+
+### 正弦載波的三大調變特徵
+回顧正弦載波通式：
+
+$$s(t) = A \cdot \cos(2\pi f_c t + \theta)$$
+
+我們可以在每個時間區間內，透過改變正弦波的 **三個物理維度** 來攜帶數位資訊：
+1. **振幅 (Peak Amplitude, $A$)** $\implies$ **振幅移鍵 (ASK, Amplitude Shift Keying)**
+2. **相位 (Phase, $\theta$)** $\implies$ **相位移鍵 (PSK, Phase Shift Keying)**
+3. **振幅與相位同時改變 ($A + \theta$)** $\implies$ **正交振幅調變 (QAM, Quadrature Amplitude Modulation)**
+
+---
+
+## 核心概念：位元 (Bit) vs 符號 (Symbol)
+
+在調變技術中，釐清「位元」與「符號」的差別是理解高速通訊的關鍵：
+
+- **符號 (Symbol / Baud)**：發送端在單位時間內送出的一次「波形狀態」。
+- **位元 (Bit)**：資訊的基本單位（0 或 1）。
 
 ```mermaid
 graph TD
-    A["基頻方波 (Baseband) <br> 頻率極低 (kHz ~ 幾 MHz)"] --> B["❌ 天線尺寸定律 <br> 天線長度 ≈ λ/4 <br> 低頻波長巨大，天線需幾十公里長！"]
-    A --> C["❌ 共享介質干擾 <br> 空氣中所有裝置頻率撞在一起 <br> 無法做分頻多工 (FDM)"]
+    SYM["一個調變符號 (Symbol)"] -->|"狀態數 = 2 (如 0, 1)"| B1["每個符號攜帶 1 個 bit (log2 2 = 1)"]
+    SYM -->|"狀態數 = 4 (如 4 種振幅/相位)"| B2["每個符號攜帶 2 個 bits (log2 4 = 2)"]
+    SYM -->|"狀態數 = 16 (16-QAM)"| B4["每個符號攜帶 4 個 bits (log2 16 = 4)"]
+    SYM -->|"狀態數 = 1024 (1024-QAM)"| B10["每個符號攜帶 10 個 bits (log2 1024 = 10)"]
+```
+
+$$\text{Bits per Symbol} = \log_2(\text{狀態總數})$$
+
+> **直觀比喻**：
+> - 符號是一輛輛開出去的「貨車」（符號率 Baud Rate 即每秒發出幾輛車）。
+> - 位元是貨車上裝載的「貨物」（位元率 Bit Rate 即每秒運送了多少貨物）。
+> - 提升傳輸率有兩種方法：**把車開得更快（提高頻寬）**，或是**每輛車裝更多貨物（高階調變）**！
+
+---
+
+## 1. 振幅移鍵 (Amplitude Shift Keying, ASK)
+
+### 1.1 二元振幅移鍵 (Binary ASK, BASK)
+BASK 是最直觀的調變方式（又稱 OOK, On-Off Keying）：
+- **傳送 Bit 1**：發射振幅為 $A$ 的載波波形 $A\cos(2\pi f_c t)$。
+- **傳送 Bit 0**：發射振幅為 $0$（完全不發射訊號）。
+
+```mermaid
+graph LR
+    subgraph SG_BASK ["BASK 時域波形對照"]
+    T1["Bit 1 (區間 1)<br/>發射載波波形<br/>s(t) = A cos(2πfc t)"] --> T2["Bit 0 (區間 2)<br/>完全靜默無電壓<br/>s(t) = 0"] --> T3["Bit 1 (區間 3)<br/>發射載波波形<br/>s(t) = A cos(2πfc t)"]
+    end
+```
+
+#### BASK 數學模型：
+$$s(t) = \begin{cases} A \cos(2\pi f_c t), & \text{傳送 bit } 1 \\ 0, & \text{傳送 bit } 0 \end{cases}$$
+
+#### BASK 硬體實現結構：
+BASK 只需要一個乘法器（Multiplier）與本地振盪器（Oscillator）：
+
+```mermaid
+graph LR
+    DATA["數位單極性基頻方波<br/>(位元寬度 τ, 電位 1V / 0V)"] --> MULT["乘法器 (Multiplier)"]
+    OSC["本地高頻振盪器<br/>產生載波 cos(2πfc t)"] --> MULT
+    MULT --> TX["調變後帶通訊號 s(t)"]
+```
+
+#### 脈衝時間 $\tau$ 與頻寬/位元率的關係：
+- 單一脈衝時間為 $\tau$（秒）。
+- **位元傳輸率 (Bit Rate)**：$\text{Bit Rate} = \frac{1}{\tau}\text{ bps}$。
+- **有效頻寬 (Effective Bandwidth)**：$\text{Effective BW} \propto \frac{1}{\tau}$。
+  - 脈衝拉長（$\tau \uparrow$）$\implies$ 傳輸速度變慢（Bit Rate $\downarrow$）$\implies$ 佔用頻寬變小（BW $\downarrow$）。
+  - 脈衝壓縮（$\tau \downarrow$）$\implies$ 傳輸速度變快（Bit Rate $\uparrow$）$\implies$ 佔用頻寬變大（BW $\uparrow$）。
+
+---
+
+### 1.2 多階振幅移鍵 (M-ary ASK, 如 4-ASK)
+如果我們不只用「有波/無波」，而是定義 **4 種不同振幅等級**：
+
+| 傳送位元組合 | 代表符號 (Symbol) | 峰值振幅大小 |
+|:---:|:---:|:---:|
+| `00` | 符號 0 | $0.25 A$ |
+| `01` | 符號 1 | $0.50 A$ |
+| `10` | 符號 2 | $0.75 A$ |
+| `11` | 符號 3 | $1.00 A$ |
+
+```mermaid
+graph LR
+    subgraph SG_2ASK ["2-ASK (BASK)"]
+    S1["1 bit / symbol<br/>Bit Rate = 1/τ bps"]
+    end
+    subgraph SG_4ASK ["4-ASK"]
+    S2["2 bits / symbol<br/>Bit Rate = 2/τ bps (速度加倍！)"]
+    end
+```
+
+> **代價與限制**：
+> 振幅越大，代表發射功率越高（$\text{Power} \propto A^2$）。若要區分更多振幅等級（如 32-ASK），相鄰振幅差值極小，極易受雜訊干擾而誤判。
+
+---
+
+## 2. 相位移鍵 (Phase Shift Keying, PSK)
+
+在無線通訊中，振幅很容易受到大氣衰減與障礙物干擾；**保持振幅固定，改為改變訊號的「相位」**，抗雜訊能力遠優於 ASK。
+
+### 2.1 二元相位移鍵 (Binary PSK, BPSK)
+- **傳送 Bit 0**：相位偏移 $0^\circ$（波形為 $+\cos(2\pi f_c t)$）。
+- **傳送 Bit 1**：相位偏移 $180^\circ$（波形顛倒，為 $-\cos(2\pi f_c t)$）。
+
+```mermaid
+sequenceDiagram
+    participant Bit0 as "Bit 0 (相位 0°)"
+    participant Bit1 as "Bit 1 (相位 180°)"
+    participant Bit0_next as "Bit 0 (相位 0°)"
+    Note over Bit0: 正常相位從波峰起跑 (+cos)
+    Note over Bit1: 相位瞬間翻轉 180° 從波谷起跑 (-cos)
+    Note over Bit0_next: 再次翻轉回 0° (+cos)
+```
+
+#### BPSK 硬體實現：
+將位元流轉為雙極性脈衝（$+1\text{V}$ 代表 0，$-1\text{V}$ 代表 1），再直接與載波相乘：
+
+```mermaid
+graph LR
+    DATA["雙極性基頻脈衝<br/>Bit 0 → +1V<br/>Bit 1 → -1V"] --> MULT["乘法器"]
+    OSC["本地振盪器 cos(2πfc t)"] --> MULT
+    MULT --> BPSK_SIG["BPSK 訊號<br/>(±1) · cos(2πfc t)"]
+```
+
+---
+
+### 2.2 四相相位移鍵 (Quadrature PSK, QPSK)
+QPSK 每次傳送 **2 個位元**，利用 4 個互相間隔 $90^\circ$ 的正交相位表示：
+
+| 位元組合 (2 bits) | 相位偏移 (Phase) | 對應三角函數疊加 |
+|:---:|:---:|:---:|
+| `11` | $45^\circ$ ($\pi/4$) | $+\cos(x) + \sin(x)$ |
+| `01` | $135^\circ$ ($3\pi/4$) | $-\cos(x) + \sin(x)$ |
+| `00` | $225^\circ$ ($5\pi/4$) | $-\cos(x) - \sin(x)$ |
+| `10` | $315^\circ$ ($7\pi/4$) | $+\cos(x) - \sin(x)$ |
+
+#### 為什麼 $\pm\cos(x) \pm\sin(x)$ 恰好代表四個相位？（幾何疊加原理）
+根據三角函數疊加公式：
+$$\cos(x) + \sin(x) = \sqrt{2}\left(\frac{1}{\sqrt{2}}\cos x + \frac{1}{\sqrt{2}}\sin x\right) = \sqrt{2}\cos(x - 45^\circ)$$
+$$-\cos(x) + \sin(x) = \sqrt{2}\cos(x - 135^\circ)$$
+
+4 種正負號組合恰好均勻切分圓周的四個象限（$45^\circ, 135^\circ, 225^\circ, 315^\circ$）！
+
+---
+
+### 2.3 QPSK 發射端硬體實現架構（2 個 BPSK 的平行組合）
+
+QPSK 本質上就是 **兩個平行的 BPSK** 同時在同一個頻率上傳送：
+
+```mermaid
+graph TD
+    BITSTREAM["輸入位元流: 0 0 1 0 0 1 1 1 ..."] --> DEMUX["2-to-1 串並轉換器 (Demux)"]
     
-    MOD["⚡ 帶通調變 (Modulation) <br> 將基頻訊號載入高頻正弦載波 (e.g. 2.4 GHz)"]
-    B --> MOD
-    C --> MOD
-    MOD --> D["✔ 天線僅需幾公分 (如手機天線)"]
-    MOD --> E["✔ 不同頻道互不干擾 (分頻多工)"]
-```
-
-1. **天線尺寸的物理定律 (Antenna Size)**：
-   - 物理學證明：天線的有效長度必須與電磁波的波長成正比（通常為 $\frac{\lambda}{4}$ 或 $\frac{\lambda}{2}$）。
-   - 若直接發射 $3\text{ kHz}$ 的音訊基頻訊號，其波長 $\lambda = \frac{c}{f} = \frac{3 \times 10^8}{3000} = 100\text{ 公里}$，你需要建造一座 **25 公里長的天線**！
-   - 若將訊號調變到 $2.4\text{ GHz}$（Wi-Fi 頻段），波長縮短為 $\lambda = \frac{3 \times 10^8}{2.4 \times 10^9} = 12.5\text{ cm}$，天線只需 **$3.1\text{ cm}$**，能輕鬆塞入手機內部。
-2. **頻譜共享與多工 (Frequency-Division Multiplexing, FDM)**：
-   - 空氣是所有人共用的介質。如果大家都發送低頻基頻訊號，所有訊號將在空中混成一團雜訊。
-   - 透過調變，可以把不同電台、不同 Wi-Fi 頻道「搬移」到不同的高頻載波（Carrier）上，彼此井水不犯河水。
-
----
-
-## 調變的本質：回到正弦波通式
-
-還記得第一節學過的正弦波通式嗎？
-
-$$s(t) = A(t) \cos(2\pi f(t) t + \phi(t))$$
-
-**調變 (Modulation)** 的本質，就是以一個高頻的純淨正弦波作為「載波 (Carrier Wave)」，並**利用要傳送的數位位元 (0 與 1)，去動態改變載波的三大物理量之一（或組合）**：
-
-```
-                    ┌── 振幅調變 ──> ASK (Amplitude Shift Keying)
-  數位位元 (0/1) ───┼── 頻率調變 ──> FSK (Frequency Shift Keying)
-                    ├── 相位調變 ──> PSK (Phase Shift Keying)
-                    └── 振幅 + 相位 ─> QAM (Quadrature Amplitude Modulation)
-```
-
----
-
-## 三大基本數位調變技術
-
-```
-位元流：         1             0             1             1
-            +-------+                     +-------+     +-------+
-基頻訊號：  |       |                     |       |     |       |
-            +       +---------------------+       +-----+       +----
-
-載波 (高頻)： ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-ASK (調振幅)   /\/\/\/\                     /\/\/\/\      /\/\/\/\
-            (有訊號=1)      (平坦無訊號=0)   (有訊號=1)    (有訊號=1)
-
-FSK (調頻率)   /\/\/\/\/\     \  /  \  /    /\/\/\/\/\    /\/\/\/\/\
-             (高頻密=1)       (低頻疏=0)     (高頻密=1)    (高頻密=1)
-
-PSK (調相位)   /\/\  \/\     /\/\  \/\     /\/\  \/\     /\/\  \/\
-                   ^             ^             ^
-                (遇到0時波形相位顛倒 180 度翻轉)
-```
-
-### 1. ASK (Amplitude Shift Keying, 振幅偏移調變)
-- **原理**：用載波的「振幅大小」代表位元。
-- **OOK (On-Off Keying)**：最簡單的 ASK，有載波輸出代表 `1`，無載波（振幅為 0）代表 `0`。
-- **優缺點**：電路最簡單，但**極易受雜訊干擾與訊號衰減影響**（空氣中的雜訊通常直接作用在振幅上）。
-
-### 2. FSK (Frequency Shift Keying, 頻率偏移調變)
-- **原理**：用載波的「頻率高低」代表位元。
-  - 頻率 $f_1$ 代表 `1`，頻率 $f_2$ 代表 `0`。
-- **優缺點**：抗雜訊能力優於 ASK（因為干擾通常不影響頻率），但**需要佔用較寬的頻譜空間**。早期低速數據機與藍牙基本速率常用。
-
-### 3. PSK (Phase Shift Keying, 相位偏移調變)
-- **原理**：載波的振幅與頻率保持不變，用載波的「初始相位角度」來代表位元。
-- **優點**：**抗干擾能力最強**，且功率利用率極高，是現代無線通訊（Wi-Fi、4G/5G、衛星通訊）的核心基礎。
-
-#### PSK 家族演進：
-- **BPSK (Binary PSK)**：使用 2 種相位（$0^\circ, 180^\circ$）。
-  - 每個 Symbol 攜帶 **$1\text{ bit}$**（$\log_2(2) = 1$）。
-- **QPSK (Quadrature PSK)**：使用 4 種正交相位（$45^\circ, 135^\circ, 225^\circ, 315^\circ$）。
-  - 每個 Symbol 攜帶 **$2\text{ bits}$**（$\log_2(4) = 2$），**在相同頻寬下傳輸速率直接加倍！**
-- **8-PSK**：使用 8 種相位，每個 Symbol 攜帶 **$3\text{ bits}$**。
-
----
-
-## 現代高速無線的主力：QAM (正交振幅調變)
-
-當我們想在一個 Symbol 內塞入更多位元時（例如 16 個狀態），如果單純使用 16-PSK，圓周上的 16 個點會靠得太近，微小的雜訊就會造成相位誤判。
-
-工程師的解決方案是：**同時調變載波的「振幅」與「相位」**，這就是 **QAM (Quadrature Amplitude Modulation)**。
-
-```
-QPSK (4 點, 2 bits/symbol)         16-QAM (16 點網格, 4 bits/symbol)
-        Q (正交軸)                          Q
-        |                                   |  *   *   *   *
-    *   |   *                               |  *   *   *   *
-  ------+------ I (同相軸)               ---+---+---+---+--- I
-    *   |   *                               |  *   *   *   *
-        |                                   |  *   *   *   *
-```
-
-### 星狀圖 (Constellation Diagram)
-- 星狀圖上的每一個「點」代表一個可發送的符號狀態（Symbol）。
-- 點離原點的距離代表**振幅**，與正橫軸的夾角代表**相位**。
-
-### QAM 階數與傳輸速度：
-- **16-QAM**：$2^4 = 16$ 個點，每個 Symbol 送 **4 bits**（Wi-Fi 4 常用）。
-- **64-QAM**：$2^6 = 64$ 個點，每個 Symbol 送 **6 bits**（數位電視 DVB、Wi-Fi 5）。
-- **256-QAM**：$2^8 = 256$ 個點，每個 Symbol 送 **8 bits (1 Byte)**（Wi-Fi 5 / 4G LTE-A）。
-- **1024-QAM**：$2^{10} = 1024$ 個點，每個 Symbol 送 **10 bits**（Wi-Fi 6）。
-- **4096-QAM**：$2^{12} = 4096$ 個點，每個 Symbol 送 **12 bits**（Wi-Fi 7）。
-
-> **代價與權衡**：星狀圖點數越多，點與點之間的距離越密。接收端需要極高的**訊噪比 (SNR)** 才能精準辨識；一旦訊號減弱或有干擾，誤碼率會急遽飆升。
-
----
-
-## 數位調變技術大總結
-
-| 調變技術 | 調變參數 | 每個符號位元數 (Bits/Symbol) | 抗雜訊能力 | 頻譜效率 | 主要應用 |
-|---|---|---|---|---|---|
-| **ASK / OOK** | 振幅 | 1 | 極差 | 低 | 光纖通訊開關、RFID、低價遙控器 |
-| **FSK** | 頻率 | 1 | 中等 | 低 | 傳統傳真機、藍牙 Basic Rate、非接觸式卡片 |
-| **BPSK** | 相位 (2 相) | 1 | **極強** | 低 | 深度太空通訊、GPS 衛星導航 |
-| **QPSK** | 相位 (4 相) | 2 | **強** | 中 | 數位衛星電視 (DVB-S)、行動網路控制通道 |
-| **64-QAM** | 振幅 + 相位 | 6 | 中等 | **高** | Wi-Fi 4/5、4G LTE |
-| **1024-QAM** | 振幅 + 相位 | 10 | 需極高 SNR | **極高** | Wi-Fi 6、5G Sub-6GHz 高速模式 |
-
----
-
-## ❓ 初學者常見疑問與思維誤區 (Q&A)
-
-??? question "Q1: 「調變 (Modulation)」與上一節講的「編碼 (Encoding)」到底有什麼區別？"
-    **解答**：
-    兩者的工作領域與目的完全不同：
-    - **編碼 (Line Coding)**：屬於**基頻 (Baseband)** 範疇。它是將二進位位元對應成合適的**電壓脈衝波形**，主要解決時脈同步、直流平衡問題（如曼徹斯特編碼），訊號頻譜仍集中在低頻，通常用於有線電纜。
-    - **調變 (Modulation)**：屬於**通帶 / 帶通 (Passband)** 範疇。它是將訊號頻譜「搬移」到幾百 MHz 或幾 GHz 的**高頻正弦載波**上，主要解決天線發射尺寸與大氣頻譜多工問題，是所有無線通訊的必經步驟。
-
-??? question "Q2: 為什麼手機走到離 Wi-Fi 分享器很遠的地方時，網速會自動變慢？"
-    **解答**：
-    這是現代無線網路的 **自適應調變與編碼 (Adaptive Modulation and Coding, AMC)** 機制在運作。
-    - 當你**靠近分享器**時，訊號極強（SNR 高），晶片會自動切換至 **1024-QAM 或 256-QAM**，每個符號送出 8~10 bits，網速全開！
-    - 當你**走進房間深處**，訊號衰減、雜訊變大（SNR 降低），如果繼續用 256-QAM 會產生大量錯包；晶片偵測到後會**自動降級為 16-QAM、QPSK 甚至 BPSK**（每個符號只送 1~2 bits）。雖然速率下降，但能保證連線不中斷。
-
-??? question "Q3: 既然 4096-QAM 能傳 12 bits，為什麼我們不直接發明「100 萬-QAM」讓網速翻一萬倍？"
-    **解答**：
-    這再次呼應了第 3 節的 **夏農極限定理 (Shannon Limit)**！
+    DEMUX -->|"偶數位元流"| I_STREAM["同相分支 I(t)<br/>0 → -1, 1 → +1"]
+    DEMUX -->|"奇數位元流"| Q_STREAM["正交分支 Q(t)<br/>0 → -1, 1 → +1"]
     
-    在 100 萬點的星狀圖上，每個點之間的電壓差可能小於幾十奈伏（$10^{-9}\text{V}$）。而在常溫環境下，導線和空氣分子的熱運動所產生的**熱雜訊（Johnson-Nyquist Noise）**就遠遠超過這個數值。雜訊會把所有的點模糊成一整團雜斑，接收端根本不可能辨識。**物理熱雜訊是調變階數永遠無法突破的終極鐵壁**。
+    OSC["本地高頻振盪器<br/>產生 cos(2πfc t)"] --> MULT_I["乘法器 I"]
+    I_STREAM --> MULT_I
+    
+    OSC --> PHASE90["-90° 移相器<br/>產生 -sin(2πfc t)"]
+    PHASE90 --> MULT_Q["乘法器 Q"]
+    Q_STREAM --> MULT_Q
+    
+    MULT_I -->|"同相訊號 I(t) · cos(2πfc t)"| SUM["加法器"]
+    MULT_Q -->|"正交訊號 Q(t) · (-sin(2πfc t))"| SUM
+    
+    SUM --> TX_OUT["發射 QPSK 訊號<br/>s(t) = I(t) cos(2πfc t) - Q(t) sin(2πfc t)"]
+```
+
+- **同相載波 (In-phase carrier)**：$\cos(2\pi f_c t)$，相位為 $0^\circ$。
+- **正交載波 (Quadrature carrier)**：$-\sin(2\pi f_c t)$，相位差為 $90^\circ$。
+- **正交性 (Orthogonality)** 確保這兩路訊號疊加在一起發射後，接收端能毫無干擾地將兩路資料各自獨立還原！
+
+---
+
+## 3. 結合振幅與相位：星座圖與正交振幅調變 (QAM)
+
+### 3.1 什麼是星座圖 (Constellation Diagram)？
+當訊號同時改變振幅與相位時，波形難以用肉眼辨識。工程上使用二維極座標平面的 **星座圖** 來視覺化所有符號：
+
+```mermaid
+graph TD
+    CP["星座圖上的一個點 (Point)"] --> LEN["距原點長度 (Length) = 訊號振幅 A"]
+    CP --> ANG["與橫軸夾角 (Angle) = 訊號相位 θ"]
+    CP --> PROJ_X["橫軸投影 (X軸) = 同相分量 I (乘上 cos)"]
+    CP --> PROJ_Y["縱軸投影 (Y軸) = 正交分量 Q (乘上 -sin)"]
+```
+
+#### BASK、BPSK、QPSK 星座圖視覺對照：
+
+```
+      BASK (2 種狀態)               BPSK (2 種狀態)               QPSK (4 種狀態)
+            Q                             Q                             Q
+            │                             │                        01   │   11
+            │                             │                         ●   │   ●
+            │                             │                             │
+    ────────┼───●────●─── I       ───●────┼────●─── I           ────────┼──────── I
+            │   0    1             0(-1)  │   1(+1)                     │
+            │                             │                         ●   │   ●
+            │                             │                        00   │   10
+```
+
+---
+
+### 3.2 正交振幅調變 (QAM - Quadrature Amplitude Modulation)
+QAM 同時調整振幅與相位，形成規律的二維方格網（如 16-QAM, 64-QAM, 1024-QAM）：
+
+```
+                       16-QAM 星座圖 (4 bits / symbol)
+                                      Q (縱軸)
+                                      ▲
+                         0000   0100  │  1100   1000
+                          ●      ●    │   ●      ●    (Q = +3)
+                                      │
+                         0001   0101  │  1101   1001
+                          ●      ●    │   ●      ●    (Q = +1)
+                      ────────────────┼────────────────► I (橫軸)
+                         0011   0111  │  1111   1011
+                          ●      ●    │   ●      ●    (Q = -1)
+                                      │
+                         0010   0110  │  1110   1010
+                          ●      ●    │   ●      ●    (Q = -3)
+                                      ▼
+                        (I=-3) (I=-1)   (I=+1) (I=+3)
+```
+
+#### 觀念大辨正 (Key Takeaway)：
+- ❌ **常見錯誤觀念**：「1024-QAM 所需的頻率頻寬 (Hz) 比 16-QAM 更大。」
+- ✔ **正確觀念**：
+  - **頻率頻寬（Hz）完全相同**（因為符號時間 $\tau$ 相同）！
+  - 1024-QAM 每個符號攜帶 $10\text{ bits}$（$\log_2 1024 = 10$），16-QAM 每個符號攜帶 $4\text{ bits}$（$\log_2 16 = 4$）。
+  - **在相同的通道頻寬下，1024-QAM 的資料傳輸速率 (bps) 是 16-QAM 的 2.5 倍！**
+
+---
+
+### 3.3 QAM 的數學本質推導 (Mathematical Proof)
+為什麼任意振幅與相位的正弦波，都能直接拆成 $I$ 與 $Q$ 兩路發送？
+
+利用三角函數餘弦和角公式：
+
+$$\cos(x + y) = \cos(x)\cos(y) - \sin(x)\sin(y)$$
+
+令 $x = 2\pi f_c t$，相位為 $y = \theta$，則帶通訊號為：
+
+$$s(t) = A\cos(2\pi f_c t + \theta) = A\cos(2\pi f_c t)\cos\theta - A\sin(2\pi f_c t)\sin\theta$$
+
+重新分組：
+
+$$s(t) = \underbrace{\left[ A\cos\theta \right]}_{I(t)\text{ (X 軸座標)}} \cdot \cos(2\pi f_c t) + \underbrace{\left[ A\sin\theta \right]}_{Q(t)\text{ (Y 軸座標)}} \cdot \left(-\sin(2\pi f_c t)\right)$$
+
+> **驚人結論**：
+> 發送端根本**不需要設計複雜的連續移相器與可變放大器**！
+> 只要計算出星座點座標 $(I, Q)$，分別產生兩組階梯電壓 $I(t)$ 與 $Q(t)$，乘上固定頻率的 $\cos$ 與 $-\sin$ 載波後相加，就能發射出任何指定振幅與相位的合成波！
+
+---
+
+### 3.4 16-QAM 傳輸實例推導
+假設我們要傳送 16 個位元：`1101 0111 1100 0110`
+
+1. **分組為 4 個符號**（每個符號 4 bits）：
+   - 符號 1：`1101` $\implies$ 查表星座圖座標 $(I, Q) = (+1, +1)$
+   - 符號 2：`0111` $\implies$ 查表星座圖座標 $(I, Q) = (-1, -1)$
+   - 符號 3：`1100` $\implies$ 查表星座圖座標 $(I, Q) = (+1, +3)$
+   - 符號 4：`0110` $\implies$ 查表星座圖座標 $(I, Q) = (-1, -3)$
+
+2. **生成同相與正交電壓序列**：
+   - $I(t)$ 電位序列：$[+1\text{V}, -1\text{V}, +1\text{V}, -1\text{V}]$
+   - $Q(t)$ 電位序列：$[+1\text{V}, -1\text{V}, +3\text{V}, -3\text{V}]$
+
+3. **發射訊號**：
+   $$s(t) = I(t)\cos(2\pi f_c t) + Q(t)(-\sin(2\pi f_c t))$$
+
+---
+
+## 4. 接收端解調 (Demodulation) 與判決原則
+
+接收端的天線收到空氣中傳來的訊號 $s(t)$ 後，如何分毫不差地把 $I(t)$ 與 $Q(t)$ 拆解出來？
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Ant as "接收天線"
+    participant Mix as "混頻乘法器 (Mixer)"
+    participant LPF as "低通濾波器 (LPF)"
+    participant Amp as "放大器 (Amplify ×2)"
+    participant Dec as "星座圖判決器 (Decision)"
+
+    Ant->>Mix: 接收高頻訊號 s(t)
+    Note over Mix: 分別乘以 cos(2πfc t) 與 -sin(2πfc t)
+    Mix->>LPF: 產生基頻分量 + 2fc 超高頻分量
+    Note over LPF: 濾除所有 2fc 載波諧波
+    LPF->>Amp: 輸出 0.5 I(t) 與 0.5 Q(t)
+    Amp->>Dec: 放大 2 倍還原原始座標 (I, Q)
+    Note over Dec: 尋找星座圖上最近的標準點 (最近鄰法則)
+    Dec-->>Ant: 輸出解碼位元串！
+```
+
+---
+
+### 4.1 數學深度拆解：正交性如何分離 $I(t)$ 與 $Q(t)$？
+
+#### 提取同相分量 $I(t)$：
+將接收到的 $s(t)$ 乘上同相載波 $\cos(2\pi f_c t)$：
+
+$$s(t) \cdot \cos(2\pi f_c t) = \left[ I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t) \right] \cdot \cos(2\pi f_c t)$$
+$$= I(t)\cos^2(2\pi f_c t) - Q(t)\sin(2\pi f_c t)\cos(2\pi f_c t)$$
+
+利用倍角公式 $\cos^2(\theta) = 0.5(1 + \cos 2\theta)$ 及 $\sin\theta\cos\theta = 0.5\sin 2\theta$：
+
+$$= 0.5 I(t) + \underbrace{0.5 I(t)\cos(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}} - \underbrace{0.5 Q(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}}$$
+
+1. **通過低通濾波器 (LPF)**：所有 $2f_c$（例如 $5\text{ GHz} \to 10\text{ GHz}$）高頻分量全部被濾除為 0。
+2. **濾波後輸出**：$0.5 I(t)$。
+3. **放大器放大 2 倍**：$2 \times 0.5 I(t) = I(t)$（**同相分量完美還原**！$Q$ 分量完全被抵消）。
+
+---
+
+#### 提取正交分量 $Q(t)$：
+將接收到的 $s(t)$ 乘上正交載波 $(-\sin(2\pi f_c t))$：
+
+$$s(t) \cdot (-\sin(2\pi f_c t)) = -I(t)\cos(2\pi f_c t)\sin(2\pi f_c t) + Q(t)\sin^2(2\pi f_c t)$$
+$$= 0.5 Q(t) - \underbrace{0.5 I(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}} - \underbrace{0.5 Q(t)\cos(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}}$$
+
+1. **通過低通濾波器 (LPF)**：濾除 $2f_c$ 高頻。
+2. **放大器放大 2 倍**：$2 \times 0.5 Q(t) = Q(t)$（**正交分量完美還原**！$I$ 分量完全被抵消）。
+
+---
+
+### 4.2 星座圖幾何判決與雜訊位元錯誤 (Bit Error)
+
+真實大氣中存在熱雜訊（Noise）。接收端解調出的座標不會完美落在整數點，而是會產生偏移（如下圖星號 $\bigstar$ 所示）：
+
+```mermaid
+graph TD
+    RECV_PT["接收到的座標點 (I_rx, Q_rx)<br/>受到雜訊加法干擾"] --> DIST["計算與所有標準星座點之歐幾里得距離"]
+    DIST --> CHOOSE["最近鄰判決原則 (Minimum Euclidean Distance)<br/>選擇距離最近的標準星座點"]
+    CHOOSE -->|"雜訊微弱 (未越過中線邊界)"| OK["✔ 正確判決 (No Bit Error)"]
+    CHOOSE -->|"雜訊過強 (偏離跨過邊界)"| ERR["❌ 錯誤判決 (Bit Error!)"]
+```
+
+```
+                   雜訊導致判決錯誤示意圖
+                              Q
+                              │
+                     01       │       11
+                      ○       │       ○
+                              │     ★ (接收點偏到這裡)
+               ───────────────┼─────────────── I
+                              │   ↗ (受到強烈雜訊推擠)
+                      ○       │  ● 10 (原發射點)
+                     00       │
+```
+
+- **訊噪比 (SNR, Signal-to-Noise Ratio)**：訊號功率與雜訊功率的比值。
+- **物理規律**：
+  $$\text{SNR} \downarrow \implies \text{接收點偏離半徑} \uparrow \implies \text{跨越判決邊界機率} \uparrow \implies \text{位元錯誤率 (BER)} \uparrow$$
+
+---
+
+## 5. 適應性調變與編碼機制 (Adaptive Modulation & Coding, AMC)
+
+### 5.1 調變方式的權衡抉擇 (Trade-off)
+
+在不同通道環境下，該選擇哪種調變技術？
+
+```mermaid
+graph LR
+    subgraph SG_GOOD ["良好通道 (高 SNR / 雜訊極小)"]
+    HIGH["選用高階調變 (如 32-QAM / 1024-QAM)<br/>★ 格點密集但雜訊極小，不會越界<br/>★ 每個符號 5~10 bits，傳輸速度飆升！"]
+    end
+    
+    subgraph SG_BAD ["惡劣通道 (低 SNR / 雜訊極大)"]
+    LOW["選用低階強固調變 (如 BPSK / QPSK)<br/>★ 格點間距巨大，抗雜訊能力超強<br/>★ 犧牲速度保證 0 錯誤率！"]
+    end
+```
+
+| 調變技術 | 每個符號攜帶位元 | 速度 (Bit Rate) | 抗雜訊能力 (Robustness) | 適用場景 |
+|:---:|:---:|:---:|:---:|:---:|
+| **BPSK** | $1\text{ bit}$ | 基準 ($1\times$) | ★★★★★ (極強) | 遠距離、訊號微弱、嚴重干擾 |
+| **QPSK** | $2\text{ bits}$ | $2\times$ | ★★★★☆ (強) | 訊號普通、基本通訊 |
+| **16-QAM** | $4\text{ bits}$ | $4\times$ | ★★★☆☆ (中) | 訊號良好（如辦公室內 Wi-Fi） |
+| **64-QAM / 256-QAM** | $6 \sim 8\text{ bits}$ | $6 \sim 8\times$ | ★★☆☆☆ (弱) | 高速行動網路近距離 |
+| **1024-QAM** | $10\text{ bits}$ | $10\times$ | ★☆☆☆☆ (極弱) | Wi-Fi 6 / 5G 極近距離無遮蔽傳輸 |
+
+---
+
+### 5.2 通道編碼 (Channel Coding) 與編碼率 (Coding Rate, $R$)
+
+單靠調變還不夠，通訊系統會在資料中加入冗餘保護（通道編碼）：
+
+$$R = \text{Coding Rate} = \frac{\text{有效資料位元數 (Useful bits)}}{\text{實際發送總位元數 (Total bits)}}$$
+
+#### 範例解析：要發送原始位元 `1101`
+1. **若設定編碼率 $R = 1/3$**（每個位元重複 3 次保護）：
+   - 編碼後序列：`111 111 000 111`（共 12 bits）。
+   - 若採用 16-QAM（4 bits/symbol）發送，共需 3 個符號：`1111`、`1100`、`0111`。
+2. **若設定編碼率 $R = 1/5$**（每個位元重複 5 次保護）：
+   - 編碼後序列：`11111 11111 00000 11111`（共 20 bits），抗雜訊更強！
+
+---
+
+### 5.3 MCS 動態調適策略：$\epsilon$-Greedy 演算法
+
+在現代 4G/5G 與 Wi-Fi 中，基地台會將調變與編碼率打包成 **MCS (Modulation and Coding Scheme)** 指標（例如 MCS 0 到 MCS 15）：
+
+```mermaid
+graph TD
+    COND["即時偵測通道雜訊 (Noise)"] --> CHECK{"雜訊變化？"}
+    CHECK -->|"雜訊變大 (SNR 劣化)"| SLOW["降低 MCS 等級<br/>降低 Coding Rate R + 切換至 BPSK/QPSK"]
+    CHECK -->|"雜訊變小 (SNR 良好)"| FAST["提高 MCS 等級<br/>提高 Coding Rate R + 切換至 1024-QAM"]
+```
+
+#### $\epsilon$-Greedy 決策機制：
+- **以 $1 - \epsilon$ 的機率（利用 Exploitation）**：選用當前估計吞吐量（Throughput）最高的最佳 MCS。
+- **以 $\epsilon$ 的小機率（探索 Exploration）**：隨機嘗試其他更高或更低的 MCS，以探測環境通道是否有好轉或劣化。
+
+---
+
+### 5.4 訊框設計：接收端如何得知傳送端選用了哪種 MCS？
+
+既然傳送端會動態切換 MCS，接收端在收到訊號前**根本不知道這批資料是用 BPSK 還是 1024-QAM 調變的**，該如何解調？
+
+解決方案在於 **訊框（Frame）的結構分層設計**：
+
+```
+                    通訊訊框 (Frame) 的結構
+┌──────────────────────────────────────┬────────────────────────────────────────────┐
+│      標頭 (Frame Header)             │            資料酬載 (Payload)              │
+├──────────────────────────────────────┼────────────────────────────────────────────┤
+│ • 來源位址 (Source Address)          │                                            │
+│ • 目的位址 (Destination Address)     │   真正傳輸的資料內容 (Data)                 │
+│ • 指派的 MCS (例如: 1024-QAM, R=3/4) │                                            │
+└──────────────────────────────────────┴────────────────────────────────────────────┘
+        ▲                                                      ▲
+        │                                                      │
+【永遠使用最慢、最穩固的調變】                         【使用 Header 指定的高速 MCS】
+ (例如 BPSK / QPSK + 低編碼率)                          (例如 1024-QAM + 高編碼率)
+```
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Tx as "發射端"
+    participant Rx as "接收端"
+
+    Note over Tx: 1. 組裝 Frame<br/>Header 註明 Payload 採用 1024-QAM
+    Tx->>Rx: 發射 Header (使用超強固 BPSK 調變)
+    Note over Rx: 2. 接收端即使在極差環境下<br/>也能 100% 正確解碼 Header
+    Note over Rx: 3. 從 Header 獲知 Payload 為 1024-QAM
+    Tx->>Rx: 發射 Payload (使用 1024-QAM 高速發送)
+    Note over Rx: 4. 切換為 1024-QAM 解調器還原資料！
+```
+
+> **核心精華**：
+> **Header 是解開 Payload 的鑰匙**。因此 Header 永遠採用最慢速、最耐雜訊的低階調變（如 BPSK），確保接收端在任何嚴苛條件下都能順利讀出 MCS 指標，再以對應模式解調高階 Payload！
+
+---
+
+## 本章精華總結表
+
+| 調變技術 | 改變維度 | 每個符號位元數 | 星座圖特徵 | 關鍵數學通式 / 性質 |
+|---|---|:---:|---|---|
+| **BASK** | 振幅 ($0$ 或 $A$) | $1$ bit | I 軸上 2 個點 | $s(t) = A\cos(2\pi f_c t)$ 或 $0$；$\text{BW} \propto 1/\tau$ |
+| **4-ASK** | 4 種振幅等級 | $2$ bits | I 軸上 4 個點 | 振幅越大功率需求越高 ($P \propto A^2$) |
+| **BPSK** | 相位 ($0^\circ, 180^\circ$) | $1$ bit | I 軸上對稱 2 點 ($\pm 1$) | $(\pm 1)\cos(2\pi f_c t)$；抗雜訊優於 ASK |
+| **QPSK** | 4 種正交相位 | $2$ bits | 4 個象限圓周上 4 點 | $I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)$ |
+| **QAM** | 同時調變振幅與相位 | $\log_2 M$ bits | 2D 矩陣網格格點 | $A\cos(2\pi f_c t + \theta) = I\cos(2\pi f_c t) - Q\sin(2\pi f_c t)$ |
+| **解調 (Rx)** | 乘載波 $\to$ LPF $\to$ 放大 | — | 最近鄰距離判決 | 利用正交性徹底分離 I 與 Q 兩路通道 |
+| **AMC** | 動態調整 MCS | 彈性 | 依 SNR 動態切換 | $\epsilon$-greedy 探索最佳平衡；Header 恆用 BPSK |
 
 ---
 
 ## 下一步
 
-我們已經完整走過了從正弦波、方波、傅立葉分析、頻寬極限到無線調變的完整通訊脈絡！
+恭喜你！至此你已經完整掌握了實體層的全部核心底層原理：
+從 **正弦波基礎** $\to$ **方波傅立葉級數** $\to$ **頻寬與頻譜搬移** $\to$ **無線調變、星座圖、I/Q 正交分解與適應性 MCS 機制**。
 
-想了解承載這些訊號的實體媒介（雙絞線、光纖）與標準規格嗎？請前往下一節：[6. 傳輸媒介與標準規格](media.md)。
+實體層成功將位元轉換為電波送達對端後，如何確保傳輸過程沒有封包錯誤？多個裝置如何共用同一條通道？
+
+請點擊前往下一章：[資料連接層 Data Link Layer 概論](../data-link-layer/index.md)！

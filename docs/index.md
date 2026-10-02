@@ -19,10 +19,8 @@
 - **知識推進路徑**：
   1. [正弦波特性與通式](physical-layer/sine-wave.md)：物理界最純粹的連續訊號與三大核心參數。
   2. [方波構成與傅立葉分析](physical-layer/fourier-and-square-wave.md)：數位方波如何由基頻與奇數次諧波疊加而成？
-  3. [頻寬與傳輸極限](physical-layer/bandwidth-and-capacity.md)：有效頻寬與 Nyquist / Shannon 通道容量極限。
-  4. [基頻編碼與傳輸模式](physical-layer/signal-encoding.md)：有線網路的 NRZ、曼徹斯特編碼與時脈同步。
-  5. [無線傳輸與調變技術](physical-layer/modulation.md)：從正弦載波到 ASK、FSK、PSK 及高階 QAM 星狀圖。
-  6. [傳輸媒介與標準規格](physical-layer/media.md)：雙絞線、光纖與無線電磁波頻段。
+  3. [頻寬與傅立葉轉換性質](physical-layer/bandwidth-and-capacity.md)：頻寬定義（Hz）、有效頻寬（90% 能量）與傅立葉五大關鍵性質。
+  4. [數位調變、解調與適應性傳輸機制](physical-layer/modulation.md)：ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調、雜訊判決與適應性 AMC / Header 設計。
 
 ### [資料連接層 Data Link Layer](data-link-layer/index.md)
 負責在相鄰節點之間提供可靠的點對點傳輸，包含成框（Framing）、錯誤偵測與更正（CRC / 漢明碼）、流量控制（滑動視窗）與 MAC 子層協定。

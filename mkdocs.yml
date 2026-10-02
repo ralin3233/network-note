@@ -41,6 +41,7 @@ markdown_extensions:
       permalink: true
 
 extra_javascript:
+  - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
@@ -49,10 +50,8 @@ nav:
       - 實體層概論與路徑: physical-layer/index.md
       - 1. 正弦波特性與通式: physical-layer/sine-wave.md
       - 2. 方波構成與傅立葉分析: physical-layer/fourier-and-square-wave.md
-      - 3. 頻寬與傳輸極限: physical-layer/bandwidth-and-capacity.md
-      - 4. 基頻編碼與傳輸模式: physical-layer/signal-encoding.md
-      - 5. 無線傳輸與調變技術: physical-layer/modulation.md
-      - 6. 傳輸媒介與標準規格: physical-layer/media.md
+      - 3. 頻寬與傅立葉轉換性質: physical-layer/bandwidth-and-capacity.md
+      - 4. 數位調變、解調與適應性傳輸機制: physical-layer/modulation.md
   - 資料連接層 Data Link Layer:
       - 概論: data-link-layer/index.md
       - 成框 Framing: data-link-layer/framing.md
