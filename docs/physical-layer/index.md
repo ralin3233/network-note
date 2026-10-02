@@ -43,7 +43,7 @@ graph TD
 
 ```mermaid
 sequenceDiagram
-    participant App as "上層協定 (Data Link 以上)"
+    participant App as "上層通訊協定 (Upper Layers)"
     participant PHY_Tx as "傳送端實體層 (PHY Tx)"
     participant Media as "實體傳輸媒介 (無線電磁波)"
     participant PHY_Rx as "接收端實體層 (PHY Rx)"
