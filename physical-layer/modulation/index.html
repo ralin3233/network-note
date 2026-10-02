@@ -11,10 +11,10 @@
       
       
       
-        <link rel="prev" href="../signal-encoding/">
+        <link rel="prev" href="../bandwidth-and-capacity/">
       
       
-        <link rel="next" href="../transmission-modes/">
+        <link rel="next" href="../../data-link-layer/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>調變技術 - 網路課程筆記 - 實體層與資料連接層</title>
+        <title>4. 數位調變、解調與適應性傳輸機制 - 網路課程筆記 - 實體層與資料連接層</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#4-modulation-demodulation-amc" class="md-skip">
           跳轉到
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              調變技術
+              4. 數位調變、解調與適應性傳輸機制
             
           </span>
         </div>
@@ -266,6 +266,25 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ai-collaboration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AI 協作紀錄
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -399,7 +418,7 @@
   <span class="md-ellipsis">
     
   
-    概論
+    實體層概論與路徑
   
 
     
@@ -420,14 +439,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../media/" class="md-nav__link">
+      <a href="../sine-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    傳輸媒介
+    1. 正弦波特性與通式
   
 
     
@@ -448,14 +467,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../signal-encoding/" class="md-nav__link">
+      <a href="../fourier-and-square-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    訊號與編碼
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
   
 
     
@@ -492,7 +539,7 @@
   <span class="md-ellipsis">
     
   
-    調變技術
+    4. 數位調變、解調與適應性傳輸機制
   
 
     
@@ -510,7 +557,7 @@
   <span class="md-ellipsis">
     
   
-    調變技術
+    4. 數位調變、解調與適應性傳輸機制
   
 
     
@@ -536,55 +583,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#bits-to-wave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        為什麼需要調變
+        為什麼需要調變？從位元到電波 (Bits \(\to\) Wave)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三種基本調變方式
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="三種基本調變方式">
+    <nav class="md-nav" aria-label="為什麼需要調變？從位元到電波 (Bits \(\to\) Wave)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ask-amplitude-shift-keying" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ASK (Amplitude Shift Keying, 振幅偏移調變)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fsk-frequency-shift-keying" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FSK (Frequency Shift Keying, 頻率偏移調變)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#psk-phase-shift-keying" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSK (Phase Shift Keying, 相位偏移調變)
+        正弦載波的三大調變特徵
       
     </span>
   </a>
@@ -597,10 +611,451 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#bit-vs-symbol" class="md-nav__link">
     <span class="md-ellipsis">
       
-        比較表
+        核心概念：位元 (Bit) vs 符號 (Symbol)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-amplitude-shift-keying-ask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 振幅移鍵 (Amplitude Shift Keying, ASK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 振幅移鍵 (Amplitude Shift Keying, ASK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-binary-ask-bask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 二元振幅移鍵 (Binary ASK, BASK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 二元振幅移鍵 (Binary ASK, BASK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BASK 數學模型：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bask_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BASK 硬體實現結構：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        脈衝時間 \(\tau\) 與頻寬/位元率的關係：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-m-ary-ask-4-ask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 多階振幅移鍵 (M-ary ASK, 如 4-ASK)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-phase-shift-keying-psk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相位移鍵 (Phase Shift Keying, PSK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相位移鍵 (Phase Shift Keying, PSK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-binary-psk-bpsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 二元相位移鍵 (Binary PSK, BPSK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 二元相位移鍵 (Binary PSK, BPSK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bpsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BPSK 硬體實現：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-quadrature-psk-qpsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 四相相位移鍵 (Quadrature PSK, QPSK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 四相相位移鍵 (Quadrature PSK, QPSK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pmcosx-pmsinx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        為什麼 \(\pm\cos(x) \pm\sin(x)\) 恰好代表四個相位？（幾何疊加原理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-qpsk-2-bpsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 QPSK 發射端硬體實現架構（2 個 BPSK 的平行組合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-qam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 結合振幅與相位：星座圖與正交振幅調變 (QAM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 結合振幅與相位：星座圖與正交振幅調變 (QAM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-constellation-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 什麼是星座圖 (Constellation Diagram)？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 什麼是星座圖 (Constellation Diagram)？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#baskbpskqpsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BASK、BPSK、QPSK 星座圖視覺對照：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-qam-quadrature-amplitude-modulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 正交振幅調變 (QAM - Quadrature Amplitude Modulation)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 正交振幅調變 (QAM - Quadrature Amplitude Modulation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        觀念大辨正 (Key Takeaway)：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-qam-mathematical-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 QAM 的數學本質推導 (Mathematical Proof)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-16-qam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 16-QAM 傳輸實例推導
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-demodulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 接收端解調 (Demodulation) 與判決原則
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 接收端解調 (Demodulation) 與判決原則">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-it-qt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 數學深度拆解：正交性如何分離 \(I(t)\) 與 \(Q(t)\)？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 數學深度拆解：正交性如何分離 \(I(t)\) 與 \(Q(t)\)？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        提取同相分量 \(I(t)\)：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        提取正交分量 \(Q(t)\)：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-bit-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 星座圖幾何判決與雜訊位元錯誤 (Bit Error)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-adaptive-modulation-coding-amc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 適應性調變與編碼機制 (Adaptive Modulation &amp; Coding, AMC)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 適應性調變與編碼機制 (Adaptive Modulation &amp; Coding, AMC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-trade-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 調變方式的權衡抉擇 (Trade-off)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-channel-coding-coding-rate-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 通道編碼 (Channel Coding) 與編碼率 (Coding Rate, \(R\))
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 通道編碼 (Channel Coding) 與編碼率 (Coding Rate, \(R\))">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        範例解析：要發送原始位元 1101
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-mcs-epsilon-greedy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 MCS 動態調適策略：\(\epsilon\)-Greedy 演算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 MCS 動態調適策略：\(\epsilon\)-Greedy 演算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-greedy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\epsilon\)-Greedy 決策機制：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-mcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 訊框設計：接收端如何得知傳送端選用了哪種 MCS？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章精華總結表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        下一步
       
     </span>
   </a>
@@ -611,62 +1066,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../transmission-modes/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    傳輸模式
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../standards/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    常見標準
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -906,6 +1305,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -923,50 +1349,534 @@
 
 
 
-<h1 id="_1">調變技術<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">為什麼需要調變<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>數位訊號沒辦法直接在某些媒介（例如無線電波、電話線）上有效傳輸，需要先「疊加」到一個載波 (carrier wave) 上，這個過程叫調變。</p>
-<h2 id="_3">三種基本調變方式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<h3 id="ask-amplitude-shift-keying">ASK (Amplitude Shift Keying, 振幅偏移調變)<a class="headerlink" href="#ask-amplitude-shift-keying" title="Permanent link">&para;</a></h3>
-<!-- TODO: 用振幅大小代表 0/1，缺點是容易受雜訊影響 -->
-
-<h3 id="fsk-frequency-shift-keying">FSK (Frequency Shift Keying, 頻率偏移調變)<a class="headerlink" href="#fsk-frequency-shift-keying" title="Permanent link">&para;</a></h3>
-<!-- TODO: 用頻率代表 0/1 -->
-
-<h3 id="psk-phase-shift-keying">PSK (Phase Shift Keying, 相位偏移調變)<a class="headerlink" href="#psk-phase-shift-keying" title="Permanent link">&para;</a></h3>
-<!-- TODO: 用相位代表 0/1，抗雜訊能力較好 -->
-
-<div class="admonition example">
-<p class="admonition-title">圖解建議</p>
-<p>畫出載波 + 三種調變後波形的對照圖，讓讀者一眼看出差異</p>
-</div>
-<h2 id="_4">比較表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h1 id="4-modulation-demodulation-amc">4. 數位調變、解調與適應性傳輸機制 (Modulation, Demodulation &amp; AMC)<a class="headerlink" href="#4-modulation-demodulation-amc" title="Permanent link">&para;</a></h1>
+<p>在前面章節中，我們掌握了正弦波通式、方波傅立葉展開以及頻寬與頻譜搬移的五大性質。</p>
+<p>本章將進入實體層最核心的應用領域：<strong>如何將電腦中的數位位元（0 與 1），透過類比正弦電磁波發射到空中？接收端如何精準解調還原？在雜訊多變的環境下，系統如何動態選擇最佳調變策略？</strong></p>
+<hr />
+<h2 id="bits-to-wave">為什麼需要調變？從位元到電波 (Bits <span class="arithmatex">\(\to\)</span> Wave)<a class="headerlink" href="#bits-to-wave" title="Permanent link">&para;</a></h2>
+<p>電腦內部只認識離散的 <strong>0 與 1</strong>（數位基頻訊號），但大氣傳輸介質只能有效傳播連續變化的 <strong>高頻電磁波</strong>（類比帶通訊號）。</p>
+<pre class="mermaid"><code>graph LR
+    BITS["數位資料 (Bits)&lt;br/&gt;1 0 1 1 0 0 1"] --&gt;|"調變 (Modulation)"| WAVE["類比高頻波形 (Wave)&lt;br/&gt;s(t) = A cos(2πfc t + θ)"]
+    WAVE --&gt;|"大氣無線傳播"| RECV["接收端天線"]
+    RECV --&gt;|"解調 (Demodulation)"| RESTORE["還原數位位元&lt;br/&gt;1 0 1 1 0 0 1"]</code></pre>
+<h3 id="_1">正弦載波的三大調變特徵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>回顧正弦載波通式：</p>
+<div class="arithmatex">\[s(t) = A \cdot \cos(2\pi f_c t + \theta)\]</div>
+<p>我們可以在每個時間區間內，透過改變正弦波的 <strong>三個物理維度</strong> 來攜帶數位資訊：
+1. <strong>振幅 (Peak Amplitude, <span class="arithmatex">\(A\)</span>)</strong> <span class="arithmatex">\(\implies\)</span> <strong>振幅移鍵 (ASK, Amplitude Shift Keying)</strong>
+2. <strong>相位 (Phase, <span class="arithmatex">\(\theta\)</span>)</strong> <span class="arithmatex">\(\implies\)</span> <strong>相位移鍵 (PSK, Phase Shift Keying)</strong>
+3. <strong>振幅與相位同時改變 (<span class="arithmatex">\(A + \theta\)</span>)</strong> <span class="arithmatex">\(\implies\)</span> <strong>正交振幅調變 (QAM, Quadrature Amplitude Modulation)</strong></p>
+<hr />
+<h2 id="bit-vs-symbol">核心概念：位元 (Bit) vs 符號 (Symbol)<a class="headerlink" href="#bit-vs-symbol" title="Permanent link">&para;</a></h2>
+<p>在調變技術中，釐清「位元」與「符號」的差別是理解高速通訊的關鍵：</p>
+<ul>
+<li><strong>符號 (Symbol / Baud)</strong>：發送端在單位時間內送出的一次「波形狀態」。</li>
+<li><strong>位元 (Bit)</strong>：資訊的基本單位（0 或 1）。</li>
+</ul>
+<pre class="mermaid"><code>graph TD
+    SYM["一個調變符號 (Symbol)"] --&gt;|"狀態數 = 2 (如 0, 1)"| B1["每個符號攜帶 1 個 bit (log2 2 = 1)"]
+    SYM --&gt;|"狀態數 = 4 (如 4 種振幅/相位)"| B2["每個符號攜帶 2 個 bits (log2 4 = 2)"]
+    SYM --&gt;|"狀態數 = 16 (16-QAM)"| B4["每個符號攜帶 4 個 bits (log2 16 = 4)"]
+    SYM --&gt;|"狀態數 = 1024 (1024-QAM)"| B10["每個符號攜帶 10 個 bits (log2 1024 = 10)"]</code></pre>
+<div class="arithmatex">\[\text{Bits per Symbol} = \log_2(\text{狀態總數})\]</div>
+<blockquote>
+<p><strong>直觀比喻</strong>：
+- 符號是一輛輛開出去的「貨車」（符號率 Baud Rate 即每秒發出幾輛車）。
+- 位元是貨車上裝載的「貨物」（位元率 Bit Rate 即每秒運送了多少貨物）。
+- 提升傳輸率有兩種方法：<strong>把車開得更快（提高頻寬）</strong>，或是<strong>每輛車裝更多貨物（高階調變）</strong>！</p>
+</blockquote>
+<hr />
+<h2 id="1-amplitude-shift-keying-ask">1. 振幅移鍵 (Amplitude Shift Keying, ASK)<a class="headerlink" href="#1-amplitude-shift-keying-ask" title="Permanent link">&para;</a></h2>
+<h3 id="11-binary-ask-bask">1.1 二元振幅移鍵 (Binary ASK, BASK)<a class="headerlink" href="#11-binary-ask-bask" title="Permanent link">&para;</a></h3>
+<p>BASK 是最直觀的調變方式（又稱 OOK, On-Off Keying）：
+- <strong>傳送 Bit 1</strong>：發射振幅為 <span class="arithmatex">\(A\)</span> 的載波波形 <span class="arithmatex">\(A\cos(2\pi f_c t)\)</span>。
+- <strong>傳送 Bit 0</strong>：發射振幅為 <span class="arithmatex">\(0\)</span>（完全不發射訊號）。</p>
+<pre class="mermaid"><code>graph LR
+    subgraph SG_BASK ["BASK 時域波形對照"]
+    T1["Bit 1 (區間 1)&lt;br/&gt;發射載波波形&lt;br/&gt;s(t) = A cos(2πfc t)"] --&gt; T2["Bit 0 (區間 2)&lt;br/&gt;完全靜默無電壓&lt;br/&gt;s(t) = 0"] --&gt; T3["Bit 1 (區間 3)&lt;br/&gt;發射載波波形&lt;br/&gt;s(t) = A cos(2πfc t)"]
+    end</code></pre>
+<h4 id="bask">BASK 數學模型：<a class="headerlink" href="#bask" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[s(t) = \begin{cases} A \cos(2\pi f_c t), &amp; \text{傳送 bit } 1 \\ 0, &amp; \text{傳送 bit } 0 \end{cases}\]</div>
+<h4 id="bask_1">BASK 硬體實現結構：<a class="headerlink" href="#bask_1" title="Permanent link">&para;</a></h4>
+<p>BASK 只需要一個乘法器（Multiplier）與本地振盪器（Oscillator）：</p>
+<pre class="mermaid"><code>graph LR
+    DATA["數位單極性基頻方波&lt;br/&gt;(位元寬度 τ, 電位 1V / 0V)"] --&gt; MULT["乘法器 (Multiplier)"]
+    OSC["本地高頻振盪器&lt;br/&gt;產生載波 cos(2πfc t)"] --&gt; MULT
+    MULT --&gt; TX["調變後帶通訊號 s(t)"]</code></pre>
+<h4 id="tau">脈衝時間 <span class="arithmatex">\(\tau\)</span> 與頻寬/位元率的關係：<a class="headerlink" href="#tau" title="Permanent link">&para;</a></h4>
+<ul>
+<li>單一脈衝時間為 <span class="arithmatex">\(\tau\)</span>（秒）。</li>
+<li><strong>位元傳輸率 (Bit Rate)</strong>：<span class="arithmatex">\(\text{Bit Rate} = \frac{1}{\tau}\text{ bps}\)</span>。</li>
+<li><strong>有效頻寬 (Effective Bandwidth)</strong>：<span class="arithmatex">\(\text{Effective BW} \propto \frac{1}{\tau}\)</span>。</li>
+<li>脈衝拉長（<span class="arithmatex">\(\tau \uparrow\)</span>）<span class="arithmatex">\(\implies\)</span> 傳輸速度變慢（Bit Rate <span class="arithmatex">\(\downarrow\)</span>）<span class="arithmatex">\(\implies\)</span> 佔用頻寬變小（BW <span class="arithmatex">\(\downarrow\)</span>）。</li>
+<li>脈衝壓縮（<span class="arithmatex">\(\tau \downarrow\)</span>）<span class="arithmatex">\(\implies\)</span> 傳輸速度變快（Bit Rate <span class="arithmatex">\(\uparrow\)</span>）<span class="arithmatex">\(\implies\)</span> 佔用頻寬變大（BW <span class="arithmatex">\(\uparrow\)</span>）。</li>
+</ul>
+<hr />
+<h3 id="12-m-ary-ask-4-ask">1.2 多階振幅移鍵 (M-ary ASK, 如 4-ASK)<a class="headerlink" href="#12-m-ary-ask-4-ask" title="Permanent link">&para;</a></h3>
+<p>如果我們不只用「有波/無波」，而是定義 <strong>4 種不同振幅等級</strong>：</p>
 <table>
 <thead>
 <tr>
-<th>調變方式</th>
-<th>改變的物理量</th>
-<th>抗干擾能力</th>
+<th style="text-align: center;">傳送位元組合</th>
+<th style="text-align: center;">代表符號 (Symbol)</th>
+<th style="text-align: center;">峰值振幅大小</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ASK</td>
-<td>振幅</td>
-<td>差</td>
+<td style="text-align: center;"><code>00</code></td>
+<td style="text-align: center;">符號 0</td>
+<td style="text-align: center;"><span class="arithmatex">\(0.25 A\)</span></td>
 </tr>
 <tr>
-<td>FSK</td>
-<td>頻率</td>
-<td>中</td>
+<td style="text-align: center;"><code>01</code></td>
+<td style="text-align: center;">符號 1</td>
+<td style="text-align: center;"><span class="arithmatex">\(0.50 A\)</span></td>
 </tr>
 <tr>
-<td>PSK</td>
-<td>相位</td>
-<td>好</td>
+<td style="text-align: center;"><code>10</code></td>
+<td style="text-align: center;">符號 2</td>
+<td style="text-align: center;"><span class="arithmatex">\(0.75 A\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>11</code></td>
+<td style="text-align: center;">符號 3</td>
+<td style="text-align: center;"><span class="arithmatex">\(1.00 A\)</span></td>
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>graph LR
+    subgraph SG_2ASK ["2-ASK (BASK)"]
+    S1["1 bit / symbol&lt;br/&gt;Bit Rate = 1/τ bps"]
+    end
+    subgraph SG_4ASK ["4-ASK"]
+    S2["2 bits / symbol&lt;br/&gt;Bit Rate = 2/τ bps (速度加倍！)"]
+    end</code></pre>
+<blockquote>
+<p><strong>代價與限制</strong>：
+振幅越大，代表發射功率越高（<span class="arithmatex">\(\text{Power} \propto A^2\)</span>）。若要區分更多振幅等級（如 32-ASK），相鄰振幅差值極小，極易受雜訊干擾而誤判。</p>
+</blockquote>
+<hr />
+<h2 id="2-phase-shift-keying-psk">2. 相位移鍵 (Phase Shift Keying, PSK)<a class="headerlink" href="#2-phase-shift-keying-psk" title="Permanent link">&para;</a></h2>
+<p>在無線通訊中，振幅很容易受到大氣衰減與障礙物干擾；<strong>保持振幅固定，改為改變訊號的「相位」</strong>，抗雜訊能力遠優於 ASK。</p>
+<h3 id="21-binary-psk-bpsk">2.1 二元相位移鍵 (Binary PSK, BPSK)<a class="headerlink" href="#21-binary-psk-bpsk" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>傳送 Bit 0</strong>：相位偏移 <span class="arithmatex">\(0^\circ\)</span>（波形為 <span class="arithmatex">\(+\cos(2\pi f_c t)\)</span>）。</li>
+<li><strong>傳送 Bit 1</strong>：相位偏移 <span class="arithmatex">\(180^\circ\)</span>（波形顛倒，為 <span class="arithmatex">\(-\cos(2\pi f_c t)\)</span>）。</li>
+</ul>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Bit0 as "Bit 0 (相位 0°)"
+    participant Bit1 as "Bit 1 (相位 180°)"
+    participant Bit0_next as "Bit 0 (相位 0°)"
+    Note over Bit0: 正常相位從波峰起跑 (+cos)
+    Note over Bit1: 相位瞬間翻轉 180° 從波谷起跑 (-cos)
+    Note over Bit0_next: 再次翻轉回 0° (+cos)</code></pre>
+<h4 id="bpsk">BPSK 硬體實現：<a class="headerlink" href="#bpsk" title="Permanent link">&para;</a></h4>
+<p>將位元流轉為雙極性脈衝（<span class="arithmatex">\(+1\text{V}\)</span> 代表 0，<span class="arithmatex">\(-1\text{V}\)</span> 代表 1），再直接與載波相乘：</p>
+<pre class="mermaid"><code>graph LR
+    DATA["雙極性基頻脈衝&lt;br/&gt;Bit 0 → +1V&lt;br/&gt;Bit 1 → -1V"] --&gt; MULT["乘法器"]
+    OSC["本地振盪器 cos(2πfc t)"] --&gt; MULT
+    MULT --&gt; BPSK_SIG["BPSK 訊號&lt;br/&gt;(±1) · cos(2πfc t)"]</code></pre>
+<hr />
+<h3 id="22-quadrature-psk-qpsk">2.2 四相相位移鍵 (Quadrature PSK, QPSK)<a class="headerlink" href="#22-quadrature-psk-qpsk" title="Permanent link">&para;</a></h3>
+<p>QPSK 每次傳送 <strong>2 個位元</strong>，利用 4 個互相間隔 <span class="arithmatex">\(90^\circ\)</span> 的正交相位表示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">位元組合 (2 bits)</th>
+<th style="text-align: center;">相位偏移 (Phase)</th>
+<th style="text-align: center;">對應三角函數疊加</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>11</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(45^\circ\)</span> (<span class="arithmatex">\(\pi/4\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(+\cos(x) + \sin(x)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>01</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(135^\circ\)</span> (<span class="arithmatex">\(3\pi/4\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(-\cos(x) + \sin(x)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>00</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(225^\circ\)</span> (<span class="arithmatex">\(5\pi/4\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(-\cos(x) - \sin(x)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>10</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(315^\circ\)</span> (<span class="arithmatex">\(7\pi/4\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(+\cos(x) - \sin(x)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="pmcosx-pmsinx">為什麼 <span class="arithmatex">\(\pm\cos(x) \pm\sin(x)\)</span> 恰好代表四個相位？（幾何疊加原理）<a class="headerlink" href="#pmcosx-pmsinx" title="Permanent link">&para;</a></h4>
+<p>根據三角函數疊加公式：
+$<span class="arithmatex">\(\cos(x) + \sin(x) = \sqrt{2}\left(\frac{1}{\sqrt{2}}\cos x + \frac{1}{\sqrt{2}}\sin x\right) = \sqrt{2}\cos(x - 45^\circ)\)</span>$
+$<span class="arithmatex">\(-\cos(x) + \sin(x) = \sqrt{2}\cos(x - 135^\circ)\)</span>$</p>
+<p>4 種正負號組合恰好均勻切分圓周的四個象限（<span class="arithmatex">\(45^\circ, 135^\circ, 225^\circ, 315^\circ\)</span>）！</p>
+<hr />
+<h3 id="23-qpsk-2-bpsk">2.3 QPSK 發射端硬體實現架構（2 個 BPSK 的平行組合）<a class="headerlink" href="#23-qpsk-2-bpsk" title="Permanent link">&para;</a></h3>
+<p>QPSK 本質上就是 <strong>兩個平行的 BPSK</strong> 同時在同一個頻率上傳送：</p>
+<pre class="mermaid"><code>graph TD
+    BITSTREAM["輸入位元流: 0 0 1 0 0 1 1 1 ..."] --&gt; DEMUX["2-to-1 串並轉換器 (Demux)"]
+
+    DEMUX --&gt;|"偶數位元流"| I_STREAM["同相分支 I(t)&lt;br/&gt;0 → -1, 1 → +1"]
+    DEMUX --&gt;|"奇數位元流"| Q_STREAM["正交分支 Q(t)&lt;br/&gt;0 → -1, 1 → +1"]
+
+    OSC["本地高頻振盪器&lt;br/&gt;產生 cos(2πfc t)"] --&gt; MULT_I["乘法器 I"]
+    I_STREAM --&gt; MULT_I
+
+    OSC --&gt; PHASE90["-90° 移相器&lt;br/&gt;產生 -sin(2πfc t)"]
+    PHASE90 --&gt; MULT_Q["乘法器 Q"]
+    Q_STREAM --&gt; MULT_Q
+
+    MULT_I --&gt;|"同相訊號 I(t) · cos(2πfc t)"| SUM["加法器"]
+    MULT_Q --&gt;|"正交訊號 Q(t) · (-sin(2πfc t))"| SUM
+
+    SUM --&gt; TX_OUT["發射 QPSK 訊號&lt;br/&gt;s(t) = I(t) cos(2πfc t) - Q(t) sin(2πfc t)"]</code></pre>
+<ul>
+<li><strong>同相載波 (In-phase carrier)</strong>：<span class="arithmatex">\(\cos(2\pi f_c t)\)</span>，相位為 <span class="arithmatex">\(0^\circ\)</span>。</li>
+<li><strong>正交載波 (Quadrature carrier)</strong>：<span class="arithmatex">\(-\sin(2\pi f_c t)\)</span>，相位差為 <span class="arithmatex">\(90^\circ\)</span>。</li>
+<li><strong>正交性 (Orthogonality)</strong> 確保這兩路訊號疊加在一起發射後，接收端能毫無干擾地將兩路資料各自獨立還原！</li>
+</ul>
+<hr />
+<h2 id="3-qam">3. 結合振幅與相位：星座圖與正交振幅調變 (QAM)<a class="headerlink" href="#3-qam" title="Permanent link">&para;</a></h2>
+<h3 id="31-constellation-diagram">3.1 什麼是星座圖 (Constellation Diagram)？<a class="headerlink" href="#31-constellation-diagram" title="Permanent link">&para;</a></h3>
+<p>當訊號同時改變振幅與相位時，波形難以用肉眼辨識。工程上使用二維極座標平面的 <strong>星座圖</strong> 來視覺化所有符號：</p>
+<pre class="mermaid"><code>graph TD
+    CP["星座圖上的一個點 (Point)"] --&gt; LEN["距原點長度 (Length) = 訊號振幅 A"]
+    CP --&gt; ANG["與橫軸夾角 (Angle) = 訊號相位 θ"]
+    CP --&gt; PROJ_X["橫軸投影 (X軸) = 同相分量 I (乘上 cos)"]
+    CP --&gt; PROJ_Y["縱軸投影 (Y軸) = 正交分量 Q (乘上 -sin)"]</code></pre>
+<h4 id="baskbpskqpsk">BASK、BPSK、QPSK 星座圖視覺對照：<a class="headerlink" href="#baskbpskqpsk" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>      BASK (2 種狀態)               BPSK (2 種狀態)               QPSK (4 種狀態)
+            Q                             Q                             Q
+            │                             │                        01   │   11
+            │                             │                         ●   │   ●
+            │                             │                             │
+    ────────┼───●────●─── I       ───●────┼────●─── I           ────────┼──────── I
+            │   0    1             0(-1)  │   1(+1)                     │
+            │                             │                         ●   │   ●
+            │                             │                        00   │   10
+</code></pre></div>
+<hr />
+<h3 id="32-qam-quadrature-amplitude-modulation">3.2 正交振幅調變 (QAM - Quadrature Amplitude Modulation)<a class="headerlink" href="#32-qam-quadrature-amplitude-modulation" title="Permanent link">&para;</a></h3>
+<p>QAM 同時調整振幅與相位，形成規律的二維方格網（如 16-QAM, 64-QAM, 1024-QAM）：</p>
+<div class="highlight"><pre><span></span><code>                       16-QAM 星座圖 (4 bits / symbol)
+                                      Q (縱軸)
+                                      ▲
+                         0000   0100  │  1100   1000
+                          ●      ●    │   ●      ●    (Q = +3)
+                                      │
+                         0001   0101  │  1101   1001
+                          ●      ●    │   ●      ●    (Q = +1)
+                      ────────────────┼────────────────► I (橫軸)
+                         0011   0111  │  1111   1011
+                          ●      ●    │   ●      ●    (Q = -1)
+                                      │
+                         0010   0110  │  1110   1010
+                          ●      ●    │   ●      ●    (Q = -3)
+                                      ▼
+                        (I=-3) (I=-1)   (I=+1) (I=+3)
+</code></pre></div>
+<h4 id="key-takeaway">觀念大辨正 (Key Takeaway)：<a class="headerlink" href="#key-takeaway" title="Permanent link">&para;</a></h4>
+<ul>
+<li>❌ <strong>常見錯誤觀念</strong>：「1024-QAM 所需的頻率頻寬 (Hz) 比 16-QAM 更大。」</li>
+<li>✔ <strong>正確觀念</strong>：</li>
+<li><strong>頻率頻寬（Hz）完全相同</strong>（因為符號時間 <span class="arithmatex">\(\tau\)</span> 相同）！</li>
+<li>1024-QAM 每個符號攜帶 <span class="arithmatex">\(10\text{ bits}\)</span>（<span class="arithmatex">\(\log_2 1024 = 10\)</span>），16-QAM 每個符號攜帶 <span class="arithmatex">\(4\text{ bits}\)</span>（<span class="arithmatex">\(\log_2 16 = 4\)</span>）。</li>
+<li><strong>在相同的通道頻寬下，1024-QAM 的資料傳輸速率 (bps) 是 16-QAM 的 2.5 倍！</strong></li>
+</ul>
+<hr />
+<h3 id="33-qam-mathematical-proof">3.3 QAM 的數學本質推導 (Mathematical Proof)<a class="headerlink" href="#33-qam-mathematical-proof" title="Permanent link">&para;</a></h3>
+<p>為什麼任意振幅與相位的正弦波，都能直接拆成 <span class="arithmatex">\(I\)</span> 與 <span class="arithmatex">\(Q\)</span> 兩路發送？</p>
+<p>利用三角函數餘弦和角公式：</p>
+<div class="arithmatex">\[\cos(x + y) = \cos(x)\cos(y) - \sin(x)\sin(y)\]</div>
+<p>令 <span class="arithmatex">\(x = 2\pi f_c t\)</span>，相位為 <span class="arithmatex">\(y = \theta\)</span>，則帶通訊號為：</p>
+<div class="arithmatex">\[s(t) = A\cos(2\pi f_c t + \theta) = A\cos(2\pi f_c t)\cos\theta - A\sin(2\pi f_c t)\sin\theta\]</div>
+<p>重新分組：</p>
+<div class="arithmatex">\[s(t) = \underbrace{\left[ A\cos\theta \right]}_{I(t)\text{ (X 軸座標)}} \cdot \cos(2\pi f_c t) + \underbrace{\left[ A\sin\theta \right]}_{Q(t)\text{ (Y 軸座標)}} \cdot \left(-\sin(2\pi f_c t)\right)\]</div>
+<blockquote>
+<p><strong>驚人結論</strong>：
+發送端根本<strong>不需要設計複雜的連續移相器與可變放大器</strong>！
+只要計算出星座點座標 <span class="arithmatex">\((I, Q)\)</span>，分別產生兩組階梯電壓 <span class="arithmatex">\(I(t)\)</span> 與 <span class="arithmatex">\(Q(t)\)</span>，乘上固定頻率的 <span class="arithmatex">\(\cos\)</span> 與 <span class="arithmatex">\(-\sin\)</span> 載波後相加，就能發射出任何指定振幅與相位的合成波！</p>
+</blockquote>
+<hr />
+<h3 id="34-16-qam">3.4 16-QAM 傳輸實例推導<a class="headerlink" href="#34-16-qam" title="Permanent link">&para;</a></h3>
+<p>假設我們要傳送 16 個位元：<code>1101 0111 1100 0110</code></p>
+<ol>
+<li><strong>分組為 4 個符號</strong>（每個符號 4 bits）：</li>
+<li>符號 1：<code>1101</code> <span class="arithmatex">\(\implies\)</span> 查表星座圖座標 <span class="arithmatex">\((I, Q) = (+1, +1)\)</span></li>
+<li>符號 2：<code>0111</code> <span class="arithmatex">\(\implies\)</span> 查表星座圖座標 <span class="arithmatex">\((I, Q) = (-1, -1)\)</span></li>
+<li>符號 3：<code>1100</code> <span class="arithmatex">\(\implies\)</span> 查表星座圖座標 <span class="arithmatex">\((I, Q) = (+1, +3)\)</span></li>
+<li>
+<p>符號 4：<code>0110</code> <span class="arithmatex">\(\implies\)</span> 查表星座圖座標 <span class="arithmatex">\((I, Q) = (-1, -3)\)</span></p>
+</li>
+<li>
+<p><strong>生成同相與正交電壓序列</strong>：</p>
+</li>
+<li><span class="arithmatex">\(I(t)\)</span> 電位序列：<span class="arithmatex">\([+1\text{V}, -1\text{V}, +1\text{V}, -1\text{V}]\)</span></li>
+<li>
+<p><span class="arithmatex">\(Q(t)\)</span> 電位序列：<span class="arithmatex">\([+1\text{V}, -1\text{V}, +3\text{V}, -3\text{V}]\)</span></p>
+</li>
+<li>
+<p><strong>發射訊號</strong>：
+   $<span class="arithmatex">\(s(t) = I(t)\cos(2\pi f_c t) + Q(t)(-\sin(2\pi f_c t))\)</span>$</p>
+</li>
+</ol>
+<hr />
+<h2 id="4-demodulation">4. 接收端解調 (Demodulation) 與判決原則<a class="headerlink" href="#4-demodulation" title="Permanent link">&para;</a></h2>
+<p>接收端的天線收到空氣中傳來的訊號 <span class="arithmatex">\(s(t)\)</span> 後，如何分毫不差地把 <span class="arithmatex">\(I(t)\)</span> 與 <span class="arithmatex">\(Q(t)\)</span> 拆解出來？</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Ant as "接收天線"
+    participant Mix as "混頻乘法器 (Mixer)"
+    participant LPF as "低通濾波器 (LPF)"
+    participant Amp as "放大器 (Amplify ×2)"
+    participant Dec as "星座圖判決器 (Decision)"
+
+    Ant-&gt;&gt;Mix: 接收高頻訊號 s(t)
+    Note over Mix: 分別乘以 cos(2πfc t) 與 -sin(2πfc t)
+    Mix-&gt;&gt;LPF: 產生基頻分量 + 2fc 超高頻分量
+    Note over LPF: 濾除所有 2fc 載波諧波
+    LPF-&gt;&gt;Amp: 輸出 0.5 I(t) 與 0.5 Q(t)
+    Amp-&gt;&gt;Dec: 放大 2 倍還原原始座標 (I, Q)
+    Note over Dec: 尋找星座圖上最近的標準點 (最近鄰法則)
+    Dec--&gt;&gt;Ant: 輸出解碼位元串！</code></pre>
+<hr />
+<h3 id="41-it-qt">4.1 數學深度拆解：正交性如何分離 <span class="arithmatex">\(I(t)\)</span> 與 <span class="arithmatex">\(Q(t)\)</span>？<a class="headerlink" href="#41-it-qt" title="Permanent link">&para;</a></h3>
+<h4 id="it">提取同相分量 <span class="arithmatex">\(I(t)\)</span>：<a class="headerlink" href="#it" title="Permanent link">&para;</a></h4>
+<p>將接收到的 <span class="arithmatex">\(s(t)\)</span> 乘上同相載波 <span class="arithmatex">\(\cos(2\pi f_c t)\)</span>：</p>
+<div class="arithmatex">\[s(t) \cdot \cos(2\pi f_c t) = \left[ I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t) \right] \cdot \cos(2\pi f_c t)$$
+$$= I(t)\cos^2(2\pi f_c t) - Q(t)\sin(2\pi f_c t)\cos(2\pi f_c t)\]</div>
+<p>利用倍角公式 <span class="arithmatex">\(\cos^2(\theta) = 0.5(1 + \cos 2\theta)\)</span> 及 <span class="arithmatex">\(\sin\theta\cos\theta = 0.5\sin 2\theta\)</span>：</p>
+<div class="arithmatex">\[= 0.5 I(t) + \underbrace{0.5 I(t)\cos(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}} - \underbrace{0.5 Q(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}}\]</div>
+<ol>
+<li><strong>通過低通濾波器 (LPF)</strong>：所有 <span class="arithmatex">\(2f_c\)</span>（例如 <span class="arithmatex">\(5\text{ GHz} \to 10\text{ GHz}\)</span>）高頻分量全部被濾除為 0。</li>
+<li><strong>濾波後輸出</strong>：<span class="arithmatex">\(0.5 I(t)\)</span>。</li>
+<li><strong>放大器放大 2 倍</strong>：<span class="arithmatex">\(2 \times 0.5 I(t) = I(t)\)</span>（<strong>同相分量完美還原</strong>！<span class="arithmatex">\(Q\)</span> 分量完全被抵消）。</li>
+</ol>
+<hr />
+<h4 id="qt">提取正交分量 <span class="arithmatex">\(Q(t)\)</span>：<a class="headerlink" href="#qt" title="Permanent link">&para;</a></h4>
+<p>將接收到的 <span class="arithmatex">\(s(t)\)</span> 乘上正交載波 <span class="arithmatex">\((-\sin(2\pi f_c t))\)</span>：</p>
+<div class="arithmatex">\[s(t) \cdot (-\sin(2\pi f_c t)) = -I(t)\cos(2\pi f_c t)\sin(2\pi f_c t) + Q(t)\sin^2(2\pi f_c t)$$
+$$= 0.5 Q(t) - \underbrace{0.5 I(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}} - \underbrace{0.5 Q(t)\cos(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c \text{ 超高頻}}\]</div>
+<ol>
+<li><strong>通過低通濾波器 (LPF)</strong>：濾除 <span class="arithmatex">\(2f_c\)</span> 高頻。</li>
+<li><strong>放大器放大 2 倍</strong>：<span class="arithmatex">\(2 \times 0.5 Q(t) = Q(t)\)</span>（<strong>正交分量完美還原</strong>！<span class="arithmatex">\(I\)</span> 分量完全被抵消）。</li>
+</ol>
+<hr />
+<h3 id="42-bit-error">4.2 星座圖幾何判決與雜訊位元錯誤 (Bit Error)<a class="headerlink" href="#42-bit-error" title="Permanent link">&para;</a></h3>
+<p>真實大氣中存在熱雜訊（Noise）。接收端解調出的座標不會完美落在整數點，而是會產生偏移（如下圖星號 <span class="arithmatex">\(\bigstar\)</span> 所示）：</p>
+<pre class="mermaid"><code>graph TD
+    RECV_PT["接收到的座標點 (I_rx, Q_rx)&lt;br/&gt;受到雜訊加法干擾"] --&gt; DIST["計算與所有標準星座點之歐幾里得距離"]
+    DIST --&gt; CHOOSE["最近鄰判決原則 (Minimum Euclidean Distance)&lt;br/&gt;選擇距離最近的標準星座點"]
+    CHOOSE --&gt;|"雜訊微弱 (未越過中線邊界)"| OK["✔ 正確判決 (No Bit Error)"]
+    CHOOSE --&gt;|"雜訊過強 (偏離跨過邊界)"| ERR["❌ 錯誤判決 (Bit Error!)"]</code></pre>
+<div class="highlight"><pre><span></span><code>                   雜訊導致判決錯誤示意圖
+                              Q
+                              │
+                     01       │       11
+                      ○       │       ○
+                              │     ★ (接收點偏到這裡)
+               ───────────────┼─────────────── I
+                              │   ↗ (受到強烈雜訊推擠)
+                      ○       │  ● 10 (原發射點)
+                     00       │
+</code></pre></div>
+<ul>
+<li><strong>訊噪比 (SNR, Signal-to-Noise Ratio)</strong>：訊號功率與雜訊功率的比值。</li>
+<li><strong>物理規律</strong>：
+  $<span class="arithmatex">\(\text{SNR} \downarrow \implies \text{接收點偏離半徑} \uparrow \implies \text{跨越判決邊界機率} \uparrow \implies \text{位元錯誤率 (BER)} \uparrow\)</span>$</li>
+</ul>
+<hr />
+<h2 id="5-adaptive-modulation-coding-amc">5. 適應性調變與編碼機制 (Adaptive Modulation &amp; Coding, AMC)<a class="headerlink" href="#5-adaptive-modulation-coding-amc" title="Permanent link">&para;</a></h2>
+<h3 id="51-trade-off">5.1 調變方式的權衡抉擇 (Trade-off)<a class="headerlink" href="#51-trade-off" title="Permanent link">&para;</a></h3>
+<p>在不同通道環境下，該選擇哪種調變技術？</p>
+<pre class="mermaid"><code>graph LR
+    subgraph SG_GOOD ["良好通道 (高 SNR / 雜訊極小)"]
+    HIGH["選用高階調變 (如 32-QAM / 1024-QAM)&lt;br/&gt;★ 格點密集但雜訊極小，不會越界&lt;br/&gt;★ 每個符號 5~10 bits，傳輸速度飆升！"]
+    end
+
+    subgraph SG_BAD ["惡劣通道 (低 SNR / 雜訊極大)"]
+    LOW["選用低階強固調變 (如 BPSK / QPSK)&lt;br/&gt;★ 格點間距巨大，抗雜訊能力超強&lt;br/&gt;★ 犧牲速度保證 0 錯誤率！"]
+    end</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">調變技術</th>
+<th style="text-align: center;">每個符號攜帶位元</th>
+<th style="text-align: center;">速度 (Bit Rate)</th>
+<th style="text-align: center;">抗雜訊能力 (Robustness)</th>
+<th style="text-align: center;">適用場景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>BPSK</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\text{ bit}\)</span></td>
+<td style="text-align: center;">基準 (<span class="arithmatex">\(1\times\)</span>)</td>
+<td style="text-align: center;">★★★★★ (極強)</td>
+<td style="text-align: center;">遠距離、訊號微弱、嚴重干擾</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>QPSK</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(2\text{ bits}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(2\times\)</span></td>
+<td style="text-align: center;">★★★★☆ (強)</td>
+<td style="text-align: center;">訊號普通、基本通訊</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16-QAM</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(4\text{ bits}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(4\times\)</span></td>
+<td style="text-align: center;">★★★☆☆ (中)</td>
+<td style="text-align: center;">訊號良好（如辦公室內 Wi-Fi）</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>64-QAM / 256-QAM</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(6 \sim 8\text{ bits}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(6 \sim 8\times\)</span></td>
+<td style="text-align: center;">★★☆☆☆ (弱)</td>
+<td style="text-align: center;">高速行動網路近距離</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>1024-QAM</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(10\text{ bits}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(10\times\)</span></td>
+<td style="text-align: center;">★☆☆☆☆ (極弱)</td>
+<td style="text-align: center;">Wi-Fi 6 / 5G 極近距離無遮蔽傳輸</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="52-channel-coding-coding-rate-r">5.2 通道編碼 (Channel Coding) 與編碼率 (Coding Rate, <span class="arithmatex">\(R\)</span>)<a class="headerlink" href="#52-channel-coding-coding-rate-r" title="Permanent link">&para;</a></h3>
+<p>單靠調變還不夠，通訊系統會在資料中加入冗餘保護（通道編碼）：</p>
+<div class="arithmatex">\[R = \text{Coding Rate} = \frac{\text{有效資料位元數 (Useful bits)}}{\text{實際發送總位元數 (Total bits)}}\]</div>
+<h4 id="1101">範例解析：要發送原始位元 <code>1101</code><a class="headerlink" href="#1101" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>若設定編碼率 <span class="arithmatex">\(R = 1/3\)</span></strong>（每個位元重複 3 次保護）：</li>
+<li>編碼後序列：<code>111 111 000 111</code>（共 12 bits）。</li>
+<li>若採用 16-QAM（4 bits/symbol）發送，共需 3 個符號：<code>1111</code>、<code>1100</code>、<code>0111</code>。</li>
+<li><strong>若設定編碼率 <span class="arithmatex">\(R = 1/5\)</span></strong>（每個位元重複 5 次保護）：</li>
+<li>編碼後序列：<code>11111 11111 00000 11111</code>（共 20 bits），抗雜訊更強！</li>
+</ol>
+<hr />
+<h3 id="53-mcs-epsilon-greedy">5.3 MCS 動態調適策略：<span class="arithmatex">\(\epsilon\)</span>-Greedy 演算法<a class="headerlink" href="#53-mcs-epsilon-greedy" title="Permanent link">&para;</a></h3>
+<p>在現代 4G/5G 與 Wi-Fi 中，基地台會將調變與編碼率打包成 <strong>MCS (Modulation and Coding Scheme)</strong> 指標（例如 MCS 0 到 MCS 15）：</p>
+<pre class="mermaid"><code>graph TD
+    COND["即時偵測通道雜訊 (Noise)"] --&gt; CHECK{"雜訊變化？"}
+    CHECK --&gt;|"雜訊變大 (SNR 劣化)"| SLOW["降低 MCS 等級&lt;br/&gt;降低 Coding Rate R + 切換至 BPSK/QPSK"]
+    CHECK --&gt;|"雜訊變小 (SNR 良好)"| FAST["提高 MCS 等級&lt;br/&gt;提高 Coding Rate R + 切換至 1024-QAM"]</code></pre>
+<h4 id="epsilon-greedy"><span class="arithmatex">\(\epsilon\)</span>-Greedy 決策機制：<a class="headerlink" href="#epsilon-greedy" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>以 <span class="arithmatex">\(1 - \epsilon\)</span> 的機率（利用 Exploitation）</strong>：選用當前估計吞吐量（Throughput）最高的最佳 MCS。</li>
+<li><strong>以 <span class="arithmatex">\(\epsilon\)</span> 的小機率（探索 Exploration）</strong>：隨機嘗試其他更高或更低的 MCS，以探測環境通道是否有好轉或劣化。</li>
+</ul>
+<hr />
+<h3 id="54-mcs">5.4 訊框設計：接收端如何得知傳送端選用了哪種 MCS？<a class="headerlink" href="#54-mcs" title="Permanent link">&para;</a></h3>
+<p>既然傳送端會動態切換 MCS，接收端在收到訊號前<strong>根本不知道這批資料是用 BPSK 還是 1024-QAM 調變的</strong>，該如何解調？</p>
+<p>解決方案在於 <strong>訊框（Frame）的結構分層設計</strong>：</p>
+<div class="highlight"><pre><span></span><code>                    通訊訊框 (Frame) 的結構
+┌──────────────────────────────────────┬────────────────────────────────────────────┐
+│      標頭 (Frame Header)             │            資料酬載 (Payload)              │
+├──────────────────────────────────────┼────────────────────────────────────────────┤
+│ • 來源位址 (Source Address)          │                                            │
+│ • 目的位址 (Destination Address)     │   真正傳輸的資料內容 (Data)                 │
+│ • 指派的 MCS (例如: 1024-QAM, R=3/4) │                                            │
+└──────────────────────────────────────┴────────────────────────────────────────────┘
+        ▲                                                      ▲
+        │                                                      │
+【永遠使用最慢、最穩固的調變】                         【使用 Header 指定的高速 MCS】
+ (例如 BPSK / QPSK + 低編碼率)                          (例如 1024-QAM + 高編碼率)
+</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Tx as "發射端"
+    participant Rx as "接收端"
+
+    Note over Tx: 1. 組裝 Frame&lt;br/&gt;Header 註明 Payload 採用 1024-QAM
+    Tx-&gt;&gt;Rx: 發射 Header (使用超強固 BPSK 調變)
+    Note over Rx: 2. 接收端即使在極差環境下&lt;br/&gt;也能 100% 正確解碼 Header
+    Note over Rx: 3. 從 Header 獲知 Payload 為 1024-QAM
+    Tx-&gt;&gt;Rx: 發射 Payload (使用 1024-QAM 高速發送)
+    Note over Rx: 4. 切換為 1024-QAM 解調器還原資料！</code></pre>
+<blockquote>
+<p><strong>核心精華</strong>：
+<strong>Header 是解開 Payload 的鑰匙</strong>。因此 Header 永遠採用最慢速、最耐雜訊的低階調變（如 BPSK），確保接收端在任何嚴苛條件下都能順利讀出 MCS 指標，再以對應模式解調高階 Payload！</p>
+</blockquote>
+<hr />
+<h2 id="_2">本章精華總結表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>調變技術</th>
+<th>改變維度</th>
+<th style="text-align: center;">每個符號位元數</th>
+<th>星座圖特徵</th>
+<th>關鍵數學通式 / 性質</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BASK</strong></td>
+<td>振幅 (<span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(A\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span> bit</td>
+<td>I 軸上 2 個點</td>
+<td><span class="arithmatex">\(s(t) = A\cos(2\pi f_c t)\)</span> 或 <span class="arithmatex">\(0\)</span>；<span class="arithmatex">\(\text{BW} \propto 1/\tau\)</span></td>
+</tr>
+<tr>
+<td><strong>4-ASK</strong></td>
+<td>4 種振幅等級</td>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span> bits</td>
+<td>I 軸上 4 個點</td>
+<td>振幅越大功率需求越高 (<span class="arithmatex">\(P \propto A^2\)</span>)</td>
+</tr>
+<tr>
+<td><strong>BPSK</strong></td>
+<td>相位 (<span class="arithmatex">\(0^\circ, 180^\circ\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span> bit</td>
+<td>I 軸上對稱 2 點 (<span class="arithmatex">\(\pm 1\)</span>)</td>
+<td><span class="arithmatex">\((\pm 1)\cos(2\pi f_c t)\)</span>；抗雜訊優於 ASK</td>
+</tr>
+<tr>
+<td><strong>QPSK</strong></td>
+<td>4 種正交相位</td>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span> bits</td>
+<td>4 個象限圓周上 4 點</td>
+<td><span class="arithmatex">\(I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)\)</span></td>
+</tr>
+<tr>
+<td><strong>QAM</strong></td>
+<td>同時調變振幅與相位</td>
+<td style="text-align: center;"><span class="arithmatex">\(\log_2 M\)</span> bits</td>
+<td>2D 矩陣網格格點</td>
+<td><span class="arithmatex">\(A\cos(2\pi f_c t + \theta) = I\cos(2\pi f_c t) - Q\sin(2\pi f_c t)\)</span></td>
+</tr>
+<tr>
+<td><strong>解調 (Rx)</strong></td>
+<td>乘載波 <span class="arithmatex">\(\to\)</span> LPF <span class="arithmatex">\(\to\)</span> 放大</td>
+<td style="text-align: center;">—</td>
+<td>最近鄰距離判決</td>
+<td>利用正交性徹底分離 I 與 Q 兩路通道</td>
+</tr>
+<tr>
+<td><strong>AMC</strong></td>
+<td>動態調整 MCS</td>
+<td style="text-align: center;">彈性</td>
+<td>依 SNR 動態切換</td>
+<td><span class="arithmatex">\(\epsilon\)</span>-greedy 探索最佳平衡；Header 恆用 BPSK</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">下一步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>恭喜你！至此你已經完整掌握了實體層的全部核心底層原理：
+從 <strong>正弦波基礎</strong> <span class="arithmatex">\(\to\)</span> <strong>方波傅立葉級數</strong> <span class="arithmatex">\(\to\)</span> <strong>頻寬與頻譜搬移</strong> <span class="arithmatex">\(\to\)</span> <strong>無線調變、星座圖、I/Q 正交分解與適應性 MCS 機制</strong>。</p>
+<p>實體層成功將位元轉換為電波送達對端後，如何確保傳輸過程沒有封包錯誤？多個裝置如何共用同一條通道？</p>
+<p>請點擊前往下一章：<a href="../../data-link-layer/">資料連接層 Data Link Layer 概論</a>！</p>
 
 
 
@@ -1027,7 +1937,7 @@
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

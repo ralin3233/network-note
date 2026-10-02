@@ -1,0 +1,1160 @@
+
+<!doctype html>
+<html lang="zh-TW" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="課程整理，寫給沒上課也能看懂的人">
+      
+      
+      
+      
+        <link rel="prev" href="../data-link-layer/protocols/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AI 協作紀錄 - 網路課程筆記 - 實體層與資料連接層</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai" class="md-skip">
+          跳轉到
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="頁首">
+    <a href=".." title="網路課程筆記 - 實體層與資料連接層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            網路課程筆記 - 實體層與資料連接層
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI 協作紀錄
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切換深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換淺色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切換淺色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="搜尋">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜尋引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="標籤" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首頁
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../physical-layer/" class="md-tabs__link">
+          
+  
+  
+  實體層 Physical Layer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../data-link-layer/" class="md-tabs__link">
+          
+  
+  
+  資料連接層 Data Link Layer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AI 協作紀錄
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="導覽列" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="網路課程筆記 - 實體層與資料連接層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    網路課程筆記 - 實體層與資料連接層
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首頁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層 Physical Layer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    實體層 Physical Layer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層概論與路徑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/sine-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 正弦波特性與通式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/fourier-and-square-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/modulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. 數位調變、解調與適應性傳輸機制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    資料連接層 Data Link Layer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    資料連接層 Data Link Layer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概論
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/framing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    成框 Framing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/error-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    錯誤偵測與更正
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/flow-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    流量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/mac-sublayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MAC 子層
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-link-layer/protocols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常見協定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="ai">AI 協作與對話紀錄 (課程評分專區)<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本頁面專門記錄本課程筆記網站製作期間，使用生成式 AI（如 ChatGPT、Gemini、Claude 等）進行輔助設計、內容整理與除錯的完整對話歷程與 Prompt，供課程評分與 AI 協作成果查驗使用。</p>
+</blockquote>
+<hr />
+<details class="quote">
+<summary>9/7：textbook模板建置</summary>
+<ul>
+<li><strong>使用模型</strong>：Claude Sonnet 5</li>
+<li><strong>提問目的</strong>：利用mkdocs建立基礎的textbook模板與架構</li>
+</ul>
+<p><strong>原始對話紀錄：</strong></p>
+<blockquote>
+<p><a href="https://claude.ai/share/688bd943-291f-4e4a-9c63-0b40591785b8">https://claude.ai/share/688bd943-291f-4e4a-9c63-0b40591785b8</a></p>
+</blockquote>
+</details>
+<details class="quote">
+<summary>9/14：實體層知識脈絡重構與初學者 Q&amp;A 擴充</summary>
+<ul>
+<li><strong>使用模型</strong>：Gemini 3.7 Flash</li>
+<li><strong>提問目的</strong>：依照課堂授課路徑重構實體層架構（正弦波 <span class="arithmatex">\(\to\)</span> 方波構成 <span class="arithmatex">\(\to\)</span> 傅立葉轉換/性質/頻率與振幅關係 <span class="arithmatex">\(\to\)</span> 頻寬/有效頻寬/Nyquist &amp; Shannon 極限 <span class="arithmatex">\(\to\)</span> 無線傳輸調變），建立強連貫脈絡，並在各節加入初學者常見疑問（Q&amp;A）與詳細解答。</li>
+</ul>
+<p><strong>提問 Prompt 與引導路徑：</strong></p>
+<blockquote>
+<p>「實體層的部分老師是從以下路徑開始講解的，請修改實體層的內容，內容地須連貫有脈絡，並記錄並解答初學者看到該節可能產生的問題：
+sine wave的基本特性及通式 -&gt; 方波的構成 -&gt; 傅立葉轉換/性質/頻率與震幅的關係 -&gt; 頻寬/有效頻寬/與其他參數的關係 -&gt; 無線傳輸的modulation」</p>
+</blockquote>
+</details>
+<details class="quote">
+<summary>9/14：傅立葉章節降維解說（拆解為 n 個 sine/cos 頻率訊號）</summary>
+<ul>
+<li><strong>使用模型</strong>：Gemini 3.7 Flash</li>
+<li><strong>提問目的</strong>：針對無工程數學或微積分基礎的初學者，將傅立葉分析簡化為「將任何複雜訊號拆解為 <span class="arithmatex">\(n\)</span> 個頻率不同的 <span class="arithmatex">\(\sin\)</span> 與 <span class="arithmatex">\(\cos\)</span> 之和」，降低學習門檻。</li>
+</ul>
+<p><strong>提問 Prompt：</strong></p>
+<blockquote>
+<p>「傅立葉的地方對於沒學過工程數學的同學太難了 請從把訊號拆成n個頻率不同的sine cos來解釋」</p>
+</blockquote>
+</details>
+<details class="quote">
+<summary>9/14：傅立葉章節比喻精簡與專業術語回歸</summary>
+<ul>
+<li><strong>使用模型</strong>：Gemini 3.7 Flash</li>
+<li><strong>提問目的</strong>：精簡生活化比喻（僅保留音樂和弦比喻作為章節開頭的直觀聯想），後續公式結構、方波拆解、諧波疊加與頻域圖均回歸清晰標準的通訊工程術語（基頻、諧波、頻率分量、振幅）。</li>
+</ul>
+<p><strong>提問 Prompt：</strong></p>
+<blockquote>
+<p>「傅立葉那張的例子留音樂那個就好，並且不需要在每個地方都用音符比喻，在開頭作為聯想就好」</p>
+</blockquote>
+</details>
+<details class="quote">
+<summary>10/2：對照簡報重構內容</summary>
+<ul>
+<li><strong>使用模型</strong>：Gemini 3.7 Flash</li>
+<li><strong>提問目的</strong>：對照簡報重新檢查各章節內容，確認無額外多餘的延伸主題</li>
+</ul>
+<p><strong>提問 Prompt：</strong></p>
+<blockquote>
+<p>「請按照這個檔案提及的內容 幫我撰寫實體層的內容，其中「正弦波特性與通式0」、「方波構成與傅立葉分析」不須更動。其餘部分需有邏輯調理地涵蓋簡報內容，圖片部分不要用ascii」</p>
+</blockquote>
+<p>**完整回覆: **</p>
+<p>Viewed mkdocs.yml:1-64<br />
+Created bandwidth-and-capacity.md<br />
+Created modulation.md<br />
+Viewed index.md:1-66<br />
+Created index.md<br />
+Viewed mkdocs.yml:1-64<br />
+Edited mkdocs.yml<br />
+Viewed index.md:1-32<br />
+Edited index.md  </p>
+<p>已重新逐頁核對課堂簡報（共 33 頁投影片），並嚴格<strong>僅保留簡報中實際講授的核心內容</strong>，徹底移除非簡報範疇的教科書額外延伸主題（如 Nyquist / Shannon、雙絞線 / 光纖、曼徹斯特編碼、ASK/FSK/PSK/QAM 星狀圖等），並確保全篇<strong>不使用任何 ASCII 字符畫</strong>。</p>
+<hr />
+<p><strong>📖 實體層筆記結構與簡報頁數精確對照</strong></p>
+<pre class="mermaid"><code>graph TD
+    A["1. 正弦波特性與通式 (sine-wave.md)&lt;br&gt;投影片 P.1 ~ P.6"] --&gt; B["2. 方波構成與傅立葉分析 (fourier-and-square-wave.md)&lt;br&gt;投影片 P.7 ~ P.11"]
+    B --&gt; C["3. 頻寬與傅立葉轉換性質 (bandwidth-and-capacity.md)&lt;br&gt;投影片 P.12 ~ P.18 &amp; P.23 ~ P.28"]
+    C --&gt; D["4. 無線傳輸、調變與解調機制 (modulation.md)&lt;br&gt;投影片 P.19 ~ P.22 &amp; P.29 ~ P.33"]
+
+    style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#0f172a;
+    style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#0f172a;
+    style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#0f172a;
+    style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;</code></pre>
+<hr />
+<p><strong>📝 重構後的各節內容詳情</strong></p>
+<ul>
+<li>
+<p><strong>1. <a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/sine-wave.md">1. 正弦波特性與通式</a> 與 <a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/fourier-and-square-wave.md">2. 方波構成與傅立葉分析</a></strong></p>
+<ul>
+<li>完全依照要求保持不變。</li>
+</ul>
+</li>
+<li>
+<p><strong>2. <a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/bandwidth-and-capacity.md">3. 頻寬、有效頻寬與傅立葉轉換性質</a>（對應投影片 P.12 ~ P.18, P.23 ~ P.28）</strong></p>
+<ul>
+<li><strong>頻寬定義</strong>：單位為 <span class="arithmatex">\(\text{Hz}\)</span>，由訊號本身包含的頻率分量決定（<span class="arithmatex">\(B = f_{\max} - f_{\min}\)</span>），非介質決定（P.12）。</li>
+<li><strong>時域壓縮與頻寬關係</strong>：時域週期減半 <span class="arithmatex">\(\implies\)</span> 頻率加倍 <span class="arithmatex">\(\implies\)</span> 頻寬加倍（P.13 ~ P.14）。</li>
+<li><strong>週期性 vs 非週期性數位訊號頻譜</strong>：週期訊號為離散柱狀諧波（<span class="arithmatex">\(f, 3f, 5f\dots\)</span>）；非週期單脈衝為連續 <span class="arithmatex">\(\text{sinc}\)</span> 頻譜（P.15）。</li>
+<li><strong>有效頻寬 (Effective Bandwidth)</strong>：忽略微弱旁瓣，保留主瓣約 <span class="arithmatex">\(90\%\)</span> 能量（P.16 ~ P.18）。</li>
+<li><strong>傅立葉轉換五大關鍵性質 (Properties of Fourier Transform)</strong>（P.23 ~ P.28）：<ol>
+<li><strong>矩形函數轉換</strong>：脈衝寬度 <span class="arithmatex">\(\tau \downarrow \implies \text{有效頻寬 } \text{Effective BW} \uparrow\)</span>。</li>
+<li><strong>時移性質 (Time Shift)</strong>：<span class="arithmatex">\(s(t)\)</span> 與 <span class="arithmatex">\(s(t + \Delta)\)</span> 頻譜完全相同。</li>
+<li><strong>時間縮放 (Time Scaling)</strong>：壓縮 <span class="arithmatex">\(\to\)</span> Bit Rate 增加 <span class="arithmatex">\(\to\)</span> 頻寬增加；拉伸 <span class="arithmatex">\(\to\)</span> Bit Rate 降低 <span class="arithmatex">\(\to\)</span> 頻寬減少。</li>
+<li><strong>線性相加 (Sum of Functions)</strong>：連續傳輸的多個位元脈衝，整體頻寬等於單一脈衝之頻寬。</li>
+<li><strong>餘弦相乘 (Multiplied by Cosine)</strong>：<span class="arithmatex">\(s(t)\cos(2\pi f_c t)\)</span> 將基頻頻譜 <span class="arithmatex">\([0, f_s]\)</span> 平移至 <span class="arithmatex">\([f_c - f_s, \, f_c + f_s]\)</span>。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>3. <a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/modulation.md">4. 無線傳輸、調變與解調機制</a>（對應投影片 P.19 ~ P.22, P.29 ~ P.33）</strong></p>
+<ul>
+<li><strong>無線不能直傳基頻的物理原因</strong>：直流分量（DC Component）無法輻射、天線尺寸限制（<span class="arithmatex">\(\approx \lambda/4\)</span>）、大氣頻譜共享（P.19）。</li>
+<li><strong>調變數學推導與積化和差</strong>（P.20 ~ P.21, P.29 ~ P.30）：
+$<span class="arithmatex">\(\cos(2\pi f_1 t)\cos(2\pi f_2 t) = \frac{1}{2}\left[\cos(2\pi(f_1+f_2)t) + \cos(2\pi(f_1-f_2)t)\right]\)</span>$
+完整收錄 <span class="arithmatex">\(s(t) = \cos(2\pi \cdot 0 t) + 0.1\cos(2\pi \cdot 10 t)\)</span> 乘以 <span class="arithmatex">\(50\text{ kHz}\)</span> 載波之展開計算，推導出新頻寬為 <span class="arithmatex">\(20\text{ Hz}\)</span>（<span class="arithmatex">\(49990\text{ Hz} \sim 50010\text{ Hz}\)</span>）。</li>
+<li><strong>通道參數設計計算實例</strong>（P.22）：<ul>
+<li>指派頻段 <span class="arithmatex">\(2.09\text{ GHz} \sim 2.11\text{ GHz}\)</span>（<span class="arithmatex">\(f_c = 2.1\text{ GHz}, B = 0.02\text{ GHz}\)</span>）。</li>
+<li>調變後頻寬 <span class="arithmatex">\(\frac{4\pi}{\tau} = 0.02\text{ GHz} \implies \tau = \frac{4\pi}{0.02 \times 10^9}\text{ s}\)</span>。</li>
+<li>最大傳輸速率 <span class="arithmatex">\(\text{Bit Rate} = 1/\tau = \frac{0.01}{2\pi}\text{ Gbps} \approx 1.59\text{ Mbps}\)</span>。</li>
+</ul>
+</li>
+<li><strong>接收端解調三步驟</strong>（P.31）：<ol>
+<li><strong>Modulate（混頻）</strong>：<span class="arithmatex">\(r(t)\cos(2\pi f_c t) = 0.5s(t) + 0.5s(t)\cos(2\pi \cdot 2f_c t)\)</span>。</li>
+<li><strong>Filter（低通濾波）</strong>：濾除 <span class="arithmatex">\(2f_c\)</span> 超高頻倍頻成分。</li>
+<li><strong>Amplify（放大）</strong>：放大 2 倍完整還原 <span class="arithmatex">\(s(t)\)</span>。</li>
+</ol>
+</li>
+<li><strong>傳送端與接收端總結流程</strong>（P.32 ~ P.33）：包含基地台指派、<span class="arithmatex">\(\tau\)</span> 決策、傳送 <span class="arithmatex">\(I(t)\cos + Q(t)\sin\)</span> 與接收端三步還原。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li><strong>4. 目錄與導覽同步更新</strong><ul>
+<li><a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/mkdocs.yml">mkdocs.yml</a>、<a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/index.md">docs/index.md</a> 與 <a href="file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/index.md">docs/physical-layer/index.md</a> 皆已同步更新為符合簡報脈絡的四大章節。</li>
+</ul>
+</li>
+</ul>
+</details>
+<hr />
+<details class="quote">
+<summary>10/2：依照簡報新增 Modulation 章節（ASK/PSK/QAM、星座圖、I/Q正交解調與AMC機制）</summary>
+<ul>
+<li><strong>使用模型</strong>：Gemini 3.7 Flash</li>
+<li><strong>提問目的</strong>：依照 35 頁調變專題簡報，完整建置 Modulation 章節，將抽象的調變概念（符號/位元轉換、I/Q 雙載波疊加、星座圖幾何判決、正交濾波還原、AMC 適應性調變與 Frame Header 機制）以圖像化流程圖、對照表與 step-by-step 實例推導詳細解說。</li>
+</ul>
+<p><strong>提問 Prompt：</strong></p>
+<blockquote>
+<p>「請幫我依照簡報安排新增modulation章節，抽象概念請以實例或圖像解釋」</p>
+</blockquote>
+<p>**完整回覆: **</p>
+<p>Viewed mkdocs.yml:1-63<br />
+Listed directory physical-layer<br />
+Viewed modulation.md:1-170<br />
+Viewed bandwidth-and-capacity.md:1-131<br />
+Viewed index.md:1-62<br />
+Created modulation.md<br />
+Viewed index.md:1-62<br />
+Edited index.md<br />
+Viewed mkdocs.yml:45-60<br />
+Edited mkdocs.yml<br />
+Viewed ai-collaboration.md:1-60<br />
+Viewed ai-collaboration.md:60-126<br />
+Edited ai-collaboration.md<br />
+Viewed index.md:1-30<br />
+Edited index.md  </p>
+<p>已為您依照 35 頁投影片的教學進程，完整重構並擴充實體層的 <a href="file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/modulation.md">4. 數位調變、解調與適應性傳輸機制 (modulation.md)</a>。所有抽象數學與物理概念均已透過 <strong>Mermaid 流程圖、幾何星座圖、時序圖、對照表與具體計算範例</strong> 進行直觀化拆解。</p>
+<hr />
+<p><strong>📖 本章核心架構與簡報頁數精確對應</strong></p>
+<pre class="mermaid"><code>graph TD
+    A["1. 導言：Bits → Wave 與 Symbol 概念 (P.1 ~ P.2, P.4)"] --&gt; B["2. 振幅移鍵 ASK / BASK / 4-ASK (P.3 ~ P.8)"]
+    B --&gt; C["3. 相位移鍵 BPSK 與 QPSK 正交雙載波 (P.9 ~ P.15)"]
+    C --&gt; D["4. 振幅+相位：星座圖與 QAM 數學本質 (P.16 ~ P.22)"]
+    D --&gt; E["5. 接收端解調：正交分離、低通濾波與最近鄰判決 (P.23 ~ P.28)"]
+    E --&gt; F["6. 適應性機制：AMC 權衡、編碼率、ε-greedy 與 Frame 設計 (P.29 ~ P.35)"]
+
+    style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px;
+    style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
+    style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px;
+    style D fill:#fce7f3,stroke:#db2777,stroke-width:2px;
+    style E fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+    style F fill:#fef3c7,stroke:#d97706,stroke-width:2px;</code></pre>
+<hr />
+<p><strong>💡 各節抽象概念之直觀化解構亮點</strong></p>
+<ol>
+<li><strong>位元 (Bit) vs 符號 (Symbol)</strong>（投影片 P.2, P.4）：</li>
+<li>以「貨車（符號）與貨物（位元）」作為實體直觀比喻：<span class="arithmatex">\(\text{Bits per Symbol} = \log_2(\text{狀態總數})\)</span>。</li>
+<li>
+<p>解釋多階調變如何在相同載波頻率下倍增傳輸速率。</p>
+</li>
+<li>
+<p><strong>振幅移鍵 (ASK / BASK / M-ASK)</strong>（投影片 P.3 ~ P.8）：</p>
+</li>
+<li><strong>BASK (OOK)</strong>：Bit 1 有波形、Bit 0 無波形；以振盪器與乘法器硬體架構圖解。</li>
+<li><strong>頻寬與傳輸率反比規律</strong>：脈衝時間 <span class="arithmatex">\(\tau \downarrow \implies \text{Bit Rate } (1/\tau) \uparrow \implies \text{Effective BW } (1/\tau) \uparrow\)</span>。</li>
+<li>
+<p><strong>多階 ASK (4-ASK)</strong>：4 種振幅等級代表 2 bits/symbol，並剖析振幅上升帶來的功率代價（<span class="arithmatex">\(P \propto A^2\)</span>）。</p>
+</li>
+<li>
+<p><strong>相位移鍵 (BPSK / QPSK)</strong>（投影片 P.9 ~ P.15）：</p>
+</li>
+<li><strong>BPSK</strong>：雙極性電位（<span class="arithmatex">\(+1\text{V} / -1\text{V}\)</span>）調變，相位翻轉 <span class="arithmatex">\(180^\circ\)</span>。</li>
+<li><strong>QPSK 數學疊加本質</strong>：圖解 <span class="arithmatex">\(\pm\cos(x) \pm\sin(x)\)</span> 疊加後產生的 4 個正交相位（<span class="arithmatex">\(45^\circ, 135^\circ, 225^\circ, 315^\circ\)</span>）。</li>
+<li>
+<p><strong>硬體架構</strong>：2-to-1 Demux 將位元串拆為 <span class="arithmatex">\(I(t)\)</span> 與 <span class="arithmatex">\(Q(t)\)</span>，平行調變同相載波 <span class="arithmatex">\(\cos(2\pi f_c t)\)</span> 與正交載波 <span class="arithmatex">\(-\sin(2\pi f_c t)\)</span> 後相加發射。</p>
+</li>
+<li>
+<p><strong>星座圖與正交振幅調變 (QAM)</strong>（投影片 P.16 ~ P.22）：</p>
+</li>
+<li><strong>星座圖幾何解讀</strong>：距離原點長度 <span class="arithmatex">\(= \text{振幅}\)</span>、夾角 <span class="arithmatex">\(= \text{相位}\)</span>、X 軸投影 <span class="arithmatex">\(= I\)</span>、Y 軸投影 <span class="arithmatex">\(= Q\)</span>。</li>
+<li><strong>重要觀念澄清</strong>：1024-QAM 與 16-QAM <strong>佔用的頻寬 (Hz) 完全相同</strong>，但前者位元速率（<span class="arithmatex">\(10\text{ bits/symbol}\)</span>）是後者（<span class="arithmatex">\(4\text{ bits/symbol}\)</span>）的 2.5 倍。</li>
+<li><strong>QAM 數學恆等式嚴謹推導</strong>：
+    $<span class="arithmatex">\(A\cos(2\pi f_c t + \theta) = \underbrace{[A\cos\theta]}_{I(t)} \cos(2\pi f_c t) + \underbrace{[A\sin\theta]}_{Q(t)} (-\sin(2\pi f_c t))\)</span>$
+    證明任何指定振幅與相位的電波皆可由兩組二維電壓座標直接合成。</li>
+<li>
+<p><strong>16-QAM 具體範例</strong>：以發送 <code>1101 0111 1100 0110</code> 為例，逐步查表映射至 <span class="arithmatex">\((1,1), (-1,-1), (1,3), (-1,-3)\)</span> 並生成 <span class="arithmatex">\(I(t), Q(t)\)</span> 波形。</p>
+</li>
+<li>
+<p><strong>接收端解調 (Demodulation) 與判決原則</strong>（投影片 P.23 ~ P.28）：</p>
+</li>
+<li><strong>正交性完美還原數學推導</strong>：<ul>
+<li>乘 <span class="arithmatex">\(\cos(2\pi f_c t) \implies 0.5 I(t) + \text{高頻 } 2f_c \implies \text{LPF 濾波} \implies 0.5 I(t) \implies \text{放大 2 倍還原 } I(t)\)</span>。</li>
+<li>乘 <span class="arithmatex">\(-\sin(2\pi f_c t) \implies 0.5 Q(t) + \text{高頻 } 2f_c \implies \text{LPF 濾波} \implies 0.5 Q(t) \implies \text{放大 2 倍還原 } Q(t)\)</span>。</li>
+</ul>
+</li>
+<li><strong>幾何最近鄰判決 (Minimum Euclidean Distance)</strong>：圖解雜訊如何使星座點偏離，說明 <span class="arithmatex">\(\text{SNR} \downarrow \implies \text{偏離距離} \uparrow \implies \text{位元錯誤率 (BER)} \uparrow\)</span>。</li>
+<li>
+<p><strong>16-QAM 判決實例</strong>：展示雜訊導致點 <span class="arithmatex">\((1.9, 2.1)\)</span> 誤判為 <code>1100</code> 的具體過程。</p>
+</li>
+<li>
+<p><strong>適應性調變與編碼機制 (AMC)</strong>（投影片 P.29 ~ P.35）：</p>
+</li>
+<li><strong>SNR 與調變選擇權衡</strong>：高 SNR 用 1024-QAM（衝高速）；低 SNR 用 BPSK（保證 0 錯誤）。</li>
+<li><strong>編碼率實例</strong>：發送 <code>1101</code> 在 <span class="arithmatex">\(R = 1/3\)</span>（12 bits，重複 3 次）與 <span class="arithmatex">\(R = 1/5\)</span>（20 bits，重複 5 次）下的符號打包過程。</li>
+<li><strong><span class="arithmatex">\(\epsilon\)</span>-Greedy 策略</strong>：<span class="arithmatex">\(1-\epsilon\)</span> 機率利用最佳 MCS、<span class="arithmatex">\(\epsilon\)</span> 機率探索環境變化。</li>
+<li><strong>訊框 (Frame) 設計核心機制</strong>：Header 永遠使用最慢、最強固的 BPSK 傳送，確保接收端 100% 能解讀出 Payload 所指派的 MCS 等級。</li>
+</ol>
+<hr />
+<p><strong>🔗 相關檔案更新清單</strong></p>
+<ul>
+<li>核心章節內容：<a href="file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/modulation.md">docs/physical-layer/modulation.md</a></li>
+<li>實體層導覽索引：<a href="file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/index.md">docs/physical-layer/index.md</a></li>
+<li>網站導覽目錄：<a href="file:///d:/university/網路通訊概論/network-notes/mkdocs.yml">mkdocs.yml</a></li>
+<li>首頁導覽：<a href="file:///d:/university/網路通訊概論/network-notes/docs/index.md">docs/index.md</a></li>
+<li>AI 協作紀錄：<a href="file:///d:/university/網路通訊概論/network-notes/docs/ai-collaboration.md">docs/ai-collaboration.md</a></li>
+</ul>
+</details>
+<hr />
+<p><strong>新增對話紀錄範本（供後續擴充使用）</strong></p>
+<p>若後續有新的 AI 對話紀錄，可直接複製下方格式貼上新增：</p>
+<div class="highlight"><pre><span></span><code>??? quote "對話 X：[請填寫對話主題]"
+<span class="w">    </span><span class="k">-</span><span class="w"> </span><span class="gs">**使用模型**</span>：[例如：ChatGPT-4o / Claude 3.5 Sonnet / Gemini]
+<span class="w">    </span><span class="k">-</span><span class="w"> </span><span class="gs">**提問目的**</span>：[簡述提問目的]
+
+    <span class="gs">**原始對話紀錄：**</span>
+<span class="k">    &gt; </span><span class="ge">[在此貼上你的對話紀錄]</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到頂端
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "toc.integrate", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

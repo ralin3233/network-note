@@ -14,7 +14,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="media/">
+        <link rel="next" href="sine-wave/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>概論 - 網路課程筆記 - 實體層與資料連接層</title>
+        <title>實體層概論與路徑 - 網路課程筆記 - 實體層與資料連接層</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              概論
+              實體層概論與路徑
             
           </span>
         </div>
@@ -266,6 +266,25 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ai-collaboration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AI 協作紀錄
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -408,7 +427,7 @@
   <span class="md-ellipsis">
     
   
-    概論
+    實體層概論與路徑
   
 
     
@@ -426,7 +445,7 @@
   <span class="md-ellipsis">
     
   
-    概論
+    實體層概論與路徑
   
 
     
@@ -455,7 +474,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        這一層在做什麼
+        為什麼需要從「正弦波」開始學網路？
       
     </span>
   </a>
@@ -466,7 +485,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        為什麼需要單獨一層來處理這件事
+        本章循序漸進閱讀指南
       
     </span>
   </a>
@@ -477,7 +496,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        本章重點
+        實體層在通訊系統中的位置
       
     </span>
   </a>
@@ -500,14 +519,14 @@
   
   
     <li class="md-nav__item">
-      <a href="media/" class="md-nav__link">
+      <a href="sine-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    傳輸媒介
+    1. 正弦波特性與通式
   
 
     
@@ -528,14 +547,42 @@
   
   
     <li class="md-nav__item">
-      <a href="signal-encoding/" class="md-nav__link">
+      <a href="fourier-and-square-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    訊號與編碼
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
   
 
     
@@ -563,63 +610,7 @@
   <span class="md-ellipsis">
     
   
-    調變技術
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="transmission-modes/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    傳輸模式
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="standards/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    常見標準
+    4. 數位調變、解調與適應性傳輸機制
   
 
     
@@ -867,6 +858,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -884,51 +902,75 @@
 
 
 
-<h1 id="physical-layer">實體層 Physical Layer 概論<a class="headerlink" href="#physical-layer" title="Permanent link">&para;</a></h1>
-<h2 id="_1">這一層在做什麼<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>實體層是 OSI 模型的最底層，負責把上層傳來的「位元 (bit)」轉換成可以在實際媒介（電線、光纖、無線電波）上傳輸的<strong>物理訊號</strong>。它不關心資料的意義，只管把 0 和 1 送到對面去。</p>
-<h2 id="_2">為什麼需要單獨一層來處理這件事<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>上層（資料連接層以上）只在乎「邏輯上的位元」，但現實世界的傳輸媒介有各自的物理限制：</p>
-<ul>
-<li>電訊號會衰減、會被干擾</li>
-<li>光訊號需要不同的收發元件</li>
-<li>無線電波要考慮頻率、天線設計</li>
-</ul>
-<p>實體層把這些「怎麼把位元變成物理訊號」的細節封裝起來，讓上層不用管硬體差異。</p>
-<h2 id="_3">本章重點<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h1 id="physical-layer">實體層 Physical Layer 全景導覽<a class="headerlink" href="#physical-layer" title="Permanent link">&para;</a></h1>
+<p>實體層（Physical Layer）是 OSI 七層模型的最底層（Layer 1）。它的核心任務只有一個：<strong>將上層的邏輯資料（0 與 1 位元串），轉換為可在真實物理媒介（空氣電磁波、電纜）中傳遞的實體訊號（高頻載波電壓、電磁波），並在接收端還原。</strong></p>
+<hr />
+<h2 id="_1">為什麼需要從「正弦波」開始學網路？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>很多初學者在剛翻開網路通訊教科書時常感到困惑：</p>
+<blockquote>
+<p><em>「我明明是來學電腦網路和軟體協定的，為什麼第一堂課老師在黑板上畫三角函數、正弦波、頻率和傅立葉轉換？」</em></p>
+</blockquote>
+<p>要理解網路通訊的底層邏輯，必須掌握課堂簡報中<strong>環環相扣的四大推導脈絡</strong>：</p>
+<pre class="mermaid"><code>graph TD
+    A["1. 正弦波 (Sine Wave)&lt;br&gt;物理界最純粹的連續訊號通式：A cos(2πft + θ)"] --&gt; B["2. 方波的構成與傅立葉分析 (Fourier Analysis)&lt;br&gt;電腦的 0 與 1 方波由基頻與奇數次諧波疊加而成"]
+    B --&gt; C["3. 頻寬與傅立葉五大性質 (Bandwidth &amp; Properties)&lt;br&gt;有效頻寬 (90%能量) ↔ 時移/縮放/相加/餘弦相乘性質"]
+    C --&gt; D["4. 數位調變、解調與適應性機制 (Modulation &amp; AMC)&lt;br&gt;ASK/PSK/QAM 星座圖 ↔ I/Q 正交分解 ↔ 最近鄰判決與 AMC 策略"]
+
+    style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#0f172a;
+    style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#0f172a;
+    style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#0f172a;
+    style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;</code></pre>
+<hr />
+<h2 id="_2">本章循序漸進閱讀指南<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>本章節完全依照課堂簡報之推導進程，由淺入深拆解實體層技術：</p>
 <table>
 <thead>
 <tr>
-<th>主題</th>
-<th>一句話說明</th>
+<th>章節</th>
+<th>核心課題</th>
+<th>一句話總結</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="media/">傳輸媒介</a></td>
-<td>訊號實際跑在什麼東西上（銅線、光纖…）</td>
+<td><a href="sine-wave/">1. 正弦波特性與通式</a></td>
+<td>什麼是正弦波？三個基本參數是什麼？</td>
+<td>任何週期訊號的基礎「積木」，用振幅、頻率與相位數學精確描述波形。</td>
 </tr>
 <tr>
-<td><a href="signal-encoding/">訊號與編碼</a></td>
-<td>位元怎麼變成訊號波形</td>
+<td><a href="fourier-and-square-wave/">2. 方波構成與傅立葉分析</a></td>
+<td>數位方波是怎麼生出來的？</td>
+<td>透過傅立葉級數，方波其實是「基頻 + 奇數次諧波」的疊加。</td>
 </tr>
 <tr>
-<td><a href="modulation/">調變技術</a></td>
-<td>訊號怎麼疊加到載波上傳送</td>
+<td><a href="bandwidth-and-capacity/">3. 頻寬與傅立葉轉換性質</a></td>
+<td>什麼是頻寬？壓縮時間為何會展寬頻率？</td>
+<td>頻寬以 Hz 為單位，矩形脈衝主瓣集中 90% 能量，掌握傅立葉五大物理性質。</td>
 </tr>
 <tr>
-<td><a href="transmission-modes/">傳輸模式</a></td>
-<td>資料傳輸的方向與並列/串列方式</td>
-</tr>
-<tr>
-<td><a href="standards/">常見標準</a></td>
-<td>業界實際在用的規格</td>
+<td><a href="modulation/">4. 數位調變、解調與適應性傳輸機制</a></td>
+<td>如何利用正弦波傳送 0/1 並在雜訊中精準還原？</td>
+<td>ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調，以及依 SNR 動態調整的 AMC 策略。</td>
 </tr>
 </tbody>
 </table>
-<!--
-TODO: 這裡可以放一張整體架構圖，展示「位元 -> 編碼 -> 調變 -> 實際訊號」的流程
--->
+<hr />
+<h2 id="_3">實體層在通訊系統中的位置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant App as "上層協定 (Data Link 以上)"
+    participant PHY_Tx as "傳送端實體層 (PHY Tx)"
+    participant Media as "實體傳輸媒介 (無線電磁波)"
+    participant PHY_Rx as "接收端實體層 (PHY Rx)"
+    participant App_Rx as "接收端上層協定"
+
+    App-&gt;&gt;PHY_Tx: 邏輯位元流 (e.g. 1 0 1 1 0 0 1)
+    Note over PHY_Tx: 產生基頻脈衝 s(t) 並&lt;br/&gt;乘上高頻載波調變 s(t) cos(2πfc t)
+    PHY_Tx-&gt;&gt;Media: 高頻帶通電磁波訊號
+    Note over Media: 大氣媒介傳播
+    Media-&gt;&gt;PHY_Rx: 接收訊號 r(t)
+    Note over PHY_Rx: 乘載波 → 低通濾波 (LPF) → 放大還原 s(t)
+    PHY_Rx-&gt;&gt;App_Rx: 還原的位元流 (1 0 1 1 0 0 1)</code></pre>
+<p>準備好探索實體層的底層奧秘了嗎？請點擊進入第一節：<a href="sine-wave/">1. 正弦波特性與通式</a>。</p>
 
 
 
@@ -989,7 +1031,7 @@ TODO: 這裡可以放一張整體架構圖，展示「位元 -> 編碼 -> 調變
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

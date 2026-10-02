@@ -11,6 +11,10 @@
       
       
       
+        <link rel="prev" href="../sine-wave/">
+      
+      
+        <link rel="next" href="../bandwidth-and-capacity/">
       
       
         
@@ -21,7 +25,7 @@
     
     
       
-        <title>4. 基頻編碼與傳輸模式 (Baseband Transmission & Line Coding) - 網路課程筆記 - 實體層與資料連接層</title>
+        <title>2. 方波構成與傅立葉分析 - 網路課程筆記 - 實體層與資料連接層</title>
       
     
     
@@ -72,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#4-baseband-transmission-line-coding" class="md-skip">
+        <a href="#2-square-wave-fourier-analysis" class="md-skip">
           跳轉到
         </a>
       
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. 基頻編碼與傳輸模式 (Baseband Transmission &amp; Line Coding)
+              2. 方波構成與傅立葉分析
             
           </span>
         </div>
@@ -224,10 +228,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
   
@@ -345,26 +351,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -382,7 +393,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -453,10 +464,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../fourier-and-square-wave/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -472,6 +510,198 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直觀理解：音樂與和弦的聯想
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        數學通式：訊號的組成結構
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="數學通式：訊號的組成結構">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        參數解讀：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        電腦的 0 與 1：方波是如何構成的？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="電腦的 0 與 1：方波是如何構成的？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方波的兩大特性：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        視覺化：諧波如何一步步疊加出方波？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="視覺化：諧波如何一步步疊加出方波？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-n1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第 1 步：僅基頻 (\(n=1\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-n1-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第 2 步：加入 3 次諧波 (\(n=1, 3\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-5-n1-3-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第 3 步：加入 5 次諧波 (\(n=1, 3, 5\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-to-infty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        極限狀態：加入無限項奇數諧波 (\(n \to \infty\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        時域圖 vs 頻域圖：兩種分析視角
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        頻率與振幅的本質關係：為什麼邊緣越陡，高頻越多？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❓ 初學者常見疑問與思維誤區 (Q&amp;A)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        下一步
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -811,170 +1041,127 @@
 
 
 
-<h1 id="4-baseband-transmission-line-coding">4. 基頻編碼與傳輸模式 (Baseband Transmission &amp; Line Coding)<a class="headerlink" href="#4-baseband-transmission-line-coding" title="Permanent link">&para;</a></h1>
-<p>在理解了頻寬與方波的關係後，我們來看<strong>有線網路（如乙太網路、USB、匯流排）</strong>中，數位系統如何直接以電壓脈衝傳遞資料——這稱為<strong>基頻傳輸 (Baseband Transmission)</strong>。</p>
+<h1 id="2-square-wave-fourier-analysis">2. 方波構成與傅立葉分析 (Square Wave &amp; Fourier Analysis)<a class="headerlink" href="#2-square-wave-fourier-analysis" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>核心觀念</strong>：傅立葉分析（Fourier Analysis）的本質，就是<strong>將任何看似複雜、扭曲的訊號，拆解成 <span class="arithmatex">\(n\)</span> 個頻率不同、振幅不同的純淨正弦波（<span class="arithmatex">\(\sin\)</span>）與餘弦波（<span class="arithmatex">\(\cos\)</span>）之和</strong>。</p>
+</blockquote>
 <hr />
-<h2 id="_1">什麼是基頻傳輸？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1">直觀理解：音樂與和弦的聯想<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>在進入數學前，我們先用一個音樂的例子來建立直覺：</p>
+<p>當鋼琴同時按下 <strong>Do - Mi - Sol</strong> 時，空氣中傳播的是一個由三個音疊加在一起的「複合聲波」（時域波形看起很複雜）。然而，人的耳朵與音樂家卻能輕易聽出：
+- 這個聲音由 <strong>261 Hz (Do)</strong>、<strong>329 Hz (Mi)</strong> 與 <strong>392 Hz (Sol)</strong> 三個純音組成。
+- 其中哪一個音比較大聲（振幅較大）、哪一個比較小聲（振幅較小）。</p>
+<pre class="mermaid"><code>graph LR
+    CHORD["鋼琴和弦波形&lt;br&gt;(時域複合訊號)"] --&gt; FT["傅立葉分析&lt;br&gt;(拆解為單純頻率)"]
+    FT --&gt; DO["261 Hz (Do 正弦波)"]
+    FT --&gt; MI["329 Hz (Mi 正弦波)"]
+    FT --&gt; SOL["392 Hz (Sol 正弦波)"]</code></pre>
+<p><strong>傅立葉分析在通訊中的角色正是如此</strong>：它就像一位調音師，能將傳輸線中任何複雜的電壓波形，精確拆解為「由哪些頻率的 <span class="arithmatex">\(\sin\)</span> 與 <span class="arithmatex">\(\cos\)</span> 組成、各自佔多大比例」。</p>
+<hr />
+<h2 id="_2">數學通式：訊號的組成結構<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>任何週期為 <span class="arithmatex">\(T\)</span> 的連續訊號 <span class="arithmatex">\(g(t)\)</span>，都可以精確寫成一串正弦波與餘弦波的相加（稱為<strong>傅立葉級數 Fourier Series</strong>）：</p>
+<div class="arithmatex">\[g(t) = c + \sum_{n=1}^{\infty} \left( a_n \cos(2\pi n f_0 t) + b_n \sin(2\pi n f_0 t) \right)\]</div>
+<p>展開來看：</p>
+<div class="arithmatex">\[g(t) = \underbrace{c}_{\text{直流分量 (平均電壓)}} + \underbrace{(a_1 \cos \omega t + b_1 \sin \omega t)}_{\text{基頻成分 (頻率 } f_0 \text{)}} + \underbrace{(a_2 \cos 2\omega t + b_2 \sin 2\omega t)}_{\text{2 次諧波 (頻率 } 2f_0 \text{)}} + \dots + \underbrace{(a_n \cos n\omega t + b_n \sin n\omega t)}_{\text{n 次諧波 (頻率 } n f_0 \text{)}}\]</div>
+<h3 id="_3">參數解讀：<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>基頻訊號 (Baseband Signal)</strong>：由數位電路直接產生的電壓波形，其頻譜從 <span class="arithmatex">\(0\text{ Hz}\)</span>（直流 DC）延伸到某個截止頻率。</li>
-<li><strong>基頻傳輸</strong>：不使用高頻載波，直接將編碼後的電壓方波訊號送上實體傳輸線（如雙絞線、同軸電纜）。通常適用於<strong>短距離、有線封閉的專屬線路</strong>。</li>
+<li><strong>基頻 (Fundamental Frequency, <span class="arithmatex">\(f_0 = 1/T\)</span>)</strong>：決定波形重複週期的基本頻率。</li>
+<li><strong>諧波 (Harmonics, <span class="arithmatex">\(n \cdot f_0\)</span>)</strong>：頻率為基頻整數倍的成分（<span class="arithmatex">\(2f_0, 3f_0, \dots\)</span>）。</li>
+<li><strong>係數 <span class="arithmatex">\(a_n, b_n\)</span></strong>：代表該頻率成分在訊號中所佔的<strong>振幅大小（強度）</strong>。如果某個頻率的係數為 0，代表訊號中完全沒有該頻率。</li>
+<li><strong><span class="arithmatex">\(\cos\)</span> 與 <span class="arithmatex">\(\sin\)</span> 的搭配</strong>：<span class="arithmatex">\(\sin\)</span> 負責奇對稱波形，<span class="arithmatex">\(\cos\)</span> 負責偶對稱波形，兩者疊加就能組合成任意相位的波形。</li>
 </ul>
 <hr />
-<h2 id="1-0">為什麼不能直接用「高電位=1, 低電位=0」？<a class="headerlink" href="#1-0" title="Permanent link">&para;</a></h2>
-<p>初學者最直覺的想法是：<code>1</code> 就給 <span class="arithmatex">\(+5\text{V}\)</span>，<code>0</code> 就給 <span class="arithmatex">\(0\text{V}\)</span>（這叫做 Unipolar NRZ）。但在實際網路工程中，這樣做會遭遇三大致命缺陷：</p>
-<div class="highlight"><pre><span></span><code>+5V |  +--------------------------+  (連續 100 個 1)
-    |  |                          |  --&gt; 接收端時脈偏差，不知道送了 99 個還是 101 個 1？
- 0V +--+                          +-------------------------&gt; 時間 t
+<h2 id="0-1">電腦的 0 與 1：方波是如何構成的？<a class="headerlink" href="#0-1" title="Permanent link">&para;</a></h2>
+<p>在數位通訊中，傳遞 0 與 1 最常見的波形是具有直角跳變的「方波 (Square Wave)」：</p>
+<div class="highlight"><pre><span></span><code>電壓 (V)
+ ^
+ |    +-------+       +-------+
+ |    |   1   |   0   |   1   |   0
+ 0----+       +-------+       +-------+-----&gt; 時間 (t)
 </code></pre></div>
+<p>對一個週期為 <span class="arithmatex">\(T\)</span>（基頻 <span class="arithmatex">\(f_0 = 1/T\)</span>）、振幅在 <span class="arithmatex">\(+A\)</span> 與 <span class="arithmatex">\(-A\)</span> 之間跳變的標準方波進行傅立葉展開，其公式為：</p>
+<div class="arithmatex">\[s(t) = \frac{4A}{\pi} \sum_{n=1, 3, 5, \dots}^{\infty} \frac{1}{n} \sin(2\pi n f_0 t)\]</div>
+<p>將各項展開：</p>
+<div class="arithmatex">\[s(t) = \frac{4A}{\pi} \left[ \underbrace{\sin(2\pi f_0 t)}_{\text{基頻 (振幅 1)}} + \underbrace{\frac{1}{3}\sin(6\pi f_0 t)}_{\text{3 次諧波 (振幅 1/3)}} + \underbrace{\frac{1}{5}\sin(10\pi f_0 t)}_{\text{5 次諧波 (振幅 1/5)}} + \underbrace{\frac{1}{7}\sin(14\pi f_0 t)}_{\text{7 次諧波 (振幅 1/7)}} + \dots \right]\]</div>
+<h3 id="_4">方波的兩大特性：<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>時脈同步問題 (Clock Synchronization)</strong>：</li>
-<li>傳送端與接收端的內部震盪器（時脈 Clock）一定有微小的頻率偏差。</li>
-<li>如果資料出現長串連續的 <code>1</code> 或 <code>0</code>，訊號電壓將長時間維持一條直線，接收端找不到任何電壓跳變點來校正時脈，導致<strong>位元計數失步</strong>。</li>
-<li><strong>直流漂移與直流分量 (DC Component / Baseline Wander)</strong>：</li>
-<li>長時間偏向正電位會在變壓器或電容耦合電路中累積電荷，導致電壓基準線浮動（Baseline Wander），使後續的電壓判決門檻失準。</li>
-<li><strong>缺乏基本錯誤偵測能力</strong>：</li>
-<li>如果線路斷線（0V），接收端可能會誤以為傳送端一直在傳送 <code>0</code>。</li>
+<li><strong>僅包含奇數次諧波</strong>：只由基頻 <span class="arithmatex">\(f_0\)</span> 以及 <span class="arithmatex">\(3f_0, 5f_0, 7f_0 \dots\)</span> 組成，沒有偶數次諧波。</li>
+<li><strong>諧波振幅與次數成反比 (<span class="arithmatex">\(1/n\)</span>)</strong>：頻率越高，振幅越小（<span class="arithmatex">\(1, \frac{1}{3}, \frac{1}{5}, \frac{1}{7} \dots\)</span>）。</li>
 </ol>
-<p>為了克服這些問題，必須將原始位元經過<strong>線路編碼 (Line Coding)</strong> 轉換。</p>
 <hr />
-<h2 id="line-coding-schemes">常見線路編碼技術 (Line Coding Schemes)<a class="headerlink" href="#line-coding-schemes" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>位元序列：        1       0       1       1       0       0       1
-               +---+   +---+   +---+---+               +---+
-NRZ-L          |   |   |   |   |       |               |   |
-             --+   +---+   +---+       +---------------+   +---
+<h2 id="_5">視覺化：諧波如何一步步疊加出方波？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1-n1">第 1 步：僅基頻 (<span class="arithmatex">\(n=1\)</span>)<a class="headerlink" href="#1-n1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>合成式</strong>：<span class="arithmatex">\(\sin(2\pi f_0 t)\)</span></li>
+<li><strong>波形特徵</strong>：純粹平滑的正弦波，頂部圓潤、邊緣平緩。</li>
+</ul>
+<p><img alt="第 1 步：僅基頻 (n=1)" src="../img/sine1.png" /></p>
+<hr />
+<h3 id="2-3-n1-3">第 2 步：加入 3 次諧波 (<span class="arithmatex">\(n=1, 3\)</span>)<a class="headerlink" href="#2-3-n1-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>合成式</strong>：<span class="arithmatex">\(\sin(2\pi f_0 t) + \frac{1}{3}\sin(6\pi f_0 t)\)</span></li>
+<li><strong>波形特徵</strong>：3 次諧波在波峰處反向抵消使頂部變平，兩側同向相加使邊緣開始變陡！</li>
+</ul>
+<p><img alt="第 2 步：加入 3 次諧波 (n=1, 3)" src="../img/sine13.png" /></p>
+<hr />
+<h3 id="3-5-n1-3-5">第 3 步：加入 5 次諧波 (<span class="arithmatex">\(n=1, 3, 5\)</span>)<a class="headerlink" href="#3-5-n1-3-5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>合成式</strong>：<span class="arithmatex">\(\dots + \frac{1}{5}\sin(10\pi f_0 t)\)</span></li>
+<li><strong>波形特徵</strong>：頂部更加平整，上升與下降邊緣已非常接近垂直！</li>
+</ul>
+<p><img alt="第 3 步：加入 5 次諧波 (n=1, 3, 5)" src="../img/sine135.png" /></p>
+<hr />
+<h3 id="n-to-infty">極限狀態：加入無限項奇數諧波 (<span class="arithmatex">\(n \to \infty\)</span>)<a class="headerlink" href="#n-to-infty" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>波形</strong>：邊緣完全垂直 90 度，頂部完全水平 ── <strong>【理想數位方波】</strong>！</li>
+</ul>
+<hr />
+<h2 id="vs">時域圖 vs 頻域圖：兩種分析視角<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
+<p>通訊工程中使用兩種座標圖來觀察訊號：</p>
+<div class="highlight"><pre><span></span><code>【時域圖 (Time Domain)】                【頻域圖 / 頻譜 (Frequency Domain)】
+示波器看：電壓隨時間的「波形」          頻譜儀看：組成訊號的「頻率分量與振幅」
 
-                 +-------+       +---+   +---------------+
-NRZ-I            |       |       |   |   |               |
-             ----+       +-------+   +---+               +-----
-             (遇1反轉，遇0保持)
-
-               +---+   -+  +---+---+   +---+   -+  +-  -+  +---+
-Manchester     |   |    |  |   |   |   |   |    |   |   |  |   |
-             --+   +----+--+   +   +---+   +----+---+---+--+   +--
-             (每個位元中心必有電壓跳變，提供自帶時脈)
+電壓 (V)                               振幅 (A)
+ ^                                      ^
+ |    +----+     +----+                 | 1.0 (基頻)
+ |    |    |     |    |                 |  |
+ |    |    |     |    |                 |  |    0.33 (3次諧波)
+ 0----+    +-----+    +---&gt; 時間 (t)    |  |     |   0.2 (5次) 0.14 (7次)
+                                        +--+-----+----+----+-----&gt; 頻率 (Hz)
+                                          f0    3f0  5f0  7f0
 </code></pre></div>
-<h3 id="1-nrz-l-non-return-to-zero-level">1. NRZ-L (Non-Return-to-Zero Level)<a class="headerlink" href="#1-nrz-l-non-return-to-zero-level" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>規則</strong>：高電位代表 <code>0</code>（或 <code>1</code>），低電位代表 <code>1</code>（或 <code>0</code>）。</li>
-<li><strong>缺點</strong>：連續長串相同的位元時，完全無法提供時脈同步，且有直流分量問題。</li>
-</ul>
-<h3 id="2-nrz-i-non-return-to-zero-invert-on-1">2. NRZ-I (Non-Return-to-Zero Invert on 1)<a class="headerlink" href="#2-nrz-i-non-return-to-zero-invert-on-1" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>規則</strong>：</li>
-<li>遇到 <code>1</code>：在位元起始處<strong>發生電位反轉（Transition）</strong>。</li>
-<li>遇到 <code>0</code>：保持原有電位不變。</li>
-<li><strong>優點</strong>：即使連線極性反接也不影響解碼；連續 <code>1</code> 時具有良好的時脈跳變。</li>
-<li><strong>缺點</strong>：遇到連續長串 <code>0</code> 時依然沒有跳變。</li>
-</ul>
-<h3 id="3-manchester-encoding">3. 曼徹斯特編碼 (Manchester Encoding) —— 經典乙太網路核心<a class="headerlink" href="#3-manchester-encoding" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>規則</strong>：<strong>在每個位元時間的正中間，必然發生一次電位跳變</strong>。</li>
-<li>IEEE 802.3 標準：<code>0</code> 代表<strong>前半週期為高電位、後半週期為低電位（由高跳低）</strong>；<code>1</code> 代表<strong>由低跳高</strong>。</li>
-<li><strong>最大優點</strong>：<strong>自帶時脈 (Self-Clocking)</strong>！接收端只要鎖定每個週期正中間的跳變，時脈永遠不會跑掉；且每個位元正負各半，<strong>完全沒有直流分量（DC Balance）</strong>。</li>
-<li><strong>代價</strong>：每個位元時間內至少切換兩次電位，<strong>所需頻寬比 NRZ 加倍</strong>（頻寬利用率只有 50%）。用於早期 10 Mbps 乙太網路（10BASE-T）。</li>
-</ul>
-<h3 id="4-differential-manchester">4. 差動曼徹斯特編碼 (Differential Manchester)<a class="headerlink" href="#4-differential-manchester" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>規則</strong>：</li>
-<li>每個位元<strong>正中間仍然必然有跳變</strong>（提供時脈）。</li>
-<li>位元的數值由<strong>位元起始處是否有跳變</strong>決定：<ul>
-<li>起始處<strong>有跳變</strong>代表 <code>0</code>。</li>
-<li>起始處<strong>無跳變</strong>代表 <code>1</code>。</li>
-</ul>
-</li>
-<li><strong>優點</strong>：結合了自帶時脈與抗極性反接優勢，曾廣泛用於 Token Ring（權杖環網路）。</li>
+<li><strong>時域圖 (Time Domain)</strong>：橫軸是<strong>時間 (<span class="arithmatex">\(t\)</span>)</strong>，縱軸是瞬時電壓。表示訊號在某一時間點的實際強度。</li>
+<li><strong>頻域圖 / 頻譜 (Frequency Domain Spectrum)</strong>：橫軸是<strong>頻率 (<span class="arithmatex">\(f\)</span>)</strong>，縱軸是各頻率成分的<strong>振幅大小</strong>。表示訊號是由哪些頻率成分以何種比例疊加而成。</li>
 </ul>
 <hr />
-<h2 id="block-coding">現代高速編碼：區塊編碼 (Block Coding)<a class="headerlink" href="#block-coding" title="Permanent link">&para;</a></h2>
-<p>為了解決曼徹斯特編碼頻寬浪費 50% 的缺點，現代高速網路（如 100M/1G 乙太網路、PCIe、USB 3.0）改採<strong>區塊編碼</strong>：</p>
+<h2 id="_6">頻率與振幅的本質關係：為什麼邊緣越陡，高頻越多？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>這是實體層通訊最重要的物理定律：</p>
+<div class="arithmatex">\[\text{時域上的急遽跳變（上升時間 } t_r \to 0 \text{）} \iff \text{頻域上需要極高頻率的諧波成分}\]</div>
 <ul>
-<li><strong>4B/5B 編碼</strong>：將每 4 個資料位元對應到預先設計的 5 個位元組，確保輸出的 5 位元中<strong>絕不會出現超過 3 個連續的 0</strong>。</li>
-<li>頻寬開銷僅增加 <span class="arithmatex">\(25\%\)</span>（比曼徹斯特的 <span class="arithmatex">\(100\%\)</span> 大幅降低！）。</li>
-<li><strong>8B/10B 編碼</strong>（Gigabit Ethernet、SATA、USB 3.0）：將 8 bits 資料映射為 10 bits，確保直流平衡與豐富跳變。</li>
+<li><strong>低頻成分</strong>（如基頻 <span class="arithmatex">\(f_0\)</span>）：決定訊號的<strong>主體輪廓與主要能量</strong>（佔總能量 90% 以上）。</li>
+<li><strong>高頻成分</strong>（如 <span class="arithmatex">\(3f_0, 5f_0, 7f_0 \dots\)</span>）：決定訊號<strong>直角邊緣的陡峭程度與跳變精確度</strong>。</li>
+<li><strong>失真 (Distortion)</strong>：如果實體線路無法通過高頻成分（高頻衰減），接收端收到的方波邊緣就會塌陷、變圓，若失真過大會導致接收端無法正確判讀 0 與 1。</li>
 </ul>
-<hr />
-<h2 id="_2">編碼技術綜合比較表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>編碼方式</th>
-<th>自帶時脈 (Self-Clocking)</th>
-<th>直流平衡 (DC Balance)</th>
-<th>頻寬消耗 (波特率 / 位元率)</th>
-<th>經典應用場景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>NRZ-L / NRZ-I</strong></td>
-<td>否（長 0 或長 1 失步）</td>
-<td>差</td>
-<td><strong>低 (<span class="arithmatex">\(S = R\)</span>)</strong></td>
-<td>RS-232 序列埠、USB 1.1 (NRZI)</td>
-</tr>
-<tr>
-<td><strong>Manchester</strong></td>
-<td><strong>極佳（位元中心必跳變）</strong></td>
-<td><strong>極佳</strong></td>
-<td><strong>高 (<span class="arithmatex">\(S = 2R\)</span>)</strong></td>
-<td>10BASE-T 乙太網路、NFC</td>
-</tr>
-<tr>
-<td><strong>Differential Manchester</strong></td>
-<td><strong>極佳</strong></td>
-<td><strong>極佳</strong></td>
-<td><strong>高 (<span class="arithmatex">\(S = 2R\)</span>)</strong></td>
-<td>Token Ring (IEEE 802.5)</td>
-</tr>
-<tr>
-<td><strong>4B/5B + MLT-3</strong></td>
-<td>良好</td>
-<td>良好</td>
-<td><strong>較低 (<span class="arithmatex">\(S = 1.25R\)</span>)</strong></td>
-<td>100BASE-TX 快速乙太網路</td>
-</tr>
-<tr>
-<td><strong>8B/10B</strong></td>
-<td>良好</td>
-<td>極佳</td>
-<td><strong>適中 (<span class="arithmatex">\(S = 1.25R\)</span>)</strong></td>
-<td>1000BASE-X、PCIe 1.0/2.0、SATA</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="transmission-modes">傳輸模式 (Transmission Modes)<a class="headerlink" href="#transmission-modes" title="Permanent link">&para;</a></h2>
-<p>在實體層中，資料傳輸的流向與傳輸通道安排有以下標準分類：</p>
-<pre class="mermaid"><code>graph TD
-    subgraph SG_DIR ["方向維度"]
-    S["單工 (Simplex)&lt;br&gt;單向廣播 (如收音機、電視)"]
-    HD["半雙工 (Half-Duplex)&lt;br&gt;雙向但不可同時 (如對講機、早期 Hub)"]
-    FD["全雙工 (Full-Duplex)&lt;br&gt;雙向且可同時傳收 (如現代 Switch、電話)"]
-    end
-    subgraph SG_LINE ["線路維度"]
-    PAR["並列傳輸 (Parallel)&lt;br&gt;多條線同時送多個 bits (如舊型印表機 LPT)"]
-    SER["串列傳輸 (Serial)&lt;br&gt;單條線路依序送 bit (如 USB, PCIe, Ethernet)"]
-    end</code></pre>
 <hr />
 <h2 id="qa">❓ 初學者常見疑問與思維誤區 (Q&amp;A)<a class="headerlink" href="#qa" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>Q1: 為什麼早期硬體喜歡「並列傳輸（如 8 條線同時送 8 bits）」，現代高速傳輸（如 USB、SATA、PCIe）反而全改成「串列傳輸（單條線一個個送）」？</summary>
+<summary>Q1: 為什麼一定要用 <span class="arithmatex">\(\sin\)</span> 與 <span class="arithmatex">\(\cos\)</span> 當作分解基礎？</summary>
 <p><strong>解答</strong>：
-這看似反直覺，但背後是嚴謹的物理與成本考量：
-1. <strong>時脈歪斜 (Clock Skew)</strong>：在超高頻率（幾 GHz）下，多條物理銅線的長度即使只差 0.1 毫米，訊號抵達接收端的時間差就會大於一個位元週期，導致不同位元無法同時對齊取樣。
-2. <strong>串音干擾 (Crosstalk)</strong>：多條高頻導線靠在一起會產生嚴重的電磁互感干擾。
-3. <strong>線路成本與體積</strong>：串列傳輸只需要 1~2 對差動線（Differential Pair），可以透過拉高單線頻率與先進編碼（如 8B/10B）達到數十 Gbps，效能遠超並列排線。</p>
+因為正弦訊號是線性傳輸系統的<strong>特性響應訊號</strong>：
+- 當一個純正弦波通過電纜、濾波器或空氣時，輸出的訊號<strong>永遠維持原本的正弦波形</strong>，只會發生振幅衰減或時間延遲。
+- 如果用其他波形（如三角波）當基礎，訊號通過線路後形狀會完全失真，無法進行分析。</p>
 </details>
 <details class="question">
-<summary>Q2: 曼徹斯特編碼每個位元中間都有跳變，這算不算是浪費頻寬？</summary>
+<summary>Q2: 傅立葉級數 (Fourier Series) 與 傅立葉轉換 (Fourier Transform) 的差別是什麼？</summary>
 <p><strong>解答</strong>：
-從純頻寬利用率來看，它確實浪費了一倍頻寬（傳 10 Mbps 資料需要 20 MHz 頻寬）。</p>
-<p>但在 1980 年代乙太網路剛發明時，接收端硬體的晶片算力與鎖相迴路（PLL）非常昂貴。曼徹斯特編碼用「頻寬換取極致簡單穩健的時脈還原電路」，使得廉價網卡能夠普及。隨著晶片技術進步，現代百兆、千兆網路才轉向更省頻寬的 4B/5B、8B/10B 或 PAM-4 多階編碼。</p>
+- <strong>傅立葉級數 (Fourier Series)</strong>：用於分析<strong>週期性訊號</strong>（如不斷重複的 <code>101010</code> 測試波形），其頻譜是由一根根離散的頻率柱狀線（<span class="arithmatex">\(f_0, 3f_0, 5f_0\)</span>）組成。
+- <strong>傅立葉轉換 (Fourier Transform)</strong>：用於分析<strong>非週期性訊號</strong>（如真實傳輸中隨機排列的位元流），其頻譜是一條連續的頻率曲線。</p>
 </details>
 <hr />
-<h2 id="_3">下一步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>基頻傳輸只能在專屬電纜中跑。如果我們要透過<strong>大氣空間（Wi-Fi、4G/5G 行動通訊、衛星）</strong>進行無線傳輸，方波電壓根本無法發射出去！</p>
-<p>我們該如何利用高頻正弦波將資料調變送出？請前往下一節：<a href="../modulation/">5. 無線傳輸與調變技術</a>。</p>
+<h2 id="_7">下一步<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>現在我們知道數位方波需要多個高頻諧波才能完整傳送。那麼，真實的電線到底能讓多大範圍的頻率通過？傳輸速率的極限在哪裡？</p>
+<p>請前往下一節：<a href="../bandwidth-and-capacity/">3. 頻寬、有效頻寬與傳輸極限</a>。</p>
 
 
 

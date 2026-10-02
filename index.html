@@ -264,6 +264,25 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="ai-collaboration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AI 協作紀錄
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -410,6 +429,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI 協作與對話紀錄
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -489,7 +519,7 @@
   <span class="md-ellipsis">
     
   
-    概論
+    實體層概論與路徑
   
 
     
@@ -510,14 +540,14 @@
   
   
     <li class="md-nav__item">
-      <a href="physical-layer/media/" class="md-nav__link">
+      <a href="physical-layer/sine-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    傳輸媒介
+    1. 正弦波特性與通式
   
 
     
@@ -538,14 +568,42 @@
   
   
     <li class="md-nav__item">
-      <a href="physical-layer/signal-encoding/" class="md-nav__link">
+      <a href="physical-layer/fourier-and-square-wave/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    訊號與編碼
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="physical-layer/bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
   
 
     
@@ -573,63 +631,7 @@
   <span class="md-ellipsis">
     
   
-    調變技術
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="physical-layer/transmission-modes/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    傳輸模式
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="physical-layer/standards/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    常見標準
+    4. 數位調變、解調與適應性傳輸機制
   
 
     
@@ -877,6 +879,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -895,23 +924,27 @@
 
 
 <h1 id="_1">網路課程筆記：實體層與資料連接層<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>這份筆記整理自課堂內容，目標是讓<strong>沒有上過這堂課的人</strong>，光看這份筆記也能理解實體層 (Physical Layer) 與資料連接層 (Data Link Layer) 的核心概念。</p>
+<p>這份筆記整理自課堂內容，目標是讓<strong>沒有上過這堂課的人</strong>，光看這份筆記也能理解實體層 (Physical Layer) 與資料連接層 (Data Link Layer) 的核心概念與底層運作原理。</p>
+<hr />
 <h2 id="_2">怎麼讀這份筆記<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>每個章節先講「這是什麼、為什麼需要它」，再進入技術細節</li>
-<li>有公式的地方（CRC、Hamming Code）會附上一步步的計算範例</li>
-<li>圖片盡量取代文字描述——訊號波形、frame 格式這類東西用看的比用讀的快很多</li>
+<li><strong>循序漸進的推導脈絡</strong>：每個章節先說明「為什麼需要這個技術」，再以嚴謹的物理與數學邏輯推導核心原理。</li>
+<li><strong>初學者問答 (Q&amp;A)</strong>：每節文末皆整理「初學者常見盲點與誤區」，直擊思考死角。</li>
+<li><strong>圖解與算式兼備</strong>：波形圖、頻譜圖、Mermaid 流程圖搭配 MathJax 公式與經典範例詳解。</li>
 </ul>
+<hr />
 <h2 id="_3">章節導覽<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="physical-layer"><a href="physical-layer/">實體層 Physical Layer</a><a class="headerlink" href="#physical-layer" title="Permanent link">&para;</a></h3>
-<p>負責把「位元」變成實際可以在媒介上傳送的訊號。</p>
+<p>負責將電腦中的邏輯位元轉換為能在實體媒介中傳播的物理訊號。
+- <strong>知識推進路徑</strong>：
+  1. <a href="physical-layer/sine-wave/">正弦波特性與通式</a>：物理界最純粹的連續訊號與三大核心參數。
+  2. <a href="physical-layer/fourier-and-square-wave/">方波構成與傅立葉分析</a>：數位方波如何由基頻與奇數次諧波疊加而成？
+  3. <a href="physical-layer/bandwidth-and-capacity/">頻寬與傅立葉轉換性質</a>：頻寬定義（Hz）、有效頻寬（90% 能量）與傅立葉五大關鍵性質。
+  4. <a href="physical-layer/modulation/">數位調變、解調與適應性傳輸機制</a>：ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調、雜訊判決與適應性 AMC / Header 設計。</p>
 <h3 id="data-link-layer"><a href="data-link-layer/">資料連接層 Data Link Layer</a><a class="headerlink" href="#data-link-layer" title="Permanent link">&para;</a></h3>
-<p>負責把位元組織成有結構的框 (frame)，並處理錯誤偵測、流量控制。</p>
-<hr />
-<div class="admonition note">
-<p class="admonition-title">撰寫中</p>
-<p>這份筆記正在持續補充，歡迎回報錯誤或不清楚的地方。</p>
-</div>
+<p>負責在相鄰節點之間提供可靠的點對點傳輸，包含成框（Framing）、錯誤偵測與更正（CRC / 漢明碼）、流量控制（滑動視窗）與 MAC 子層協定。</p>
+<h3 id="ai"><a href="ai-collaboration/">AI 協作與對話紀錄</a><a class="headerlink" href="#ai" title="Permanent link">&para;</a></h3>
+<p>記錄本網站製作期間使用 AI 輔助規劃、觀念釐清、計算驗證與排版之 Prompt 與對話歷程（供課程評分查驗）。</p>
 
 
 
@@ -972,7 +1005,7 @@
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script src="javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
