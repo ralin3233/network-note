@@ -27,7 +27,11 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - pymdownx.arithmatex:
       generic: true
@@ -37,18 +41,18 @@ markdown_extensions:
       permalink: true
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - 首頁: index.md
   - 實體層 Physical Layer:
-      - 概論: physical-layer/index.md
-      - 傳輸媒介: physical-layer/media.md
-      - 訊號與編碼: physical-layer/signal-encoding.md
-      - 調變技術: physical-layer/modulation.md
-      - 傳輸模式: physical-layer/transmission-modes.md
-      - 常見標準: physical-layer/standards.md
+      - 實體層概論與路徑: physical-layer/index.md
+      - 1. 正弦波特性與通式: physical-layer/sine-wave.md
+      - 2. 方波構成與傅立葉分析: physical-layer/fourier-and-square-wave.md
+      - 3. 頻寬與傳輸極限: physical-layer/bandwidth-and-capacity.md
+      - 4. 基頻編碼與傳輸模式: physical-layer/signal-encoding.md
+      - 5. 無線傳輸與調變技術: physical-layer/modulation.md
+      - 6. 傳輸媒介與標準規格: physical-layer/media.md
   - 資料連接層 Data Link Layer:
       - 概論: data-link-layer/index.md
       - 成框 Framing: data-link-layer/framing.md
@@ -56,3 +60,4 @@ nav:
       - 流量控制: data-link-layer/flow-control.md
       - MAC 子層: data-link-layer/mac-sublayer.md
       - 常見協定: data-link-layer/protocols.md
+  - AI 協作紀錄: ai-collaboration.md
