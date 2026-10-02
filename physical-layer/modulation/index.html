@@ -25,7 +25,7 @@
     
     
       
-        <title>4. 數位調變、解調與適應性傳輸機制 - 網路課程筆記 - 實體層與資料連接層</title>
+        <title>4. 數位調變、解調與適應性傳輸機制 - 網路課程筆記 - 實體層</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="頁首">
-    <a href="../.." title="網路課程筆記 - 實體層與資料連接層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            網路課程筆記 - 實體層與資料連接層
+            網路課程筆記 - 實體層
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -289,13 +289,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="導覽列" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="網路課程筆記 - 實體層與資料連接層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    網路課程筆記 - 實體層與資料連接層
+    網路課程筆記 - 實體層
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -1032,10 +1032,21 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❓ 初學者常見疑問與思維誤區 (Q&amp;A)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        下一步
+        實體層總結
       
     </span>
   </a>
@@ -1625,11 +1636,38 @@ $$= 0.5 Q(t) - \underbrace{0.5 I(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c
 </tbody>
 </table>
 <hr />
-<h2 id="_3">下一步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="qa">❓ 初學者常見疑問與思維誤區 (Q&amp;A)<a class="headerlink" href="#qa" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Q1: 1024-QAM 傳輸速度是 16-QAM 的 2.5 倍，為什麼 Wi-Fi 和 5G 不直接永遠鎖定在 1024-QAM 或 4096-QAM？</summary>
+<p><strong>解答</strong>：
+因為「星座點密度」與「抗雜訊能力」存在著嚴格的物理權衡（Trade-off）：
+- <strong>16-QAM</strong>：二維平面上只有 16 個點，相鄰點之間的判決安全邊界非常寬廣。即使遇到中等強度的雜訊干擾，接收點偏移後依然能落在正確的決策區間內。
+- <strong>1024-QAM</strong>：在相同的發射功率限制下，二維平面必須硬塞入 1024 個點，相鄰點間距極端狹窄。只要環境有一點微弱的雜訊、多路徑干擾或人體阻擋，接收點就會輕易跨越邊界被誤判為鄰居點，引發嚴重的位元錯誤（Bit Error）。</p>
+<p>因此，只有當手機距離基地台非常近且無遮蔽（極高 SNR）時系統才會跑 1024-QAM；一旦距離拉遠或訊號減弱，自適應機制（AMC）必須立即自動降階切換至 QPSK 或 16-QAM 以確保資料傳輸的正確性。</p>
+</details>
+<details class="question">
+<summary>Q2: 為什麼同相載波 <span class="arithmatex">\(\cos(2\pi f_c t)\)</span> 與正交載波 <span class="arithmatex">\(-\sin(2\pi f_c t)\)</span> 在同一個頻率 <span class="arithmatex">\(f_c\)</span> 發送，接收端卻完全不會把它們混在一起？</summary>
+<p><strong>解答</strong>：
+這完全歸功於三角函數在數學上的<strong>正交性 (Orthogonality)</strong>：
+- 當接收端欲提取同相分量 <span class="arithmatex">\(I(t)\)</span> 時，將接收訊號乘上 <span class="arithmatex">\(\cos(2\pi f_c t)\)</span>：
+  - <span class="arithmatex">\(I(t)\)</span> 部分形成 <span class="arithmatex">\(\cos^2(2\pi f_c t) = 0.5 + 0.5\cos(4\pi f_c t)\)</span>（包含直流基頻 <span class="arithmatex">\(0.5\)</span> 與兩倍頻 <span class="arithmatex">\(2f_c\)</span>）。
+  - <span class="arithmatex">\(Q(t)\)</span> 部分形成 <span class="arithmatex">\(-\sin(2\pi f_c t)\cos(2\pi f_c t) = -0.5\sin(4\pi f_c t)\)</span>（<strong>純兩倍頻 <span class="arithmatex">\(2f_c\)</span>，完全不含任何直流基頻！</strong>）。
+- 接著訊號通過低通濾波器（LPF）濾除所有 <span class="arithmatex">\(2f_c\)</span> 高頻諧波後，<span class="arithmatex">\(Q(t)\)</span> 的影響被<strong>徹底歸零消除</strong>，只保留下乾淨的 <span class="arithmatex">\(0.5 I(t)\)</span>！同理，乘以 <span class="arithmatex">\(-\sin(2\pi f_c t)\)</span> 濾波後也會將 <span class="arithmatex">\(I(t)\)</span> 完全歸零消除。</p>
+</details>
+<details class="question">
+<summary>Q3: 既然發射端會隨時更換 MCS（調變與編碼等級），接收端在收到訊號的第一瞬間如何知道該用哪種方式解調？</summary>
+<p><strong>解答</strong>：
+關鍵在於<strong>訊框標頭 (Frame Header) 的非對稱保護機制</strong>：
+1. 每個通訊訊框在結構上都由「標頭 (Header)」與「資料酬載 (Payload)」兩部分組成。
+2. Header 內詳細記錄了該 Payload 所採用的 MCS 等級（如 1024-QAM, <span class="arithmatex">\(R=3/4\)</span>）。
+3. <strong>Header 永遠使用傳輸速度最慢、抗雜訊能力最強的基礎調變（如 BPSK / QPSK）進行發射</strong>。</p>
+<p>因此，無論當時通道環境多麼惡劣，接收端都能 100% 正確解讀出 Header 內容；獲知 MCS 等級後，接收電路便能毫秒級切換至對應的解調模式來還原高速的 Payload 資料！</p>
+</details>
+<hr />
+<h2 id="_3">實體層總結<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>恭喜你！至此你已經完整掌握了實體層的全部核心底層原理：
 從 <strong>正弦波基礎</strong> <span class="arithmatex">\(\to\)</span> <strong>方波傅立葉級數</strong> <span class="arithmatex">\(\to\)</span> <strong>頻寬與頻譜搬移</strong> <span class="arithmatex">\(\to\)</span> <strong>無線調變、星座圖、I/Q 正交分解與適應性 MCS 機制</strong>。</p>
-<p>實體層成功將位元轉換為電波送達對端後，如何確保傳輸過程沒有封包錯誤？多個裝置如何共用同一條通道？</p>
-<p>請點擊前往下一章：<a href="../data-link-layer/index.md">資料連接層 Data Link Layer 概論</a>！</p>
+<p>實體層成功將電腦中的 0 與 1 位元轉換為高頻電磁波，克服了大氣雜訊與通道衰減，將訊號穩定送達接收端並精確還原！</p>
 
 
 

@@ -25,7 +25,7 @@
     
     
       
-        <title>3. 頻寬與傅立葉轉換性質 - 網路課程筆記 - 實體層與資料連接層</title>
+        <title>3. 頻寬與傅立葉轉換性質 - 網路課程筆記 - 實體層</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="頁首">
-    <a href="../.." title="網路課程筆記 - 實體層與資料連接層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            網路課程筆記 - 實體層與資料連接層
+            網路課程筆記 - 實體層
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -289,13 +289,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="導覽列" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="網路課程筆記 - 實體層與資料連接層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層與資料連接層" data-md-component="logo">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    網路課程筆記 - 實體層與資料連接層
+    網路課程筆記 - 實體層
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -679,6 +679,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❓ 初學者常見疑問與思維誤區 (Q&amp;A)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -924,9 +935,34 @@
 </tbody>
 </table>
 <hr />
+<h2 id="qa">❓ 初學者常見疑問與思維誤區 (Q&amp;A)<a class="headerlink" href="#qa" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Q1: 為什麼電信公司標榜的「頻寬」單位是 Hz，但我們買家用網路時「頻寬」單位卻是 Mbps？兩者有何差別？</summary>
+<p><strong>解答</strong>：
+這是通訊領域最常見的名詞混淆：
+- <strong>物理頻寬 (Bandwidth, 單位：<span class="arithmatex">\(\text{Hz}\)</span>)</strong>：指傳輸媒介或訊號所包含的「頻率範圍大小」（<span class="arithmatex">\(B = f_{\max} - f_{\min}\)</span>），代表通道的「車道寬度」。
+- <strong>資料傳輸速率 (Data Rate / Bit Rate, 單位：<span class="arithmatex">\(\text{bps}\)</span>)</strong>：指每秒實際傳送的「位元數量」，代表每秒運送的「貨物總量」。</p>
+<p>根據傅立葉時間縮放性質與有效頻寬公式：<span class="arithmatex">\(\text{脈衝時間 } \tau \downarrow \implies \text{位元率 } (1/\tau) \uparrow \implies \text{所需頻寬 (Hz)} \uparrow\)</span>。
+物理頻寬（Hz）越大，才能容納越窄的脈衝，每秒能傳輸的位元速率（bps）才越高。</p>
+</details>
+<details class="question">
+<summary>Q2: 為什麼傳送「連續 100 萬個位元」的長訊號，所需頻寬卻只由「單一個位元脈衝的寬度 <span class="arithmatex">\(\tau\)</span>」決定？</summary>
+<p><strong>解答</strong>：
+根據傅立葉轉換的<strong>時移性質 (Time Shift)</strong> 與 <strong>線性相加性質 (Sum)</strong>：
+1. 在不同時間送出的相同脈衝，其頻譜振幅分佈完全相同。
+2. 當多個脈衝連續在不同時間點送出時，整個複合訊號在頻域上的頻率分量就是單一脈衝頻率分量的聯集。</p>
+<p>因此，決定系統需要多少頻寬的關鍵是「每個位元脈衝被壓縮得有多窄（<span class="arithmatex">\(\tau\)</span> 有多小）」，而不是「總共傳了多少個位元」。</p>
+</details>
+<details class="question">
+<summary>Q3: 矩形脈衝的頻譜明明延伸到無窮大，為什麼實務上只保留「主瓣（有效頻寬）」就能正確傳輸？</summary>
+<p><strong>解答</strong>：
+因為矩形脈衝的絕大部分能量（約 <span class="arithmatex">\(90\%\)</span> 以上）都高度集中在中央主瓣區域（<span class="arithmatex">\([-1/\tau, 1/\tau]\)</span> 或單側 <span class="arithmatex">\(2\pi/\tau\text{ rad/s}\)</span>）。</p>
+<p>高頻旁瓣的作用僅僅是把方波的垂直轉角修得更方正。實務上只要通過有效頻寬，接收端在取樣判決時就足以正確辨識出高電位（1）與低電位（0），無需浪費無窮大的頻寬去傳送能量微弱的旁瓣。</p>
+</details>
+<hr />
 <h2 id="_3">下一步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>現在我們知道數位脈衝的頻寬特性，也知道乘上餘弦波可以搬移頻譜。</p>
-<p>那麼在無線通訊中，如何具體設定載波頻率與脈衝時間？接收端又如何還原資料？請前往下一節：<a href="../modulation/">4. 無線傳輸、調變與解調機制</a>。</p>
+<p>那麼在無線通訊中，如何具體設定載波頻率與脈衝時間？接收端又如何還原資料？請前往下一節：<a href="../modulation/">4. 數位調變、解調與適應性傳輸機制</a>。</p>
 
 
 
