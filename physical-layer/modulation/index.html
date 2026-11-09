@@ -14,7 +14,7 @@
         <link rel="prev" href="../bandwidth-and-capacity/">
       
       
-        <link rel="next" href="../../ai-collaboration/">
+        <link rel="next" href="../ofdm/">
       
       
         
@@ -251,17 +251,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../ai-collaboration/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-collaboration/" class="md-tabs__link">
+          
+  
   
   AI 協作紀錄
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -1046,7 +1047,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        實體層總結
+        下一步：邁向現代高速多載波通訊
       
     </span>
   </a>
@@ -1057,6 +1058,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ofdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. 正交分頻多工 (OFDM) 與離散傅立葉
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1075,9 +1104,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../ai-collaboration/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -1091,7 +1136,135 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI 協作紀錄
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作總覽
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-10-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/12 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-10-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/19 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-11-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11/02 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1664,10 +1837,9 @@ $$= 0.5 Q(t) - \underbrace{0.5 I(t)\sin(2\pi \cdot 2f_c t)}_{\text{頻率 } 2f_c
 <p>因此，無論當時通道環境多麼惡劣，接收端都能 100% 正確解讀出 Header 內容；獲知 MCS 等級後，接收電路便能毫秒級切換至對應的解調模式來還原高速的 Payload 資料！</p>
 </details>
 <hr />
-<h2 id="_3">實體層總結<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>恭喜你！至此你已經完整掌握了實體層的全部核心底層原理：
-從 <strong>正弦波基礎</strong> <span class="arithmatex">\(\to\)</span> <strong>方波傅立葉級數</strong> <span class="arithmatex">\(\to\)</span> <strong>頻寬與頻譜搬移</strong> <span class="arithmatex">\(\to\)</span> <strong>無線調變、星座圖、I/Q 正交分解與適應性 MCS 機制</strong>。</p>
-<p>實體層成功將電腦中的 0 與 1 位元轉換為高頻電磁波，克服了大氣雜訊與通道衰減，將訊號穩定送達接收端並精確還原！</p>
+<h2 id="_3">下一步：邁向現代高速多載波通訊<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>掌握了單載波調變（QAM、PSK）後，當通訊速率大幅提升時，真實世界中的多路徑反射會導致致命的「符號間干擾 (ISI)」。如何利用多載波技術克服這個難題？</p>
+<p>請繼續前往下一章：<a href="../ofdm/">5. 正交分頻多工 (OFDM) 與離散傅立葉</a>，探索保護時間、循環前綴 (CP) 與 FFT 的奧秘！</p>
 
 
 

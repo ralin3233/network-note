@@ -1,0 +1,1356 @@
+
+<!doctype html>
+<html lang="zh-TW" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="課程整理，寫給沒上課也能看懂的人">
+      
+      
+      
+      
+        <link rel="prev" href="../ai-collaboration/">
+      
+      
+        <link rel="next" href="../chat-history-10-19/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>10/12 完整對話紀錄 - 網路課程筆記 - 實體層</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1012-ai-ofdm" class="md-skip">
+          跳轉到
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="頁首">
+    <a href=".." title="網路課程筆記 - 實體層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            網路課程筆記 - 實體層
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10/12 完整對話紀錄
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切換深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換淺色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切換淺色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="搜尋">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜尋引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="標籤" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首頁
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../physical-layer/" class="md-tabs__link">
+          
+  
+  
+  實體層 Physical Layer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ai-collaboration/" class="md-tabs__link">
+          
+  
+  
+  AI 協作紀錄
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="導覽列" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="網路課程筆記 - 實體層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    網路課程筆記 - 實體層
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首頁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層 Physical Layer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    實體層 Physical Layer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層概論與路徑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/sine-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 正弦波特性與通式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/fourier-and-square-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/modulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. 數位調變、解調與適應性傳輸機制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-layer/ofdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. 正交分頻多工 (OFDM) 與離散傅立葉
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI 協作紀錄
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作總覽
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/12 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/12 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📑 核心內容規劃與章節脈絡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 相關更新檔案清單
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 本章精簡後的核心章節結構
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 相關檔案清單
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 理論連貫性（不再分段獨立割裂）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 聚焦離散傅立葉轉換 (DFT) 的「純理論」部分
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 5
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 主題自然連貫
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 像老師教學般的直覺概念解說（拒絕教科書式直接丟定義）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-orthogonality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 收尾於「正交性 (Orthogonality)」—— 後續內容全部裁切
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        對話輪次 6
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="對話輪次 6">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👤 使用者 (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 AI 回覆 (Assistant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chat-history-10-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/19 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chat-history-11-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11/02 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1012-ai-ofdm">10/12 完整 AI 對話紀錄：OFDM 章節範圍收斂與離散傅立葉直覺解說<a class="headerlink" href="#1012-ai-ofdm" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文件記錄 2026/10/12 針對「保護頻帶、保護時間與離散傅立葉轉換」章節撰寫與調整之完整對話歷程（一字不漏紀錄）。</p>
+</blockquote>
+<hr />
+<h2 id="1">對話輪次 1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="user">👤 使用者 (User)<a class="headerlink" href="#user" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>請幫我新增OFDM章，從guard time/band講到 離散傅立葉就好
+</code></pre></div>
+<h3 id="ai-assistant">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant" title="Permanent link">&para;</a></h3>
+<p>已為您新增 <strong>第 5 章：正交分頻多工 (OFDM) 與離散傅立葉 (DFT)</strong>，並同步更新了導覽目錄與前後章節的脈絡串接。</p>
+<hr />
+<h3 id="_1">📑 核心內容規劃與章節脈絡<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>新章節放置於 <a href="../physical-layer/ofdm/">docs/physical-layer/ofdm.md</a>，範圍精準從 <strong>Guard Band / Guard Time</strong> 出發，講授至 <strong>離散傅立葉轉換 (IDFT/DFT/FFT)</strong>：</p>
+<ol>
+<li><strong>單載波的高速物理瓶頸</strong>：</li>
+<li>符號時間 <span class="arithmatex">\(T_s\)</span> 隨高速傳輸極度壓縮。</li>
+<li>大氣多路徑傳播（Multipath Propagation）與延遲擴展（Delay Spread <span class="arithmatex">\(\tau_{\max}\)</span>）。</li>
+<li>當 <span class="arithmatex">\(T_s &lt; \tau_{\max}\)</span> 時引發毀滅性的 <strong>符號間干擾 (Inter-Symbol Interference, ISI)</strong>，時域等化器複雜度爆炸。</li>
+<li><strong>分頻多工 (FDM) 的思路與保護頻帶 (Guard Band) 的代價</strong>：</li>
+<li>將頻寬切分為 <span class="arithmatex">\(N\)</span> 條慢速子通道，符號時間拉長為 <span class="arithmatex">\(T = N \cdot T_s \gg \tau_{\max}\)</span> 瓦解 ISI。</li>
+<li>傳統 FDM 為防頻譜重疊漏水而設立 <strong>保護頻帶 (Guard Band)</strong>，頻譜利用率低於 50% 且需要極度昂貴陡峭的類比濾波器。</li>
+<li><strong>時域防護：保護時間 (Guard Time) 與補零盲點</strong>：</li>
+<li>於時域兩符號間插入保護時間 <span class="arithmatex">\(T_g \ge \tau_{\max}\)</span> 阻隔跨符號衝撞。</li>
+<li>剖析「純補零 (Zero-Padding)」的致命副作用：多徑延遲波在接收視窗被硬生生截斷，引發頻譜能量洩漏（Spectral Leakage），打破正交性並爆發 <strong>子載波間干擾 (ICI, Inter-Carrier Interference)</strong>。</li>
+<li><strong>神來之筆：循環前綴 (Cyclic Prefix, CP)</strong>：</li>
+<li>將 OFDM 符號末端長度為 <span class="arithmatex">\(T_g\)</span> 的波形直接複製貼到最前端。</li>
+<li><strong>三大魔法</strong>：<ol>
+<li>丟棄 CP 徹底清除前一符號的 ISI 殘影。</li>
+<li>週期延拓使延遲波在積分視窗內仍為完整正弦波，徹底消滅 ICI。</li>
+<li>將通道線性摺積轉化為<strong>圓周摺積 (Circular Convolution)</strong>，使頻域呈現 <span class="arithmatex">\(Y_k = H_k X_k + W_k\)</span>，只需<strong>單抽頭頻域等化 (One-Tap Equalizer)</strong> 即可還原資料。</li>
+</ol>
+</li>
+<li><strong>正交性 (Orthogonality) 的數學原理與頻譜重疊</strong>：</li>
+<li>子載波頻率間隔條件：<span class="arithmatex">\(\Delta f = \frac{1}{T}\)</span>。</li>
+<li>正交性時間積分之嚴謹數學證明：<span class="arithmatex">\(\frac{1}{T} \int_0^T e^{j 2\pi (m-n)\Delta f t} dt = 0\)</span> (<span class="arithmatex">\(m \ne n\)</span>)。</li>
+<li><strong>Sinc 函數頻譜交疊之美</strong>：各子載波頻譜重疊 50%，但在彼此峰值中心頻率處，其餘子載波恰好落在零點（Zero-Crossings / Nulls），完全互不干擾。</li>
+<li><strong>硬體實作困境與離散傅立葉 (DFT / IDFT / FFT) 的奇蹟</strong>：</li>
+<li>數千載波類比振盪器在硬體上不可行。</li>
+<li><strong>數學對應證明</strong>：連續 OFDM 基頻取樣訊號 <span class="arithmatex">\(s[n] = \sum_{k=0}^{N-1} X_k e^{j \frac{2\pi}{N} kn}\)</span> <strong>精確等於反離散傅立葉轉換 (IDFT)</strong>；接收端解調即為 <strong>離散傅立葉轉換 (DFT)</strong>。</li>
+<li>結合 <strong>快速傅立葉轉換 (FFT)</strong>，運算複雜度由 <span class="arithmatex">\(O(N^2)\)</span> 驟降為 <span class="arithmatex">\(O(N \log_2 N)\)</span>，實現純數位晶片（DSP/FPGA）的高速調變解調。</li>
+<li>附完整 <strong>OFDM 數位收發系統架構流程圖 (Transceiver Architecture)</strong>、<strong>精華對照總結表</strong> 與 <strong>初學者常見盲點 Q&amp;A</strong>。</li>
+</ol>
+<hr />
+<h3 id="_2">🔗 相關更新檔案清單<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>📄 <strong>新章節內容</strong>：<a href="../physical-layer/ofdm/">docs/physical-layer/ofdm.md</a></li>
+<li>⚙️ <strong>網站導覽目錄</strong>：<a href="../mkdocs.yml">mkdocs.yml</a>（在第 4 章後新增第 5 章選單）</li>
+<li>🏠 <strong>首頁章節導覽</strong>：<a href="../">docs/index.md</a>（加入第 5 章推進路徑與摘要）</li>
+<li>🗺️ <strong>實體層全景導覽</strong>：<a href="../physical-layer/">docs/physical-layer/index.md</a>（更新 Mermaid 知識流程圖與閱讀指南總表）</li>
+<li>🔄 <strong>前章末端銜接</strong>：<a href="../physical-layer/modulation/">docs/physical-layer/modulation.md</a>（第 4 章文末無縫導引至第 5 章）</li>
+<li>📝 <strong>協作紀錄更新</strong>：<a href="../ai-collaboration/">docs/ai-collaboration.md</a>（增補 10/12 AI 協作 Prompt 與要點，供課程評分查驗）</li>
+</ul>
+<hr />
+<h2 id="2">對話輪次 2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="user_1">👤 使用者 (User)<a class="headerlink" href="#user_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>從guard time/band講到 離散傅立葉就好，我暫時不需要其他節
+</code></pre></div>
+<h3 id="ai-assistant_1">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant_1" title="Permanent link">&para;</a></h3>
+<p>已為您精準調整 <a href="../physical-layer/ofdm/">docs/physical-layer/ofdm.md</a> 的內容，<strong>移除所有多餘小節（如收發機系統架構全圖、Q&amp;A、全章總結等），嚴格將範圍收斂在從 Guard Band / Guard Time 開始，講到離散傅立葉 (DFT/IDFT) 為止</strong>。</p>
+<hr />
+<h3 id="_3">📖 本章精簡後的核心章節結構<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>docs/physical-layer/ofdm.md
+│
+├── 1. 保護頻帶 (Guard Band) 與保護時間 (Guard Time)
+│    ├── 1.1 頻域挑戰：保護頻帶 (Guard Band) 的成因與頻譜浪費代價
+│    ├── 1.2 時域挑戰：多路徑延遲擴展 (Delay Spread) 與保護時間 (Guard Time)
+│    └── 1.3 空保護時間（補零 Zero-Padding）破壞正交性與引發 ICI 的盲點
+│
+├── 2. 循環前綴 (Cyclic Prefix, CP)
+│    ├── 2.1 循環前綴構造：複製末端 Tg 貼至最前端，接收端切除 CP
+│    └── 2.2 三大作用：消除 ISI、維持週期性消滅 ICI、將線性摺積轉化為圓周摺積（單抽頭頻域等化）
+│
+├── 3. 子載波正交性 (Orthogonality)
+│    ├── 3.1 數學定義與正交條件：Δf = 1/T 及時域互相關積分為 0 證明
+│    └── 3.2 頻域視角：Sinc 函數在彼此中心頻率峰值處剛好穿過零點 (Zero-Crossings)，允許頻譜緊密重疊
+│
+└── 4. 離散傅立葉轉換 (DFT / IDFT) 的實現
+     ├── 4.1 連續時間 OFDM 多載波合成公式
+     ├── 4.2 等間距取樣推導：時域取樣序列 s[n] 數學等價於 IDFT{X_k}
+     ├── 4.3 接收端解調：時域取樣序列經 DFT{r[n]} 還原各載波頻域符號
+     └── 4.4 快速傅立葉轉換 (FFT) 演算法將複雜度由 O(N²) 降至 O(N log N) 之數位實現優勢
+</code></pre></div>
+<hr />
+<h3 id="_4">🔗 相關檔案清單<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>📄 <strong>OFDM 精簡專章</strong>：<a href="../physical-layer/ofdm/">docs/physical-layer/ofdm.md</a></li>
+<li>⚙️ <strong>選單配置</strong>：<a href="../mkdocs.yml">mkdocs.yml</a></li>
+<li>🏠 <strong>首頁導覽</strong>：<a href="../">docs/index.md</a></li>
+<li>🗺️ <strong>實體層導覽</strong>：<a href="../physical-layer/">docs/physical-layer/index.md</a></li>
+<li>📝 <strong>協作紀錄</strong>：<a href="../ai-collaboration/">docs/ai-collaboration.md</a></li>
+</ul>
+<hr />
+<h2 id="3">對話輪次 3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="user_2">👤 使用者 (User)<a class="headerlink" href="#user_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>不對 就講guard time/band和 離散傅立葉，不要有其他東西
+</code></pre></div>
+<h3 id="ai-assistant_2">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant_2" title="Permanent link">&para;</a></h3>
+<p>好了，<a href="../physical-layer/ofdm/">ofdm.md</a> 現在只有兩個主題：</p>
+<ol>
+<li><strong>保護頻帶與保護時間 (Guard Band &amp; Guard Time)</strong> — 頻域浪費頻寬 vs 時域消除 ISI</li>
+<li><strong>離散傅立葉轉換 (DFT)</strong> — 推導 OFDM 調變 = IDFT、解調 = DFT，以及 FFT 帶來的效能優勢</li>
+</ol>
+<p>沒有其他多餘內容了。</p>
+<hr />
+<h2 id="4">對話輪次 4<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="user_3">👤 使用者 (User)<a class="headerlink" href="#user_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>離散傅立葉轉換的部分先講理論部分就好，還不要跨到OFDM應用部分，並且確保保護頻帶與保護時間和離散傅立葉之間的主題是連貫的，而不是分段論述
+</code></pre></div>
+<h3 id="ai-assistant_3">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant_3" title="Permanent link">&para;</a></h3>
+<p>已重新調整 <a href="../physical-layer/ofdm/">ofdm.md</a> 的架構與內容，主要調整重點如下：</p>
+<h3 id="1_1">1. 理論連貫性（不再分段獨立割裂）<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>不再將保護機制與傅立葉轉換切成兩段獨立不相干的章節，而是以<strong>訊號傳輸的時頻物理制約</strong>貫穿整篇脈絡：
+* <strong>時頻雙重防護</strong>：頻域以<strong>保護頻帶 (Guard Band)</strong> 避免相鄰頻譜滲漏干擾；時域以<strong>保護時間 (Guard Time)</strong> 阻斷多路徑反射殘影以消除 ISI。
+* <strong>串聯樞紐（核心連結）</strong>：深入論述「保護時間」如何強制將連續訊號切分成一段段固定長度 <span class="arithmatex">\(T\)</span> 的「有限時間區塊 (Time Block)」，加上接收端的「數位取樣 (<span class="arithmatex">\(N\)</span> 點)」，在頻域上自然引導出離散化正交頻點的需求，從而<strong>必然引出處理有限長度離散序列的核心工具——離散傅立葉轉換 (DFT)</strong>。</p>
+<hr />
+<h3 id="2-dft">2. 聚焦離散傅立葉轉換 (DFT) 的「純理論」部分<a class="headerlink" href="#2-dft" title="Permanent link">&para;</a></h3>
+<p>已完全移除 OFDM 調變/解調系統應用（不提頻域符號映射、IDFT 調變器、DFT 解調器等具體系統設計），專注於純訊號處理理論：
+* <strong>正轉換 (Forward DFT) 與反轉換 (IDFT)</strong>：定義式及其幾何與物理投影意涵。
+* <strong>正交性 (Orthogonality)</strong>：複數指數基底在離散網格點上的正交證明與無串擾特性。
+* <strong>隱含週期延拓性 (Implicit Periodicity)</strong>：有限區塊在 DFT 下的圓周位移與圓周卷積理論本質。
+* <strong>計算理論 (FFT)</strong>：Cooley-Tukey 演算法利用對稱性與週期性，將 <span class="arithmatex">\(\mathcal{O}(N^2)\)</span> 複雜度降至 <span class="arithmatex">\(\mathcal{O}(N \log_2 N)\)</span> 的演算法突破。</p>
+<hr />
+<h2 id="5">對話輪次 5<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="user_4">👤 使用者 (User)<a class="headerlink" href="#user_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>講到正交性就好，再往後的都不要，然後離散傅立葉請從直覺、概念開始講，要像老師在教同學一樣，而不是數學教科書一上來就丟定義
+</code></pre></div>
+<h3 id="ai-assistant_4">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant_4" title="Permanent link">&para;</a></h3>
+<p>已為您重構 <a href="../physical-layer/ofdm/">ofdm.md</a>，修改重點如下：</p>
+<h3 id="1_2">1. 主題自然連貫<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>雙重防護機制</strong>：從頻域的「保護頻帶（防頻譜滲漏但浪費頻寬）」對比時域的「保護時間（防多路徑反射以消除 ISI）」。</li>
+<li><strong>串聯樞紐</strong>：說明因為保護時間的劃分，訊號被切分成固定長度 <span class="arithmatex">\(T\)</span> 的獨立「時間區塊」，晶片在裡面抓出 <span class="arithmatex">\(N\)</span> 個取樣點，<strong>自然引導出問題：「電腦手裡只有這 <span class="arithmatex">\(N\)</span> 個數字，要怎麼找出裡面藏了哪些頻率？」</strong></li>
+</ul>
+<hr />
+<h3 id="2_1">2. 像老師教學般的直覺概念解說（拒絕教科書式直接丟定義）<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>耳朵聽和弦的比喻</strong>：說明傅立葉轉換本質上就是幫波形「抓出藏在裡面的音符」。</li>
+<li><strong>音叉與共鳴（Resonance）的直覺</strong>：</li>
+<li>電腦如何做頻率檢測？就像拿特定頻率的「音叉」去比對。</li>
+<li><strong>相乘並加總（點積 / 投影）</strong>：若頻率存在，波峰對波峰，乘積全為正，加總得到大數值（共振成功）；若頻率不存在，正負相消得 0。</li>
+<li><strong>拆解公式積木</strong>：逐項對照解說 <span class="arithmatex">\(x[n]\)</span>（取樣訊號）、<span class="arithmatex">\(e^{-j\frac{2\pi}{N}kn}\)</span>（標準測試音叉）、<span class="arithmatex">\(\sum\)</span>（共振加總）與 <span class="arithmatex">\(X[k]\)</span>（檢測結果），接著簡單以「組裝播放樂曲」直覺帶過反轉換 IDFT。</li>
+</ul>
+<hr />
+<h3 id="3-orthogonality">3. 收尾於「正交性 (Orthogonality)」—— 後續內容全部裁切<a class="headerlink" href="#3-orthogonality" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>學生心中的關鍵問題</strong>：「用第 <span class="arithmatex">\(k_1\)</span> 號音叉去測，會不會被 <span class="arithmatex">\(k_2\)</span> 號頻率干擾？」</li>
+<li><strong>幾何直覺</strong>：以平面座標 <span class="arithmatex">\(X\)</span> 軸與 <span class="arithmatex">\(Y\)</span> 軸互相垂直、投影為 0 作為直覺比喻。</li>
+<li><strong>數學驗證與向量圓周對稱性</strong>：說明 <span class="arithmatex">\(k_1 \ne k_2\)</span> 時旋轉向量在複數平面上剛好轉滿整數圈、對稱抵消為 0 的本質。</li>
+<li><strong>正交性結論</strong>：各離散頻率就像走在獨立軌道上，在同個時域區塊內混合也<strong>互不干擾</strong>。</li>
+<li><strong>章節於此結束</strong>，不再贅述週期延拓、FFT 演算法或 OFDM 調變應用。</li>
+</ul>
+<hr />
+<h2 id="6">對話輪次 6<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="user_5">👤 使用者 (User)<a class="headerlink" href="#user_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>請把本次「完整」對話內容一字不漏寫成.md，並在AI對話紀錄中插入該md
+</code></pre></div>
+<h3 id="ai-assistant_5">🤖 AI 回覆 (Assistant)<a class="headerlink" href="#ai-assistant_5" title="Permanent link">&para;</a></h3>
+<p>已將本次對話之完整 6 輪對話內容一字不漏輸出為專屬 Markdown 紀錄檔案 <a href="./">chat-history-10-12.md</a>，並同步在 <a href="../ai-collaboration/">docs/ai-collaboration.md</a> 的「AI 協作與對話紀錄」中插入完整的收錄項目與連結。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到頂端
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "toc.integrate", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

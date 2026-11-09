@@ -251,17 +251,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../ai-collaboration/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../ai-collaboration/" class="md-tabs__link">
+          
+  
   
   AI 協作紀錄
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -604,6 +605,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ofdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. 正交分頻多工 (OFDM) 與離散傅立葉
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -617,9 +646,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../ai-collaboration/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -633,7 +678,135 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI 協作紀錄
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作總覽
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chat-history-10-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/12 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chat-history-10-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/19 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chat-history-11-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11/02 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -668,11 +841,13 @@
     A["1. 正弦波 (Sine Wave)&lt;br&gt;物理界最純粹的連續訊號通式：A cos(2πft + θ)"] --&gt; B["2. 方波的構成與傅立葉分析 (Fourier Analysis)&lt;br&gt;電腦的 0 與 1 方波由基頻與奇數次諧波疊加而成"]
     B --&gt; C["3. 頻寬與傅立葉五大性質 (Bandwidth &amp; Properties)&lt;br&gt;有效頻寬 (90%能量) ↔ 時移/縮放/相加/餘弦相乘性質"]
     C --&gt; D["4. 數位調變、解調與適應性機制 (Modulation &amp; AMC)&lt;br&gt;ASK/PSK/QAM 星座圖 ↔ I/Q 正交分解 ↔ 最近鄰判決與 AMC 策略"]
+    D --&gt; E["5. 正交分頻多工與離散傅立葉 (OFDM &amp; DFT)&lt;br&gt;多徑延遲 ↔ Guard Band/Time ↔ 循環前綴 CP ↔ 正交重疊 ↔ IDFT/FFT 數位實作"]
 
     style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#0f172a;
     style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#0f172a;
     style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#0f172a;
-    style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;</code></pre>
+    style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;
+    style E fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#0f172a;</code></pre>
 <hr />
 <h2 id="_2">本章循序漸進閱讀指南<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>本章節完全依照課堂簡報之推導進程，由淺入深拆解實體層技術：</p>
@@ -704,6 +879,11 @@
 <td><a href="modulation/">4. 數位調變、解調與適應性傳輸機制</a></td>
 <td>如何利用正弦波傳送 0/1 並在雜訊中精準還原？</td>
 <td>ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調，以及依 SNR 動態調整的 AMC 策略。</td>
+</tr>
+<tr>
+<td><a href="ofdm/">5. 正交分頻多工 (OFDM) 與離散傅立葉</a></td>
+<td>頻寬極大化時如何克服多徑 ISI 與硬體複雜度？</td>
+<td>告別 Guard Band，善用 Guard Time 與循環前綴 (CP)，透過 IDFT/FFT 數位算法實現數千載波正交傳輸。</td>
 </tr>
 </tbody>
 </table>

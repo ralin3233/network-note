@@ -1,0 +1,2263 @@
+
+<!doctype html>
+<html lang="zh-TW" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="課程整理，寫給沒上課也能看懂的人">
+      
+      
+      
+      
+        <link rel="prev" href="../modulation/">
+      
+      
+        <link rel="next" href="../../ai-collaboration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>5. 正交分頻多工 (OFDM) 與離散傅立葉 - 網路課程筆記 - 實體層</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-ofdm" class="md-skip">
+          跳轉到
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="頁首">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-header__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            網路課程筆記 - 實體層
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. 正交分頻多工 (OFDM) 與離散傅立葉
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切換深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切換淺色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切換淺色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="搜尋">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜尋引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="標籤" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首頁
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  實體層 Physical Layer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-collaboration/" class="md-tabs__link">
+          
+  
+  
+  AI 協作紀錄
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="導覽列" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="網路課程筆記 - 實體層" class="md-nav__button md-logo" aria-label="網路課程筆記 - 實體層" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    網路課程筆記 - 實體層
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首頁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層 Physical Layer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    實體層 Physical Layer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    實體層概論與路徑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sine-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 正弦波特性與通式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier-and-square-wave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 方波構成與傅立葉分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bandwidth-and-capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 頻寬與傅立葉轉換性質
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. 數位調變、解調與適應性傳輸機制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. 正交分頻多工 (OFDM) 與離散傅立葉
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. 正交分頻多工 (OFDM) 與離散傅立葉
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章地圖
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        訊號傳輸的雙重邊界：頻域與時域的防護機制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="訊號傳輸的雙重邊界：頻域與時域的防護機制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guard-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        頻域防護：保護頻帶 (Guard Band)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guard-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        時域防護：保護時間 (Guard Time)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        串聯樞紐：從「時域分塊取樣」通往「離散傅立葉轉換」
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        離散傅立葉轉換 (DFT) 的直覺與概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="離散傅立葉轉換 (DFT) 的直覺與概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 人類的耳朵是怎麼聽音樂的？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 電腦要怎麼測量「某個頻率在不在」？—— 音叉與共振的直覺
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-forward-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 理解正轉換 (Forward DFT) 的數學式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-inverse-dft-idft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 理解反轉換 (Inverse DFT, IDFT) 的數學式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-dft-n-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. DFT 的矩陣形式（以 \(N = 4\) 為例）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-idft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. IDFT 的矩陣形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orthogonality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心基石：為什麼頻率之間不會打架？—— 正交性 (Orthogonality)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心基石：為什麼頻率之間不會打架？—— 正交性 (Orthogonality)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 幾何直覺：二維空間中的直角座標
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 離散諧波波形的正交驗證
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 離散諧波波形的正交驗證">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-k_1-k_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情況 A：當 \(k_1 = k_2\)（測試同一個頻率）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-k_1-ne-k_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        情況 B：當 \(k_1 \ne k_2\)（測試不同頻率）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 正交性的教學總結
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 從矩陣看正交性（補充）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-ofdm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 正交性的頻域長相：OFDM 頻譜（補充）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyclic-prefix-cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        循環前綴 (Cyclic Prefix, CP)：保護時間的進化版
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="循環前綴 (Cyclic Prefix, CP)：保護時間的進化版">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        為什麼「空白」保護時間不夠用？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解法：不要留白，把尾巴複製到前面
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        為什麼這樣就有效？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP 的代價與設計原則
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cp-lti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        循環卷積：CP 真正在做的事（LTI 系統觀點）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="循環卷積：CP 真正在做的事（LTI 系統觀點）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 通道是一個 LTI 系統
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-intra-symbol-interference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 多路徑 = 符號自己撞自己：Intra-Symbol Interference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 加 CP 之後：線性卷積「看起來像」循環卷積
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-yk-hkxk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 循環卷積的頻域魔法：\(Y[k] = H[k]\,X[k]\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 為什麼「循環卷積」一定要配「正交子載波」？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fft-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快速傅立葉轉換 (FFT)：讓 DFT 從「算不動」變成「瞬間完成」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速傅立葉轉換 (FFT)：讓 DFT 從「算不動」變成「瞬間完成」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DFT 到底有多慢？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FFT 的核心想法：不要重複算一樣的東西
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-point-fft-butterfly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-Point FFT：蝶形運算 (Butterfly)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-point-fft-ifftn-2k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N-Point FFT / IFFT（\(N = 2^k\)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快了多少？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ofdm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OFDM 發送流程：從位元到空中的電磁波
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OFDM 發送流程：從位元到空中的電磁波">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        發送端逐步拆解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一個具體例子（\(N = 4\)）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ofdm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OFDM 接收流程：把混在一起的波形拆回來
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OFDM 接收流程：把混在一起的波形拆回來">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接收端逐步拆解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ofdm-v1-v24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OFDM 設計版本：v1 與 v2（4 個子通道）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        端到端全貌：把所有零件接起來
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="端到端全貌：把所有零件接起來">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整章回顧：四個問題，四個答案
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        容易混淆的名詞
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❓ 初學者常見疑問與思維誤區 (Q&amp;A)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章精華總結表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        總結：這條路走完了
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作紀錄
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI 協作紀錄
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI 協作總覽
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-10-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/12 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-10-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10/19 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chat-history-11-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11/02 完整對話紀錄
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5-ofdm">5. 正交分頻多工 (OFDM)：保護頻帶、循環前綴與快速傅立葉轉換<a class="headerlink" href="#5-ofdm" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>核心觀念</strong>：OFDM 不是一種新的單載波調變方式，而是一種「<strong>把一條寬頻通道切成很多條窄頻通道</strong>」的多載波傳輸策略。它在頻域用「正交」取代相鄰子載波間的保護頻帶，在時域用「循環前綴 (CP)」擋下多路徑干擾，最後靠 IDFT/FFT 一次處理數千個子載波——同時解決了干擾與硬體複雜度兩個難題。</p>
+<p>其中 CP 的真正數學作用，是把「通道造成的線性卷積」轉換成「<strong>循環卷積</strong>」，讓每個子載波在頻域上只被乘上一個複數 <span class="arithmatex">\(H[k]\)</span>，這就是<strong>單抽頭等化</strong>能成立的嚴格原因。全篇的公式統一使用 <span class="arithmatex">\(W_N \triangleq e^{-j\frac{2\pi}{N}}\)</span> 這個記號（見下方「符號約定」）。</p>
+</blockquote>
+<hr />
+<h2 id="_1">本章地圖<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>段落</th>
+<th>要回答的問題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>雙重邊界</td>
+<td>為什麼傳輸訊號一定要在頻域與時域設下防護？</td>
+</tr>
+<tr>
+<td>離散傅立葉轉換 (DFT)</td>
+<td>面對 <span class="arithmatex">\(N\)</span> 個取樣點，怎麼知道裡面藏了哪些頻率？</td>
+</tr>
+<tr>
+<td>DFT / IDFT 矩陣形式</td>
+<td><span class="arithmatex">\(N=4\)</span> 時，這個轉換長成什麼樣的矩陣？</td>
+</tr>
+<tr>
+<td>正交性 (Orthogonality)</td>
+<td>為什麼不同頻率疊在一起傳，卻不會互相干擾？</td>
+</tr>
+<tr>
+<td>OFDM 頻譜</td>
+<td>正交重疊在頻域上到底長什麼樣子？</td>
+</tr>
+<tr>
+<td>循環前綴 (CP)</td>
+<td>保護時間為什麼不能留空白，而要「複製尾巴」？</td>
+</tr>
+<tr>
+<td>循環卷積 (Circular Convolution)</td>
+<td>CP 到底為什麼能讓等化變成「一個除法」？</td>
+</tr>
+<tr>
+<td>快速傅立葉轉換 (FFT)</td>
+<td>DFT 那麼慢，真實系統怎麼跑得動？</td>
+</tr>
+<tr>
+<td>2-Point FFT 蝶形</td>
+<td>分治法的每一步，實際電路長什麼樣子？</td>
+</tr>
+<tr>
+<td>OFDM 發送 / 接收流程</td>
+<td>位元是怎麼變成空中的電磁波，又怎麼拆回來？</td>
+</tr>
+<tr>
+<td>OFDM 設計版本</td>
+<td>4 個子通道可以怎麼安排？</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">訊號傳輸的雙重邊界：頻域與時域的防護機制<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>在任何實際通訊媒介中傳輸訊號，都無法脫離「時間（Time）」與「頻率（Frequency）」兩個基本維度的物理制約。為了確保訊號在傳輸過程中不被干擾，通訊系統必須在頻域與時域各自設立邊界防護：</p>
+<pre class="mermaid"><code>graph TD
+    SIG["通訊訊號必須同時面對&lt;br/&gt;時間與頻率兩個維度的干擾"]
+    SIG --&gt; FREQ["【頻域維度】保護頻帶 (Guard Band)"]
+    SIG --&gt; TIME["【時域維度】保護時間 (Guard Time)"]
+    FREQ --&gt; F1["解決：相鄰通道頻譜滲漏 (ACI)"]
+    FREQ --&gt; F2["代價：浪費寶貴頻寬"]
+    TIME --&gt; T1["解決：多路徑延遲造成的符號干擾 (ISI)"]
+    TIME --&gt; T2["機制：把符號切成獨立的觀察窗口"]</code></pre>
+<h3 id="guard-band">頻域防護：保護頻帶 (Guard Band)<a class="headerlink" href="#guard-band" title="Permanent link">&para;</a></h3>
+<p>在傳統分頻多工 (FDM) 架構下，多個通訊通道並行傳輸。由於實際濾波器無法做到完美的垂直截止邊緣，訊號的能量必然會向兩側頻率擴散（旁波瓣 Sidelobes）。</p>
+<p>若相鄰通道緊密貼合，這些擴散的能量就會侵入鄰近通道，引發<strong>相鄰通道干擾 (Adjacent Channel Interference, ACI)</strong>。傳統的解決方式是在相鄰頻道之間刻意保留一段無訊號的頻率空白——<strong>保護頻帶 (Guard Band)</strong>：</p>
+<p><img alt="傳統 FDM 在相鄰通道間保留保護頻帶 (a)，OFDM 則讓子載波正交重疊、不需保護頻帶 (b)" src="../img/guard-band-vs-ofdm.png" /></p>
+<p>上圖對照兩種做法：<strong>(a) 傳統 FDM</strong> 每個通道的頻譜（旁波瓣）會向兩側滲漏，相鄰通道之間必須空出一段不用的「保護頻帶」；<strong>(b) OFDM</strong> 子載波雖然緊密重疊，但因為正交，彼此不會互相干擾，因此不需要保護頻帶。</p>
+<blockquote>
+<p><strong>頻域代價</strong>：保護頻帶是完全不承載任何有效資料的頻譜留白。隨著並行通道數量增加，保護頻帶佔用的頻寬比例大幅攀升，造成極大的頻譜資源浪費。</p>
+</blockquote>
+<hr />
+<h3 id="guard-time">時域防護：保護時間 (Guard Time)<a class="headerlink" href="#guard-time" title="Permanent link">&para;</a></h3>
+<p>與頻域相對，在時間軸上，無線電波會經由地面、建物等多重路徑（直射波、反射波、散射波）到達接收端，即<strong>多路徑傳播 (Multipath Propagation)</strong>。</p>
+<p>多條路徑的長度不同，導致訊號抵達的時間產生先後落差，最早抵達與最晚抵達的分量之間的時間差稱為<strong>延遲擴展 (Delay Spread, <span class="arithmatex">\(\tau_{\max}\)</span>)</strong>。</p>
+<p>如果時域上的資料符號前後緊密相連，前一個符號的多路徑反射波殘影，就會疊加在下一個符號的前端，造成嚴重的<strong>符號間干擾 (Inter-Symbol Interference, ISI)</strong>：</p>
+<pre class="mermaid"><code>graph LR
+    S1["符號 1"] --&gt; S2["符號 2"]
+    S1 -.-&gt;|"反射波延遲 τ"| X["撞進符號 2 的前端"]
+    X --&gt; ISI["符號間干擾 (ISI)"]</code></pre>
+<p>為了解決這個問題，系統必須在時域上以獨立區塊進行傳輸，並在相鄰符號之間插入一段空白間隔——<strong>保護時間 (Guard Time, <span class="arithmatex">\(T_g\)</span>)</strong>：</p>
+<pre class="mermaid"><code>graph LR
+    S1["符號 1"] --&gt; G["保護時間 Tg（空白）"]
+    G --&gt; S2["符號 2"]
+    S1 -.-&gt;|"反射波延遲殘影"| G
+    G --&gt; OK["殘影在 Tg 內消散，符號 2 乾淨接收"]</code></pre>
+<p>只要確保保護時間大於通道的最大延遲擴展（<span class="arithmatex">\(T_g \ge \tau_{\max}\)</span>），前一符號的所有反射波能量都會在保護時間內消散完畢，後續符號便能在乾淨的區間被接收，<strong>徹底消除符號間干擾 (ISI)</strong>。</p>
+<hr />
+<h2 id="_3">串聯樞紐：從「時域分塊取樣」通往「離散傅立葉轉換」<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>請仔細觀察上述的保護時間機制——它為我們帶來了一個非常關鍵的轉變：</p>
+<p>為了躲避多路徑干擾，我們<strong>不能再把訊號當作一條連綿不絕、無限長的連續波形</strong>來處理。我們必須在時間軸上把它切成一個個長度為 <span class="arithmatex">\(T\)</span> 的獨立「時間區塊 (Time Block)」，每個區塊前後都有保護時間隔開：</p>
+<pre class="mermaid"><code>graph LR
+    G1["保護時間 Tg&lt;br/&gt;(等待殘影消散)"] --&gt; T1["有效觀察區間 T&lt;br/&gt;(取樣長度 N)"]
+    T1 --&gt; G2["保護時間 Tg"]
+    G2 --&gt; T2["有效觀察區間 T&lt;br/&gt;(取樣長度 N)"]</code></pre>
+<p>而在現代接收端的數位晶片裡，電腦根本不懂連續的電壓波形，它只能在長度 <span class="arithmatex">\(T\)</span> 的有效觀察窗口裡，每隔一段微小時間「拍照取樣」一次，採集到有限個（例如 <span class="arithmatex">\(N\)</span> 個）數位數值：</p>
+<div class="arithmatex">\[x[0], x[1], x[2], \dots, x[N-1]\]</div>
+<p>這時候，一個極其根本的問題擺在眼前：</p>
+<blockquote>
+<p><strong>面對手中這一串只有 <span class="arithmatex">\(N\)</span> 個點的離散數字，我們該如何知道它裡面藏了哪些頻率成分？</strong></p>
+</blockquote>
+<p>這正是我們需要<strong>離散傅立葉轉換 (Discrete Fourier Transform, DFT)</strong> 的起點。</p>
+<hr />
+<h2 id="dft">離散傅立葉轉換 (DFT) 的直覺與概念<a class="headerlink" href="#dft" title="Permanent link">&para;</a></h2>
+<p>在進入任何複雜數學式之前，我們先建立物理直覺。</p>
+<h3 id="1">1. 人類的耳朵是怎麼聽音樂的？<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>想像你在鋼琴上同時按下 <code>Do</code>、<code>Mi</code>、<code>Sol</code> 三個鍵組成和弦：
+* 如果用示波器看時域波形，你會看到一條高低起伏、形狀怪異複雜的曲線。
+* 但你的耳朵和大腦卻能輕易分辨：「這裡面有 <code>Do</code>、有 <code>Mi</code>、還有 <code>Sol</code>！」</p>
+<p><strong>傅立葉轉換在做的事，本質上就是幫波形「抓出藏在裡面的音符」</strong>——把一段看似複雜混亂的時間訊號，拆解成各個不同頻率的單純波形，並告訴你每一個頻率的分量有多大（振幅）、何時開始震動（相位）。</p>
+<hr />
+<h3 id="2">2. 電腦要怎麼測量「某個頻率在不在」？—— 音叉與共振的直覺<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>想像你想知道一個混雜的聲音裡有沒有 440 Hz（標準音 A）的聲音，最直覺的做法是什麼？</p>
+<p>拿一把 440 Hz 的標準音叉靠近它！
+* 如果聲音裡<strong>有</strong> 440 Hz，音叉就會產生強烈<strong>共振（Resonance）</strong>。
+* 如果聲音裡<strong>完全沒有</strong> 440 Hz，音叉就幾乎動也不動。</p>
+<p>在電腦的數位運算裡，我們沒有實體音叉，但可以用純數學做出一模一樣的「共振檢驗」：<strong>相乘並加總（內積 / 投影）</strong>。</p>
+<pre class="mermaid"><code>graph TD
+    X["收到的訊號 x[n]"] --&gt; M["乘上標準頻率波形（音叉）"]
+    M --&gt; SUM["把 N 個點的乘積全部加總"]
+    SUM --&gt; R["同向疊加 → 大值：共振，抓到該頻率&lt;br/&gt;正負相消 → 0：此頻率不存在"]</code></pre>
+<ul>
+<li><strong>如果訊號裡正好有這個頻率</strong>：訊號的波峰正好對上音叉的波峰、波谷對上波谷，相乘後「正正得正、負負也得正」，每個取樣點都貢獻正值，加總起來就會是一個<strong>非常大的數值</strong> <span class="arithmatex">\(\implies\)</span> <strong>共振成功！抓到這個頻率了！</strong></li>
+<li><strong>如果訊號裡沒有這個頻率（或頻率不匹配）</strong>：兩者的起伏節奏不同步，有時候相乘是正、有時候相乘是負，在長度 <span class="arithmatex">\(N\)</span> 的區間內正負互相抵消，加總結果<strong>精確為 0</strong> <span class="arithmatex">\(\implies\)</span> <strong>沒有共振，代表這個頻率不存在。</strong></li>
+</ul>
+<hr />
+<h3 id="3-forward-dft">3. 理解正轉換 (Forward DFT) 的數學式<a class="headerlink" href="#3-forward-dft" title="Permanent link">&para;</a></h3>
+<p>有了「音叉共振測試」的直覺，我們再來看離散傅立葉轉換的定義式，就會發現它一點都不神秘。先統一一個記號：</p>
+<p><strong>符號約定（全篇通用）</strong>：<span class="arithmatex">\(W_N \triangleq e^{-j\frac{2\pi}{N}}\)</span>，於是 <span class="arithmatex">\(W_N^{kn} = e^{-j\frac{2\pi}{N}kn}\)</span>。特別地 <span class="arithmatex">\(W_4 = e^{-j\frac{\pi}{2}} = -j\)</span>。</p>
+<p>因此正轉換可寫成：</p>
+<div class="arithmatex">\[X[k] = \sum_{n=0}^{N-1} x[n] \cdot W_N^{kn}, \quad k = 0, 1, \dots, N-1\]</div>
+<p>（與原始的 <span class="arithmatex">\(X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-j\frac{2\pi}{N}kn}\)</span> 完全等價。）</p>
+<p>讓我們像拆解積木一樣拆開每個符號：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">符號</th>
+<th style="text-align: center;">角色</th>
+<th style="text-align: left;">直覺意義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x[n]\)</span></td>
+<td style="text-align: center;"><strong>原始時域取樣</strong></td>
+<td style="text-align: left;">接收端在時間區塊內採集到的第 <span class="arithmatex">\(n\)</span> 個數值 (<span class="arithmatex">\(n = 0 \dots N-1\)</span>)。</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(W_N^{kn}\)</span></td>
+<td style="text-align: center;"><strong>第 <span class="arithmatex">\(k\)</span> 號虛擬音叉</strong></td>
+<td style="text-align: left;">電腦自己產生的標準測試波形（<span class="arithmatex">\(=e^{-j\frac{2\pi}{N}kn}\)</span>，代表旋轉速度為 <span class="arithmatex">\(k\)</span> 的正弦與餘弦波）。</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x[n] \cdot W_N^{kn}\)</span></td>
+<td style="text-align: center;"><strong>逐點比對</strong></td>
+<td style="text-align: left;">訊號與測試音叉在每個取樣點的強度相乘。</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\sum_{n=0}^{N-1}\)</span></td>
+<td style="text-align: center;"><strong>共振加總</strong></td>
+<td style="text-align: left;">把這 <span class="arithmatex">\(N\)</span> 個點的乘積全部加起來，看是否有共振放大。</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(X[k]\)</span></td>
+<td style="text-align: center;"><strong>頻率 <span class="arithmatex">\(k\)</span> 的檢測結果</strong></td>
+<td style="text-align: left;">一個複數，<strong>大小</strong>代表頻率強度，<strong>角度</strong>代表起始相位。</td>
+</tr>
+</tbody>
+</table>
+<p>這就是正離散傅立葉轉換：拿 <span class="arithmatex">\(N\)</span> 支不同頻率的「音叉」（<span class="arithmatex">\(k = 0, 1, \dots, N-1\)</span>），一支一支去測試我們手上的時域訊號 <span class="arithmatex">\(x[n]\)</span>，最後得到 <span class="arithmatex">\(N\)</span> 個頻率的成分強度 <span class="arithmatex">\(X[k]\)</span>。</p>
+<hr />
+<h3 id="4-inverse-dft-idft">4. 理解反轉換 (Inverse DFT, IDFT) 的數學式<a class="headerlink" href="#4-inverse-dft-idft" title="Permanent link">&para;</a></h3>
+<p>那如果反過來呢？假設我們已經知道了各個音符各自有多大聲（頻域數值 <span class="arithmatex">\(X[k]\)</span>），我們想把這首「樂曲」重新在時域上播放出來，該怎麼做？</p>
+<p>答案就是把這 <span class="arithmatex">\(N\)</span> 個標準波形乘上各自的權重 <span class="arithmatex">\(X[k]\)</span>，通通疊加在一起。用 <span class="arithmatex">\(W_N\)</span> 記號寫起來就是：</p>
+<div class="arithmatex">\[x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \cdot W_N^{-kn}, \quad n = 0, 1, \dots, N-1\]</div>
+<p>（等價於 <span class="arithmatex">\(x[n] = \frac{1}{N}\sum_{k=0}^{N-1} X[k]\cdot e^{j\frac{2\pi}{N}kn}\)</span>；注意指數的負號與 DFT 相反。）</p>
+<p>這就是<strong>反離散傅立葉轉換 (IDFT)</strong>——從頻域的音符成分，重新組裝合成出原本的時域波形（前方除以 <span class="arithmatex">\(N\)</span> 只是把能量尺度縮放還原）。</p>
+<h3 id="5-dft-n-4">5. DFT 的矩陣形式（以 <span class="arithmatex">\(N = 4\)</span> 為例）<a class="headerlink" href="#5-dft-n-4" title="Permanent link">&para;</a></h3>
+<p>DFT 其實就是一個「矩陣乘法」。把 <span class="arithmatex">\(N\)</span> 個取樣點排成向量 <span class="arithmatex">\(\mathbf{x} = [x[0], x[1], \dots, x[N-1]]^{\mathsf T}\)</span>，輸出向量 <span class="arithmatex">\(\mathbf{X} = [X[0], X[1], \dots, X[N-1]]^{\mathsf T}\)</span>，則</p>
+<div class="arithmatex">\[\mathbf{X} = F_N\,\mathbf{x}\]</div>
+<p>其中 <span class="arithmatex">\(F_N\)</span> 是 <span class="arithmatex">\(N\times N\)</span> 的 DFT 矩陣，第 <span class="arithmatex">\((k,n)\)</span> 個元素就是 <span class="arithmatex">\(W_N^{kn}\)</span>。以 <span class="arithmatex">\(N=4\)</span>（<span class="arithmatex">\(W_4 = -j\)</span>）為例：</p>
+<div class="arithmatex">\[F_4 = \begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; W_4^{1} &amp; W_4^{2} &amp; W_4^{3} \\
+1 &amp; W_4^{2} &amp; W_4^{4} &amp; W_4^{6} \\
+1 &amp; W_4^{3} &amp; W_4^{6} &amp; W_4^{9}
+\end{bmatrix}
+= \begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; -j &amp; -1 &amp; j \\
+1 &amp; -1 &amp; 1 &amp; -1 \\
+1 &amp; j &amp; -1 &amp; -j
+\end{bmatrix}\]</div>
+<p>每一「列」就是一支音叉：第 <span class="arithmatex">\(k\)</span> 列對應頻率 <span class="arithmatex">\(k\)</span> 的檢測。矩陣乘法 <span class="arithmatex">\(X[k] = \sum_n (F_4)_{kn}\,x[n]\)</span> 正好就是 DFT 定義式。</p>
+<h3 id="6-idft">6. IDFT 的矩陣形式<a class="headerlink" href="#6-idft" title="Permanent link">&para;</a></h3>
+<p>IDFT 就是 DFT 矩陣的反矩陣；而 DFT 矩陣剛好是「么正矩陣（差一個 <span class="arithmatex">\(1/N\)</span> 係數）」，所以反矩陣只要「取共軛轉置、再乘 <span class="arithmatex">\(\frac{1}{N}\)</span>」：</p>
+<div class="arithmatex">\[\mathbf{x} = \frac{1}{N} F_N^{\mathsf H}\,\mathbf{X}\]</div>
+<p>以 <span class="arithmatex">\(N=4\)</span> 為例：</p>
+<div class="arithmatex">\[F_4^{-1} = \frac{1}{4}\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; j &amp; -1 &amp; -j \\
+1 &amp; -1 &amp; 1 &amp; -1 \\
+1 &amp; -j &amp; -1 &amp; j
+\end{bmatrix}\]</div>
+<blockquote>
+<p><strong>一眼看懂正交性</strong>：<span class="arithmatex">\(F_4\)</span> 的任兩列（或任兩行）內積都是 0，代表不同頻率的音叉互相垂直——這就是下一節「正交性」的矩陣版本。</p>
+</blockquote>
+<hr />
+<h2 id="orthogonality">核心基石：為什麼頻率之間不會打架？—— 正交性 (Orthogonality)<a class="headerlink" href="#orthogonality" title="Permanent link">&para;</a></h2>
+<p>這時候同學們心中一定會產生一個關鍵疑問：</p>
+<blockquote>
+<p>「老師，當我用第 <span class="arithmatex">\(k_1\)</span> 號音叉去測訊號時，如果訊號裡同時有第 <span class="arithmatex">\(k_2\)</span> 號頻率，難道第 <span class="arithmatex">\(k_2\)</span> 號頻率不會跑來干擾，讓我誤以為第 <span class="arithmatex">\(k_1\)</span> 號頻率也很強嗎？」</p>
+</blockquote>
+<p>答案是：<strong>只要頻率挑得正確，就絕對不會干擾！</strong></p>
+<p>這就是整個傅立葉分析中最美妙、最重要的核心性質——<strong>正交性 (Orthogonality)</strong>。</p>
+<h3 id="1_1">1. 幾何直覺：二維空間中的直角座標<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>想想二維平面上的 <span class="arithmatex">\(X\)</span> 軸與 <span class="arithmatex">\(Y\)</span> 軸：
+* 它們彼此夾角是 90 度（互相垂直、正交）。
+* 一個純粹沿著 <span class="arithmatex">\(X\)</span> 軸移動的向量 <span class="arithmatex">\((5, 0)\)</span>，如果我們去測量它在 <span class="arithmatex">\(Y\)</span> 軸上的投影分量，答案永遠是 <span class="arithmatex">\(0\)</span>。
+* 無論 <span class="arithmatex">\(X\)</span> 軸方向的數值多大，它都完全不會「漏」到 <span class="arithmatex">\(Y\)</span> 軸去，兩者互不干涉。</p>
+<pre class="mermaid"><code>graph TD
+    V["向量 (5, 0)：完全沿著 X 軸"] --&gt; P["它在 Y 軸上的投影 = 0"]
+    P --&gt; C["兩軸正交 → 互不干涉"]</code></pre>
+<h3 id="2_1">2. 離散諧波波形的正交驗證<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>在離散傅立葉轉換中，這 <span class="arithmatex">\(N\)</span> 個標準測試波形 <span class="arithmatex">\(e^{j \frac{2\pi}{N} kn}\)</span>，就相當於高維度空間中一組<strong>彼此互相垂直的座標軸</strong>。</p>
+<p>如果我們拿頻率為 <span class="arithmatex">\(k_1\)</span> 的波形，去和頻率為 <span class="arithmatex">\(k_2\)</span> 的波形做內積（相乘並在 <span class="arithmatex">\(N\)</span> 個取樣點上求和）：</p>
+<div class="arithmatex">\[\frac{1}{N} \sum_{n=0}^{N-1} W_N^{-k_1 n} \cdot W_N^{k_2 n} = \frac{1}{N} \sum_{n=0}^{N-1} W_N^{(k_2 - k_1)n}\]</div>
+<p>這個式子的結果會呈現兩種截然不同的情況：</p>
+<h4 id="a-k_1-k_2">情況 A：當 <span class="arithmatex">\(k_1 = k_2\)</span>（測試同一個頻率）<a class="headerlink" href="#a-k_1-k_2" title="Permanent link">&para;</a></h4>
+<p>指數項變成 <span class="arithmatex">\(e^{0} = 1\)</span>，所有取樣點全部同向疊加：
+$<span class="arithmatex">\(\frac{1}{N} \sum_{n=0}^{N-1} 1 = \frac{1}{N} \times N = 1\)</span>$
+能量完全保留，測出真實數值。</p>
+<h4 id="b-k_1-ne-k_2">情況 B：當 <span class="arithmatex">\(k_1 \ne k_2\)</span>（測試不同頻率）<a class="headerlink" href="#b-k_1-ne-k_2" title="Permanent link">&para;</a></h4>
+<p>因為頻率差 <span class="arithmatex">\((k_1 - k_2)\)</span> 是非零整數，代表這個旋轉向量在長度為 <span class="arithmatex">\(N\)</span> 的取樣區間內，剛好在複數平面上<strong>均勻旋轉了整數整整好幾圈</strong>：</p>
+<p><pre class="mermaid"><code>graph TD
+    A["旋轉向量在複數平面上均勻轉動"] --&gt; B["取樣點剛好繞整數圈、方向對稱"]
+    B --&gt; C["所有向量正負相消 → 總和 = 0"]</code></pre>
+因為每個方向的箭頭都有相反方向的箭頭與之抵消，所有點加總起來的結果<strong>精確為 0</strong>：</p>
+<div class="arithmatex">\[\frac{1}{N} \sum_{n=0}^{N-1} W_N^{(k_2 - k_1)n} = 0 \quad (k_1 \ne k_2)\]</div>
+<p>我們可以用一個簡潔的數學符號（Kronecker Delta <span class="arithmatex">\(\delta\)</span>）總結這個美妙的結果：</p>
+<div class="arithmatex">\[\frac{1}{N} \sum_{n=0}^{N-1} W_N^{-k_1 n} \cdot W_N^{k_2 n} = \delta[k_1 - k_2] = \begin{cases} 1, &amp; k_1 = k_2 \\ 0, &amp; k_1 \ne k_2 \end{cases}\]</div>
+<hr />
+<h3 id="3">3. 正交性的教學總結<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>正交性告訴我們一件極度關鍵的物理事實：</p>
+<p>在一個長度為 <span class="arithmatex">\(N\)</span> 的取樣窗口內，只要我們挑選的各個頻率滿足以 <span class="arithmatex">\(\frac{1}{T}\)</span>（即整數倍 index <span class="arithmatex">\(k\)</span>）為間隔，那麼：</p>
+<ol>
+<li><strong>每個頻率成分就像走在各自獨立的專屬通道上</strong>。</li>
+<li>即使它們在時域上全部混在一起傳輸，當我們在接收端拿特定頻率的基底去投影（做 DFT 運算）時，<strong>其他所有頻率的分量都會因為正交性而精確抵消為 0</strong>，絲毫不會產生串擾。</li>
+</ol>
+<p>這正是為什麼我們能夠在同一個時域區塊內，毫無失真地把各個離散頻率成分乾淨俐落地分離開來的根本數學保證。</p>
+<h3 id="4">4. 從矩陣看正交性（補充）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>回顧上一節的 DFT 矩陣 <span class="arithmatex">\(F_4\)</span>：它的每一「列」就是一支音叉。正交性在矩陣上的意思是——<strong>任兩列（或任兩行）的內積都是 0</strong>：</p>
+<div class="arithmatex">\[F_4 F_4^{\mathsf H} = 4\,I_4 \quad\Longrightarrow\quad \frac{1}{4}F_4 F_4^{\mathsf H} = I_4\]</div>
+<p>只有「同一列與自己」內積會得到 <span class="arithmatex">\(N=4\)</span>（乘上 <span class="arithmatex">\(1/N\)</span> 後變成 1），不同列之間都精確為 0。這就是為什麼 IDFT 只要「共軛轉置再除以 <span class="arithmatex">\(N\)</span>」就能還原——矩陣正交性保證了 <span class="arithmatex">\(F_4^{-1} = \frac{1}{4}F_4^{\mathsf H}\)</span>。</p>
+<h3 id="5-ofdm_1">5. 正交性的頻域長相：OFDM 頻譜（補充）<a class="headerlink" href="#5-ofdm_1" title="Permanent link">&para;</a></h3>
+<p>把正交性畫成頻譜，會得到下圖：每個子載波的頻譜是一個 <span class="arithmatex">\(\operatorname{sinc}\)</span> 函數，<strong>它的波峰剛好對準其他所有子載波的零點</strong>。所以即使這些子載波在頻域上大幅重疊，在每個子載波的中心頻率上，其他子載波的貢獻都精確為 0——這就是「正交重疊」的實體樣貌。</p>
+<p><img alt="OFDM 子載波頻譜：波峰對準彼此零點，重疊也不互相干擾" src="../img/ofdm-spectrum.png" /></p>
+<p>用式子表達：第 <span class="arithmatex">\(k\)</span> 個子載波（理想矩形脈衝）的頻譜為</p>
+<div class="arithmatex">\[S_k(f) = \operatorname{sinc}\!\left(f - \frac{k}{T}\right), \quad \text{且 } S_k\!\left(\frac{k'}{T}\right) = \delta[k-k']\]</div>
+<p>換句話說，在第 <span class="arithmatex">\(k'/T\)</span> 這個頻率點上取樣時，只有 <span class="arithmatex">\(k=k'\)</span> 的子載波有值，其餘全為 0。這正是 OFDM 能在「零保護頻帶」下仍不互相干擾的原因。</p>
+<hr />
+<h2 id="cyclic-prefix-cp">循環前綴 (Cyclic Prefix, CP)：保護時間的進化版<a class="headerlink" href="#cyclic-prefix-cp" title="Permanent link">&para;</a></h2>
+<p>前面我們用「一段空白」當作保護時間，聽起來很合理。但在 OFDM 裡，直接留空白會遇到一個致命問題。</p>
+<h3 id="_4">為什麼「空白」保護時間不夠用？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>回想 DFT 能乾淨分離頻率的條件：在長度 <span class="arithmatex">\(T\)</span> 的觀察窗口內，每個子載波都要「剛好轉完整數圈」。這是正交性的前提。</p>
+<p>現在多路徑的延遲波闖了進來。如果保護時間是空白，雖然上一個符號的殘影已經被擋在窗外，但<strong>當前符號自己的延遲複本會晚一步才進入 FFT 窗口</strong>，而且尾巴被切掉了。窗口內收到的，是一個「頭尾接不起來」的殘缺波形：</p>
+<pre class="mermaid"><code>graph TD
+    W["FFT 觀察窗口 T"] --&gt; D["直射波：完整一圈 ✓"]
+    W --&gt; R["延遲波：晚 τ 抵達"]
+    R --&gt; B["前端是空白、後段被切掉"]
+    B --&gt; X["頭尾接不起來 → 正交性破裂"]
+    X --&gt; ICI["載波間干擾 (ICI)"]</code></pre>
+<p>這裡的干擾不是符號與符號之間的 ISI，而是「子載波與子載波之間」的干擾，稱為<strong>載波間干擾 (Inter-Carrier Interference, ICI)</strong>。它比 ISI 更棘手，因為所有子載波都混在一起了。</p>
+<h3 id="_5">解法：不要留白，把尾巴複製到前面<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>既然問題出在「窗口內的波形不完整」，那就<strong>主動把符號的尾巴複製一份、貼到符號的前面</strong>。這段複製出來的前置片段，就是<strong>循環前綴 (Cyclic Prefix, CP)</strong>。</p>
+<pre class="mermaid"><code>graph TD
+    ORIG["原符號 [A B C D E F G H]"] --&gt; CP["複製尾巴 [F G H] 貼到前面"]
+    CP --&gt; EXT["帶 CP：F G H ／ A B C D E F G H"]
+    EXT --&gt; DELAY["延遲波晚一步抵達（平移量 &lt; CP 長度）"]
+    DELAY --&gt; WIN["FFT 窗口只取後段：[H A B C D E F G]"]
+    WIN --&gt; OK["仍是完整一圈 → 只多相位偏移，正交性保住"]</code></pre>
+<h3 id="_6">為什麼這樣就有效？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>關鍵在於：<strong>CP 讓「被延遲的波形」在窗口內仍然是完整的一圈</strong>。</p>
+<p>CP 是從符號尾巴複製來的，等於把「一個週期的結尾」實際送到空中。當延遲複本晚一步才進入窗口時，它缺少的前段剛好由 CP 補上；換句話說，延遲複本在窗口內看起來就只是「把整個符號循環平移」——而循環平移只會讓每個子載波多一個相位偏移，不會破壞整數圈的特性。</p>
+<blockquote>
+<p>這也是為什麼接收端可以放心地把 CP 丟掉：它的任務只是「保護」窗口內的波形完整，本身不承載新資訊。</p>
+</blockquote>
+<p>用一句話總結：</p>
+<blockquote>
+<p><strong>保護時間若留白，只能擋住 ISI；加上 CP，才能同時擋住 ISI 與 ICI。</strong></p>
+</blockquote>
+<h3 id="cp">CP 的代價與設計原則<a class="headerlink" href="#cp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>長度條件</td>
+<td><span class="arithmatex">\(T_{cp} \ge \tau_{\max}\)</span>（要長於最大延遲擴展）</td>
+</tr>
+<tr>
+<td>代價</td>
+<td>佔用時間，但<strong>不佔用額外頻寬</strong>（資料只是被複製，沒有多送新頻率）</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>CP 越長，抗多路徑能力越強，但有效資料占比越低</td>
+</tr>
+<tr>
+<td>實務取值</td>
+<td>約有效符號長度的 <span class="arithmatex">\(1/4 \sim 1/16\)</span>（例如 LTE 的 normal CP 約 <span class="arithmatex">\(4.7\,\mu s\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>為什麼 CP 比保護頻帶划算？</strong>
+保護頻帶是「頻率資源的永久浪費」，通道數越多、浪費越多；CP 只是把同一段資料複製一次，佔用的是時間，也不會讓相鄰通道互相干擾。OFDM 之所以能拿掉相鄰子載波之間的保護頻帶、讓它們緊密重疊，靠的就是<strong>正交性 + CP</strong> 這對組合。</p>
+</blockquote>
+<hr />
+<h2 id="cp-lti">循環卷積：CP 真正在做的事（LTI 系統觀點）<a class="headerlink" href="#cp-lti" title="Permanent link">&para;</a></h2>
+<p>前面說 CP 是「讓窗口內的波形維持完整一圈」，這只是直覺。真正讓 OFDM 能「一個除法就完成等化」的，是下面這條<strong>線性時不變系統 (LTI)</strong> 的推理鏈。</p>
+<h3 id="1-lti">1. 通道是一個 LTI 系統<a class="headerlink" href="#1-lti" title="Permanent link">&para;</a></h3>
+<p>無線通道（多路徑 + 衰減）可以看成一個<strong>線性時不變系統 (Linear Time-Invariant, LTI)</strong>，它有脈衝響應 <span class="arithmatex">\(h[n]\)</span>（或 <span class="arithmatex">\(h(t)\)</span>）。訊號經過通道，就是在時域上做<strong>卷積</strong>：</p>
+<div class="arithmatex">\[y[n] = x[n] * h[n] = \sum_{m} h[m]\, x[n-m]\]</div>
+<p>多路徑的每一條路徑，就是 <span class="arithmatex">\(h[n]\)</span> 裡的一個延遲分量。這一步是「線性卷積」，結果長度會變成 <span class="arithmatex">\(N + L - 1\)</span>。</p>
+<h3 id="2-intra-symbol-interference">2. 多路徑 = 符號自己撞自己：Intra-Symbol Interference<a class="headerlink" href="#2-intra-symbol-interference" title="Permanent link">&para;</a></h3>
+<p>多路徑的延遲副本，除了會撞到下一個符號（ISI），<strong>更會跟「同一個符號自己」的較晚部分重疊</strong>。這種「符號內部的自我干擾」稱為<strong>符號內干擾 (Intra-Symbol Interference)</strong>。</p>
+<p>如果不管它，接收端在窗口內看到的其實是「好幾個平移版本的自己疊在一起」，波形被扭曲，正交性也就保不住。</p>
+<p><img alt="線性卷積 vs 循環卷積：CP 如何把溢位繞回前面" src="../img/circular-convolution.png" /></p>
+<h3 id="3-cp">3. 加 CP 之後：線性卷積「看起來像」循環卷積<a class="headerlink" href="#3-cp" title="Permanent link">&para;</a></h3>
+<p>關鍵魔法在這裡：當我們在符號前加了長度 <span class="arithmatex">\(\ge\)</span> 最大延遲的 CP，再讓接收端<strong>只取後面長度 <span class="arithmatex">\(N\)</span> 的窗口</strong>，那麼「線性卷積的溢位尾巴」會剛好被 CP 補上，使窗口內看到的結果<strong>等於原符號與通道的循環卷積 (circular convolution)</strong>：</p>
+<div class="arithmatex">\[y[n] = x[n] \;\circledast\; h[n], \quad n = 0, 1, \dots, N-1\]</div>
+<p>（<span class="arithmatex">\(\circledast\)</span> 表示循環卷積：索引超過 <span class="arithmatex">\(N\)</span> 的部分會「繞回」前端，這正是 CP 做的事。）</p>
+<p>上圖的三個步驟就是這件事：① 原始符號 → ② 線性卷積讓尾巴溢位（撞到下一個符號）→ ③ 加 CP 後，溢位被繞回前端，變成循環卷積、長度仍為 <span class="arithmatex">\(N\)</span>。</p>
+<h3 id="4-yk-hkxk">4. 循環卷積的頻域魔法：<span class="arithmatex">\(Y[k] = H[k]\,X[k]\)</span><a class="headerlink" href="#4-yk-hkxk" title="Permanent link">&para;</a></h3>
+<p>循環卷積有一個 DFT 最愛的性質——<strong>時域循環卷積，等於頻域相乘</strong>：</p>
+<div class="arithmatex">\[\text{DFT}\{x[n] \circledast h[n]\} = X[k]\cdot H[k]\]</div>
+<p>於是接收端做完 FFT 後，第 <span class="arithmatex">\(k\)</span> 個子載波上只會被乘上一個複數 <span class="arithmatex">\(H[k]\)</span>：</p>
+<div class="arithmatex">\[Y[k] = H[k]\,X[k] + \text{雜訊}\]</div>
+<p>這就是<strong>單抽頭等化</strong>的嚴格由來：只要除以 <span class="arithmatex">\(H[k]\)</span> 就好，</p>
+<div class="arithmatex">\[\hat{X}[k] = \frac{Y[k]}{H[k]}\]</div>
+<p>不需要任何複雜的時域濾波器。可以說——</p>
+<blockquote>
+<p><strong>CP 的真正任務，不是「填時間」，而是「把線性卷積變成循環卷積」，讓頻域只剩一個乾乾淨淨的乘法。</strong></p>
+</blockquote>
+<h3 id="5">5. 為什麼「循環卷積」一定要配「正交子載波」？<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>因為 <span class="arithmatex">\(Y[k] = H[k]X[k]\)</span> 這條式子，是建立在「DFT 能把訊號乾淨地分到各子載波」之上；而這件事又依賴子載波正交。換句話說：</p>
+<ul>
+<li><strong>正交性</strong>：保證子載波在頻域互不干擾（沒有 ICI）。</li>
+<li><strong>CP + 循環卷積</strong>：保證通道在每個子載波上「只是一個複數 <span class="arithmatex">\(H[k]\)</span>」（可以一個除法補償）。</li>
+</ul>
+<p>兩者合起來，才讓 OFDM 的接收端可以又便宜又準。</p>
+<hr />
+<h2 id="fft-dft">快速傅立葉轉換 (FFT)：讓 DFT 從「算不動」變成「瞬間完成」<a class="headerlink" href="#fft-dft" title="Permanent link">&para;</a></h2>
+<p>到這裡，數學上我們已經有了完整的工具：</p>
+<ul>
+<li>發射端用 <strong>IDFT</strong> 把 <span class="arithmatex">\(N\)</span> 個子載波的資料合成時域波形</li>
+<li>接收端用 <strong>DFT</strong> 把時域取樣還原成 <span class="arithmatex">\(N\)</span> 個子載波的資料</li>
+</ul>
+<p>但真實系統碰上一個很現實的問題：<strong>太慢</strong>。</p>
+<h3 id="dft_1">DFT 到底有多慢？<a class="headerlink" href="#dft_1" title="Permanent link">&para;</a></h3>
+<p>直接照定義算 DFT，需要拿 <span class="arithmatex">\(N\)</span> 個頻率音叉，每個都跟 <span class="arithmatex">\(N\)</span> 個取樣點乘一遍：</p>
+<div class="arithmatex">\[\text{乘法次數} \approx N \times N = N^2\]</div>
+<p>以 Wi-Fi / 4G 常見的 <span class="arithmatex">\(N = 2048\)</span> 為例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="arithmatex">\(N\)</span>（子載波數）</th>
+<th style="text-align: right;">DFT 乘法次數 (<span class="arithmatex">\(N^2\)</span>)</th>
+<th style="text-align: right;">若每秒 10 萬個符號</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">4,096</td>
+<td style="text-align: right;">4 億次/秒</td>
+</tr>
+<tr>
+<td style="text-align: right;">1,024</td>
+<td style="text-align: right;">1,048,576</td>
+<td style="text-align: right;">1,048 億次/秒</td>
+</tr>
+<tr>
+<td style="text-align: right;">2,048</td>
+<td style="text-align: right;">4,194,304</td>
+<td style="text-align: right;">4,194 億次/秒</td>
+</tr>
+</tbody>
+</table>
+<p>這個數量級，別說手機晶片，連桌上型電腦都很難即時處理。<strong>如果沒有更快的演算法，OFDM 根本不可能商用化。</strong></p>
+<h3 id="fft">FFT 的核心想法：不要重複算一樣的東西<a class="headerlink" href="#fft" title="Permanent link">&para;</a></h3>
+<p>DFT 的定義式裡藏著大量「重複計算」。例如 <span class="arithmatex">\(N = 8\)</span> 時，第 0、2、4、6 號音叉的某些旋轉點其實是同一個值，卻被重複乘了好幾次。<strong>FFT (Fast Fourier Transform) 就是把這些重複的部分合併起來，用「分而治之」一次算完。</strong></p>
+<p>最經典的 Cooley-Tukey 演算法，作法只有三步：</p>
+<ol>
+<li>把 <span class="arithmatex">\(N\)</span> 個取樣點<strong>依照奇數、偶數拆成兩半</strong></li>
+<li>分別對這兩半做「較小規模的 DFT」</li>
+<li>利用對稱性，把兩半的結果組合起來</li>
+</ol>
+<p>因為每次拆半，問題規模就減半，遞迴下去只需要 <span class="arithmatex">\(\log_2 N\)</span> 層：</p>
+<pre class="mermaid"><code>graph TD
+    N8["8 點 DFT"] --&gt; E["偶數點 (0,2,4,6)&lt;br/&gt;→ 4 點 DFT"]
+    N8 --&gt; O["奇數點 (1,3,5,7)&lt;br/&gt;→ 4 點 DFT"]
+    E --&gt; E1["偶數 (0,4) → 2 點 DFT"]
+    E --&gt; E2["奇數 (2,6) → 2 點 DFT"]
+    O --&gt; O1["偶數 (1,5) → 2 點 DFT"]
+    O --&gt; O2["奇數 (3,7) → 2 點 DFT"]</code></pre>
+<p>每一層約做 <span class="arithmatex">\(N/2\)</span> 次乘法，共 <span class="arithmatex">\(\log_2 N\)</span> 層 <span class="arithmatex">\(\Rightarrow\)</span> 總計 <span class="arithmatex">\(\frac{N}{2}\log_2 N\)</span> 次。</p>
+<h3 id="2-point-fft-butterfly">2-Point FFT：蝶形運算 (Butterfly)<a class="headerlink" href="#2-point-fft-butterfly" title="Permanent link">&para;</a></h3>
+<p>FFT 的最小單位是「2 點 DFT」。對兩個點 <span class="arithmatex">\(x[0], x[1]\)</span>，2 點 DFT 只有加減法：</p>
+<div class="arithmatex">\[X[0] = x[0] + x[1], \qquad X[1] = x[0] - x[1]\]</div>
+<p>把它畫成訊號流程圖，兩條線交叉像蝴蝶的翅膀，所以叫<strong>蝶形 (butterfly)</strong>：</p>
+<pre class="mermaid"><code>graph LR
+    A0["x[0]"] --&gt; P["X[0] = x[0] + x[1]"]
+    A1["x[1]"] --&gt; P
+    A0 --&gt; M["X[1] = x[0] − x[1]"]
+    A1 --&gt; M</code></pre>
+<p>在更一般的位置，蝶形會帶一個旋轉因子（twiddle factor）<span class="arithmatex">\(W_N^{m}\)</span>：</p>
+<div class="arithmatex">\[X[p] = a + W_N^{m} b, \qquad X[q] = a - W_N^{m} b\]</div>
+<p>這就是整個 FFT 反覆堆疊的基本積木。</p>
+<h3 id="n-point-fft-ifftn-2k">N-Point FFT / IFFT（<span class="arithmatex">\(N = 2^k\)</span>）<a class="headerlink" href="#n-point-fft-ifftn-2k" title="Permanent link">&para;</a></h3>
+<p>把 2 點蝶形一層一層往上疊，就得到 <span class="arithmatex">\(N\)</span> 點 FFT。因為 <span class="arithmatex">\(N\)</span> 是 2 的次方，每次都能「乾淨地折半」：</p>
+<ul>
+<li><strong>FFT</strong>：用旋轉因子 <span class="arithmatex">\(W_N = e^{-j\frac{2\pi}{N}}\)</span>。</li>
+<li><strong>IFFT</strong>：把旋轉因子換成共軛 <span class="arithmatex">\(W_N^{-1} = e^{+j\frac{2\pi}{N}}\)</span>，最後再乘 <span class="arithmatex">\(\frac{1}{N}\)</span>。實作上通常直接<strong>共用同一套 FFT 電路</strong>（輸入取共軛、輸出取共軛並除以 <span class="arithmatex">\(N\)</span>），所以硬體只要做一種蝶形單元。</li>
+</ul>
+<pre class="mermaid"><code>graph TD
+    S["N 點輸入"] --&gt; ST1["第 1 層：N/2 個 2 點蝶形"]
+    ST1 --&gt; ST2["第 2 層：N/2 個 2 點蝶形"]
+    ST2 --&gt; DOTS["⋯ 共 log2N 層"]
+    DOTS --&gt; OUT["N 點輸出"]</code></pre>
+<h3 id="_7">快了多少？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\text{DFT}: N^2 \quad \longrightarrow \quad \text{FFT}: \frac{N}{2}\log_2 N\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="arithmatex">\(N\)</span></th>
+<th style="text-align: right;">DFT (<span class="arithmatex">\(N^2\)</span>)</th>
+<th style="text-align: right;">FFT (<span class="arithmatex">\(\frac{N}{2}\log_2 N\)</span>)</th>
+<th style="text-align: right;">加速倍率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">4,096</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">約 21 倍</td>
+</tr>
+<tr>
+<td style="text-align: right;">1,024</td>
+<td style="text-align: right;">1,048,576</td>
+<td style="text-align: right;">5,120</td>
+<td style="text-align: right;">約 205 倍</td>
+</tr>
+<tr>
+<td style="text-align: right;">2,048</td>
+<td style="text-align: right;">4,194,304</td>
+<td style="text-align: right;">11,264</td>
+<td style="text-align: right;">約 372 倍</td>
+</tr>
+<tr>
+<td style="text-align: right;">4,096</td>
+<td style="text-align: right;">16,777,216</td>
+<td style="text-align: right;">24,576</td>
+<td style="text-align: right;">約 682 倍</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>重點觀念</strong>：FFT <strong>不是</strong>一種新的轉換，它算出來的結果和 DFT <strong>一模一樣</strong>，只是一種「比較聰明的計算方法」。所以可以把 FFT 想成「DFT 的快速演算法」，而不是另一個數學工具。</p>
+<p><strong>工程上的小約定</strong>：發射端用的是反向的 IDFT，實作時通常也用同一套 FFT 電路（把輸入取共軛，或把正負號反過來）完成，一般統稱為 <strong>IFFT/FFT</strong>。</p>
+</blockquote>
+<hr />
+<h2 id="ofdm">OFDM 發送流程：從位元到空中的電磁波<a class="headerlink" href="#ofdm" title="Permanent link">&para;</a></h2>
+<p>現在把前面所有零件組起來。OFDM 發射端的工作，可以拆成六個步驟：</p>
+<pre class="mermaid"><code>graph TD
+    BITS["① 輸入位元流&lt;br/&gt;1 0 1 1 0 0 1 0 ..."] --&gt; MAP["② 調變映射 (Mapping)&lt;br/&gt;每組位元 → 星座點 (I, Q)&lt;br/&gt;QPSK / 16-QAM / 64-QAM"]
+    MAP --&gt; S2P["③ 串並轉換 (S/P)&lt;br/&gt;把 N 個符號分配到 N 個子載波"]
+    S2P --&gt; IDFT["④ IDFT / IFFT&lt;br/&gt;N 個頻域符號 → N 點時域波形"]
+    IDFT --&gt; CP["⑤ 加入循環前綴 (CP)&lt;br/&gt;複製尾巴貼到前端"]
+    CP --&gt; P2S["⑥ 並串轉換 (P/S) + DAC&lt;br/&gt;時域取樣 → 類比訊號 → 升頻"]
+    P2S --&gt; TX["天線發射"]</code></pre>
+<h3 id="_8">發送端逐步拆解<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>① 輸入位元流</strong>
+上層協定送來的一串 0 與 1。</p>
+<p><strong>② 調變映射 (Mapping)</strong>
+把位元分組，對應到星座圖上的點。例如 16-QAM 每 4 個位元一組，映射成一個複數 <span class="arithmatex">\((I, Q)\)</span>。</p>
+<p><strong>③ 串並轉換 (Serial-to-Parallel, S/P)</strong>
+這是 OFDM 的關鍵一步：把原本「一個接一個排隊」的符號，<strong>同時分配到 <span class="arithmatex">\(N\)</span> 個子載波上</strong>。</p>
+<pre class="mermaid"><code>graph LR
+    S["串列輸入 s0 s1 s2 … s(N-1)"] --&gt; SP["串並轉換 S/P"]
+    SP --&gt; C0["子載波 0：s0"]
+    SP --&gt; C1["子載波 1：s1"]
+    SP --&gt; C2["子載波 2：s2"]
+    SP --&gt; CN["子載波 N-1：s(N-1)"]</code></pre>
+<p>原本一個符號要佔用整條頻寬、時間很短；現在 <span class="arithmatex">\(N\)</span> 個符號並排，每個只佔 <span class="arithmatex">\(1/N\)</span> 的頻寬，但時間變成 <span class="arithmatex">\(N\)</span> 倍長。<strong>總傳輸率不變，但每個子載波上的符號變「慢」了，這正是它能抵抗多路徑的關鍵。</strong></p>
+<p><strong>④ IDFT / IFFT</strong>
+把這 <span class="arithmatex">\(N\)</span> 個頻域符號，轉換成一段時域波形。數學上，IDFT 做的事就是：</p>
+<div class="arithmatex">\[x[n] = \frac{1}{N}\sum_{k=0}^{N-1} X[k]\, e^{j\frac{2\pi}{N}kn}\]</div>
+<p>也就是把 <span class="arithmatex">\(N\)</span> 個子載波（各自乘上自己的資料 <span class="arithmatex">\(X[k]\)</span>）疊加起來。<strong>這一步等於「同時用 <span class="arithmatex">\(N\)</span> 個頻率發射」，卻只需要一次數學運算，不需要 <span class="arithmatex">\(N\)</span> 組振盪器。</strong></p>
+<p><strong>⑤ 加入循環前綴 (CP)</strong>
+把時域波形的尾巴複製到前端，用來對抗多路徑延遲。</p>
+<p><strong>⑥ 並串轉換 + DAC + 升頻</strong>
+把並行的時域取樣排回串列，經數位類比轉換器 (DAC) 變成類比波形，再乘上高頻載波升頻到射頻頻段，由天線發射。</p>
+<h3 id="n-4">一個具體例子（<span class="arithmatex">\(N = 4\)</span>）<a class="headerlink" href="#n-4" title="Permanent link">&para;</a></h3>
+<p>假設 4 個子載波要傳送的星座點是 <span class="arithmatex">\(X = [\,1,\ -1,\ j,\ -j\,]\)</span>：</p>
+<pre class="mermaid"><code>graph LR
+    X["頻域 X = (1, −1, j, −j)"] --&gt;|IDFT| x["時域 x[0] x[1] x[2] x[3]"]
+    x --&gt;|"加 CP（複製最後 1 點）"| TX["發射：x[3], x[0] x[1] x[2] x[3]"]
+    TX --&gt; RX["去 CP 後只取 x[0] 到 x[3]"]</code></pre>
+<blockquote>
+<p><strong>看懂這張圖，就懂 OFDM 的一半</strong>：發射端從頭到尾只做了一件事——「把 <span class="arithmatex">\(N\)</span> 個頻域數值，用 IDFT 變成一段時域波形」。空中看起來只是一條複雜的波形，但裡面其實疊了 <span class="arithmatex">\(N\)</span> 個互相正交的子載波。</p>
+</blockquote>
+<hr />
+<h2 id="ofdm_1">OFDM 接收流程：把混在一起的波形拆回來<a class="headerlink" href="#ofdm_1" title="Permanent link">&para;</a></h2>
+<p>接收端基本上是發射端的「倒帶」，但方向相反：先移除 CP，再用 FFT 把子載波分開。</p>
+<pre class="mermaid"><code>graph TD
+    RX["① 天線接收 + 降頻 + ADC&lt;br/&gt;射頻訊號 → 基頻數位取樣"] --&gt; S2P["② 串並轉換 (S/P)&lt;br/&gt;切成一個符號長度的區塊"]
+    S2P --&gt; RCP["③ 移除循環前綴 (Remove CP)&lt;br/&gt;丟掉前端複製的片段"]
+    RCP --&gt; FFT["④ FFT&lt;br/&gt;N 點時域取樣 → N 個子載波資料"]
+    FFT --&gt; EQ["⑤ 單抽頭等化 (Equalization)&lt;br/&gt;補償每個子載波的振幅/相位失真"]
+    EQ --&gt; DEMAP["⑥ 解映射 (Demapping)&lt;br/&gt;星座點 → 位元（最近鄰判決）"]
+    DEMAP --&gt; P2S["⑦ 並串轉換 (P/S)&lt;br/&gt;還原原始位元流"]</code></pre>
+<h3 id="_9">接收端逐步拆解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>① 接收 + 降頻 + ADC</strong>
+天線收到射頻訊號，先乘上本地載波降回基頻，再由 ADC 取樣成數位序列。</p>
+<p><strong>② 串並轉換</strong>
+依照符號長度（CP + 有效資料）把連續的取樣切成一個一個區塊。</p>
+<p><strong>③ 移除循環前綴</strong>
+把每個區塊前端的 CP 丟掉，只保留後面長度 <span class="arithmatex">\(T\)</span> 的有效資料。</p>
+<blockquote>
+<p>為什麼要丟掉？因為 CP 是「複製品」，不帶新資訊；留著反而會讓 FFT 窗口對不準。</p>
+</blockquote>
+<p><strong>④ FFT</strong>
+對每個區塊做 <span class="arithmatex">\(N\)</span> 點 FFT，得到 <span class="arithmatex">\(N\)</span> 個複數 <span class="arithmatex">\(Y[k]\)</span>。由於正交性，第 <span class="arithmatex">\(k\)</span> 個輸出<strong>只會包含第 <span class="arithmatex">\(k\)</span> 個子載波的資料</strong>，其他子載波全部抵銷為 0。</p>
+<div class="arithmatex">\[Y[k] = H[k] \cdot X[k] + \text{雜訊}\]</div>
+<p>其中 <span class="arithmatex">\(H[k]\)</span> 是第 <span class="arithmatex">\(k\)</span> 個子載波在通道上受到的振幅衰減與相位旋轉。</p>
+<p><strong>⑤ 單抽頭等化 (One-tap Equalization)</strong>
+每個子載波只要除以自己的 <span class="arithmatex">\(H[k]\)</span>，就能還原出原本的 <span class="arithmatex">\(X[k]\)</span>：</p>
+<div class="arithmatex">\[\hat{X}[k] = \frac{Y[k]}{H[k]}\]</div>
+<blockquote>
+<p><strong>這是 OFDM 最漂亮的地方之一</strong>：因為每個子載波頻寬很窄，通道在它上面幾乎是「平的」（等於一個複數常數），所以等化只需要「一個除法」，不需要複雜的濾波器。這叫<strong>單抽頭等化 (single-tap equalizer)</strong>，硬體成本極低。</p>
+</blockquote>
+<p><strong>⑥ 解映射 (Demapping)</strong>
+把等化後的星座點，依照「最近鄰法則」判定它屬於哪個標準點，再反查表還原成位元。</p>
+<p><strong>⑦ 並串轉換</strong>
+把 <span class="arithmatex">\(N\)</span> 個子載波還原出來的位元，依序排回原本的串列位元流，交給上層協定。</p>
+<hr />
+<h2 id="ofdm-v1-v24">OFDM 設計版本：v1 與 v2（4 個子通道）<a class="headerlink" href="#ofdm-v1-v24" title="Permanent link">&para;</a></h2>
+<p>同樣是「把通道切成 4 個子通道」，實作上有兩種典型設計思路（對應簡報的 OFDM Design v1 / v2）：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>子通道安排</th>
+<th>特點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>v1：並排不重疊</strong></td>
+<td>4 個子通道各自佔一段互不重疊的頻帶，通道之間仍留保護頻帶</td>
+<td>概念接近傳統 FDM，實作簡單，但頻譜效率低（浪費保護頻帶）</td>
+</tr>
+<tr>
+<td><strong>v2：正交重疊</strong></td>
+<td>4 個子載波以正交方式緊密重疊，不需要子載波間保護頻帶</td>
+<td>頻譜效率高，是真正 OFDM 的做法；靠 IDFT/FFT 一次合成與分離</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../img/guard-band-vs-ofdm.png" /></p>
+<blockquote>
+<p>一句話：<strong>v1 用「空間隔開」換取不干擾，v2 用「正交」換取不干擾</strong>——而 v2 才是 OFDM 名稱中「Orthogonal」的由來。</p>
+</blockquote>
+<hr />
+<h2 id="_10">端到端全貌：把所有零件接起來<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>graph LR
+    subgraph TX["發送端"]
+        B["位元"] --&gt; M["調變映射"] --&gt; S1["串並轉換"] --&gt; I["IDFT / IFFT"] --&gt; C["加 CP"] --&gt; P1["並串 + DAC"]
+    end
+    subgraph CH["通道"]
+        AIR["多路徑 + 雜訊"]
+    end
+    subgraph RX["接收端"]
+        P2["ADC + 串並"] --&gt; RC["移除 CP"] --&gt; F["FFT"] --&gt; E["等化"] --&gt; D["解映射"] --&gt; BB["位元"]
+    end
+    P1 --&gt; AIR --&gt; P2</code></pre>
+<h3 id="_11">整章回顧：四個問題，四個答案<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>問題</th>
+<th>傳統做法</th>
+<th>OFDM 的做法</th>
+<th>關鍵原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相鄰通道會互相干擾</td>
+<td>留保護頻帶，浪費頻寬</td>
+<td>子載波正交重疊，<strong>不需要子載波間的保護頻帶</strong></td>
+<td>正交性 (Orthogonality)</td>
+</tr>
+<tr>
+<td>多路徑造成符號干擾</td>
+<td>留空白保護時間（只擋 ISI）</td>
+<td>加<strong>循環前綴 (CP)</strong>，同時擋 ISI 與 ICI</td>
+<td>波形循環延伸</td>
+</tr>
+<tr>
+<td>多路徑讓通道補償變複雜</td>
+<td>需要複雜的時域等化濾波器</td>
+<td><strong>CP 把線性卷積變成循環卷積</strong>，等化只剩一個除法</td>
+<td>循環卷積 + 頻域相乘</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(N\)</span> 個子載波硬體太貴、DFT 太慢</td>
+<td>每路一組振盪器 / 直接算 DFT</td>
+<td><strong>一組 IFFT/FFT</strong> 全部搞定</td>
+<td>FFT 分治演算法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">容易混淆的名詞<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>名詞</th>
+<th>位置</th>
+<th>作用</th>
+<th>一句話記憶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>保護頻帶 (Guard Band)</strong></td>
+<td>頻域</td>
+<td>避免相鄰「通道」干擾</td>
+<td>頻率上的隔離牆</td>
+</tr>
+<tr>
+<td><strong>保護時間 (Guard Time)</strong></td>
+<td>時域</td>
+<td>避免相鄰「符號」干擾 (ISI)</td>
+<td>時間上的緩衝區</td>
+</tr>
+<tr>
+<td><strong>循環前綴 (CP)</strong></td>
+<td>時域</td>
+<td>保護時間的實作方式，額外維持正交性 (抗 ICI)</td>
+<td>複製尾巴貼到前面</td>
+</tr>
+<tr>
+<td><strong>循環卷積 (Circular Convolution)</strong></td>
+<td>時域↔頻域</td>
+<td>CP 讓通道的線性卷積等效成循環卷積，使頻域只剩相乘</td>
+<td>溢位繞回前面</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="qa">❓ 初學者常見疑問與思維誤區 (Q&amp;A)<a class="headerlink" href="#qa" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Q1: CP 只是把尾巴複製一份，這樣不是重複傳送資料、浪費頻寬嗎？</summary>
+<p><strong>解答</strong>：
+確實會浪費一點「時間」，但<strong>不會浪費頻寬</strong>。
+- 複製的片段不帶新資訊，所以有效資料率會下降（例如 CP 佔了總長度的 <span class="arithmatex">\(1/8\)</span>，效率就剩下 <span class="arithmatex">\(7/8\)</span>）。
+- 但它沒有產生新的頻率成分，子載波間距不變，因此<strong>不佔用額外的頻譜</strong>。
+- 相較之下，保護頻帶是直接把一整段頻率空下來、完全不能用，浪費得更徹底。所以 OFDM 選擇用 CP 換掉保護頻帶，整體頻譜效率反而更高。</p>
+</details>
+<details class="question">
+<summary>Q2: 既然 FFT 和 DFT 結果一樣，為什麼課本不直接叫它 DFT？</summary>
+<p><strong>解答</strong>：
+因為兩者的「計算成本」天差地遠。
+- <strong>DFT</strong> 是數學定義，直接照定義算需要 <span class="arithmatex">\(N^2\)</span> 次運算。
+- <strong>FFT</strong> 是 DFT 的一種快速演算法，利用對稱性與分治，把複雜度降到 <span class="arithmatex">\(\frac{N}{2}\log_2 N\)</span>。</p>
+<p>對 <span class="arithmatex">\(N = 2048\)</span> 而言，兩者相差約 <strong>372 倍</strong>。沒有 FFT，OFDM 的即時運算根本不可能實現。所以工程上講「用 FFT 做 OFDM」，強調的是「用得起」這件事。</p>
+</details>
+<details class="question">
+<summary>Q3: 接收端要怎麼知道每個子載波被通道衰減了多少（<span class="arithmatex">\(H[k]\)</span>），才能做等化？</summary>
+<p><strong>解答</strong>：
+實務上會發送<strong>已知的導頻訊號 (Pilot)</strong>。
+- 發射端在特定子載波上，插入接收端早就知道的固定符號。
+- 接收端收到後，拿「實測值 ÷ 已知值」就能估出該子載波的 <span class="arithmatex">\(H[k]\)</span>。
+- 再依照通道的連續性，內插出其他子載波的 <span class="arithmatex">\(H[k]\)</span>。</p>
+<p>這也是為什麼 Wi-Fi 與 4G/5G 的訊框裡，總會夾雜一些看起來「不是資料」的固定圖樣——它們就是讓接收端校正通道用的導頻。</p>
+</details>
+<hr />
+<h2 id="_13">本章精華總結表<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>主題</th>
+<th>核心概念</th>
+<th>關鍵數學 / 機制</th>
+<th>解決的問題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>保護頻帶</strong></td>
+<td>相鄰通道間留空白</td>
+<td>頻譜隔離</td>
+<td>相鄰通道干擾 (ACI)</td>
+</tr>
+<tr>
+<td><strong>保護時間</strong></td>
+<td>符號間留緩衝</td>
+<td><span class="arithmatex">\(T_g \ge \tau_{\max}\)</span></td>
+<td>符號間干擾 (ISI)</td>
+</tr>
+<tr>
+<td><strong>循環前綴 (CP)</strong></td>
+<td>複製符號尾巴到前端</td>
+<td>維持窗口內波形循環，且讓線性卷積 → 循環卷積</td>
+<td>ISI + ICI + 單抽頭等化</td>
+</tr>
+<tr>
+<td><strong>DFT</strong></td>
+<td>用 <span class="arithmatex">\(N\)</span> 個正交音叉檢測頻率</td>
+<td><span class="arithmatex">\(X[k]=\sum x[n]W_N^{kn}\)</span></td>
+<td>時域 → 頻域</td>
+</tr>
+<tr>
+<td><strong>IDFT</strong></td>
+<td>把 <span class="arithmatex">\(N\)</span> 個頻率成分疊回波形</td>
+<td><span class="arithmatex">\(x[n]=\frac{1}{N}\sum X[k]W_N^{-kn}\)</span></td>
+<td>頻域 → 時域</td>
+</tr>
+<tr>
+<td><strong>DFT 矩陣</strong></td>
+<td>把 DFT 寫成 <span class="arithmatex">\(N\times N\)</span> 矩陣乘法</td>
+<td><span class="arithmatex">\(\mathbf{X}=F_N\mathbf{x},\ (F_N)_{kn}=W_N^{kn}\)</span></td>
+<td>用矩陣一次算完</td>
+</tr>
+<tr>
+<td><strong>正交性</strong></td>
+<td>不同頻率內積為 0</td>
+<td><span class="arithmatex">\(\frac{1}{N}\sum W_N^{(k_2-k_1)n}=\delta[k_1-k_2]\)</span></td>
+<td>子載波互不干擾</td>
+</tr>
+<tr>
+<td><strong>OFDM 頻譜</strong></td>
+<td>子載波為 sinc、波峰對準彼此零點</td>
+<td><span class="arithmatex">\(S_k(f)=\operatorname{sinc}(f-k/T)\)</span></td>
+<td>正交重疊仍不干擾</td>
+</tr>
+<tr>
+<td><strong>循環卷積</strong></td>
+<td>時域繞回＝頻域相乘</td>
+<td><span class="arithmatex">\(\text{DFT}\{x\circledast h\}=X[k]H[k]\)</span></td>
+<td>等化只需一個除法</td>
+</tr>
+<tr>
+<td><strong>FFT</strong></td>
+<td>DFT 的分治快速演算法</td>
+<td><span class="arithmatex">\(N^2 \to \frac{N}{2}\log_2 N\)</span>（2 點蝶形堆疊）</td>
+<td>DFT 運算太慢</td>
+</tr>
+<tr>
+<td><strong>OFDM 發送</strong></td>
+<td>位元 → 映射 → S/P → IFFT → CP</td>
+<td>一次合成 <span class="arithmatex">\(N\)</span> 個子載波</td>
+<td>用單一電路發射多載波</td>
+</tr>
+<tr>
+<td><strong>OFDM 接收</strong></td>
+<td>去 CP → FFT → 等化 → 解映射</td>
+<td>單抽頭等化 <span class="arithmatex">\(\hat{X}[k]=Y[k]/H[k]\)</span></td>
+<td>乾淨分離並還原資料</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_14">總結：這條路走完了<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>走到這裡，你已經把實體層的完整脈絡走過一遍：</p>
+<div class="arithmatex">\[\text{正弦波} \;\to\; \text{方波與傅立葉} \;\to\; \text{頻寬} \;\to\; \text{調變 (ASK/PSK/QAM)} \;\to\; \text{OFDM (CP + FFT)}\]</div>
+<p>從「一個頻率要怎麼描述」，到「怎麼把位元塞進電磁波」，再到「怎麼在惡劣的多路徑環境中，用數千個正交子載波高速又穩定地傳輸」——這條路徑，正是 Wi-Fi、4G LTE、5G NR 之所以能運作的底層邏輯。</p>
+<blockquote>
+<p><strong>最後帶走一句話</strong>：
+OFDM 的精髓不是某個複雜公式，而是三個很樸素的念頭——
+<strong>用正交性省下頻寬、用循環前綴換取時間、用 FFT 把數學變成能跑的電路。</strong></p>
+</blockquote>
+<p>如果想重新梳理整體架構，可以回到 <a href="../">實體層全景導覽</a>。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到頂端
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "toc.integrate", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
