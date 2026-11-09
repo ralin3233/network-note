@@ -1,3 +1,6 @@
+# 網頁部屬於
+https://ralin3233.github.io/network-note/
+
 # 網路課程筆記網站 - 實體層
 
 用 [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) 建立的網路通訊概論實體層課程筆記網站。
