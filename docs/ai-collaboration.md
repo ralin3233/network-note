@@ -1,228 +1,168 @@
----
-hide:
-  - toc
----
-
 # AI 協作與對話紀錄 (課程評分專區)
 
-> 本頁面專門記錄本課程筆記網站製作期間，使用生成式 AI（如 ChatGPT、Gemini、Claude 等）進行輔助設計、內容整理與除錯的完整對話歷程與 Prompt，供課程評分與 AI 協作成果查驗使用。
+> 本頁面完整記錄本課程筆記網站製作期間，使用生成式 AI（ChatGPT、Gemini、Claude 等）進行輔助規劃、架構重構、觀念教學化與內容校對之歷程與 Prompt，供課程評分與 AI 協作成果查驗使用。
 
 ---
 
-??? quote "9/7：textbook模板建置"
-    - **使用模型**：Claude Sonnet 5
-    - **提問目的**：利用mkdocs建立基礎的textbook模板與架構
+## 📊 協作總覽與評分導讀
 
-    **原始對話紀錄：**
-    > <https://claude.ai/share/688bd943-291f-4e4a-9c63-0b40591785b8>
+在製作本筆記過程中，AI **並非作為單純代寫工具**，而是作為「架構重構顧問」、「初學者教學降維檢驗者」以及「公式與圖表生成助手」。本專區記錄了從模板搭建、課堂投影片精準對照，到多輪提示詞收斂與觀念降維的完整歷程。
 
-??? quote "9/14：實體層知識脈絡重構與初學者 Q&A 擴充"
-    - **使用模型**：Gemini 3.7 Flash
-    - **提問目的**：依照課堂授課路徑重構實體層架構（正弦波 $\to$ 方波構成 $\to$ 傅立葉轉換/性質/頻率與振幅關係 $\to$ 頻寬/有效頻寬/Nyquist & Shannon 極限 $\to$ 無線傳輸調變），建立強連貫脈絡，並在各節加入初學者常見疑問（Q&A）與詳細解答。
+### 協作里程碑摘要
 
-    **提問 Prompt 與引導路徑：**
-    > 「實體層的部分老師是從以下路徑開始講解的，請修改實體層的內容，內容地須連貫有脈絡，並記錄並解答初學者看到該節可能產生的問題：
-    > sine wave的基本特性及通式 -> 方波的構成 -> 傅立葉轉換/性質/頻率與震幅的關係 -> 頻寬/有效頻寬/與其他參數的關係 -> 無線傳輸的modulation」
-
-??? quote "9/14：傅立葉章節降維解說（拆解為 n 個 sine/cos 頻率訊號）"
-    - **使用模型**：Gemini 3.7 Flash
-    - **提問目的**：針對無工程數學或微積分基礎的初學者，將傅立葉分析簡化為「將任何複雜訊號拆解為 $n$ 個頻率不同的 $\sin$ 與 $\cos$ 之和」，降低學習門檻。
-
-    **提問 Prompt：**
-    > 「傅立葉的地方對於沒學過工程數學的同學太難了 請從把訊號拆成n個頻率不同的sine cos來解釋」
-
-??? quote "9/14：傅立葉章節比喻精簡與專業術語回歸"
-    - **使用模型**：Gemini 3.7 Flash
-    - **提問目的**：精簡生活化比喻（僅保留音樂和弦比喻作為章節開頭的直觀聯想），後續公式結構、方波拆解、諧波疊加與頻域圖均回歸清晰標準的通訊工程術語（基頻、諧波、頻率分量、振幅）。
-
-    **提問 Prompt：**
-    > 「傅立葉那張的例子留音樂那個就好，並且不需要在每個地方都用音符比喻，在開頭作為聯想就好」
-
-??? quote "10/2：對照簡報重構內容"
-    - **使用模型**：Gemini 3.7 Flash
-    - **提問目的**：對照簡報重新檢查各章節內容，確認無額外多餘的延伸主題
-
-    **提問 Prompt：**
-    > 「請按照這個檔案提及的內容 幫我撰寫實體層的內容，其中「正弦波特性與通式0」、「方波構成與傅立葉分析」不須更動。其餘部分需有邏輯調理地涵蓋簡報內容，圖片部分不要用ascii」
-
-    **完整回覆: **
-
-    Viewed mkdocs.yml:1-64  
-    Created bandwidth-and-capacity.md  
-    Created modulation.md  
-    Viewed index.md:1-66  
-    Created index.md  
-    Viewed mkdocs.yml:1-64  
-    Edited mkdocs.yml  
-    Viewed index.md:1-32  
-    Edited index.md  
-
-    已重新逐頁核對課堂簡報（共 33 頁投影片），並嚴格**僅保留簡報中實際講授的核心內容**，徹底移除非簡報範疇的教科書額外延伸主題（如 Nyquist / Shannon、雙絞線 / 光纖、曼徹斯特編碼、ASK/FSK/PSK/QAM 星狀圖等），並確保全篇**不使用任何 ASCII 字符畫**。
-
-    ---
-
-    **📖 實體層筆記結構與簡報頁數精確對照**
-
-    ```mermaid
-    graph TD
-        A["1. 正弦波特性與通式 (sine-wave.md)<br>投影片 P.1 ~ P.6"] --> B["2. 方波構成與傅立葉分析 (fourier-and-square-wave.md)<br>投影片 P.7 ~ P.11"]
-        B --> C["3. 頻寬與傅立葉轉換性質 (bandwidth-and-capacity.md)<br>投影片 P.12 ~ P.18 & P.23 ~ P.28"]
-        C --> D["4. 無線傳輸、調變與解調機制 (modulation.md)<br>投影片 P.19 ~ P.22 & P.29 ~ P.33"]
-        
-        style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#0f172a;
-        style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#0f172a;
-        style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#0f172a;
-        style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;
-    ```
-
-    ---
-
-    **📝 重構後的各節內容詳情**
-
-    * **1. [1. 正弦波特性與通式](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/sine-wave.md) 與 [2. 方波構成與傅立葉分析](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/fourier-and-square-wave.md)**
-        * 完全依照要求保持不變。
-
-    * **2. [3. 頻寬、有效頻寬與傅立葉轉換性質](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/bandwidth-and-capacity.md)（對應投影片 P.12 ~ P.18, P.23 ~ P.28）**
-        * **頻寬定義**：單位為 $\text{Hz}$，由訊號本身包含的頻率分量決定（$B = f_{\max} - f_{\min}$），非介質決定（P.12）。
-        * **時域壓縮與頻寬關係**：時域週期減半 $\implies$ 頻率加倍 $\implies$ 頻寬加倍（P.13 ~ P.14）。
-        * **週期性 vs 非週期性數位訊號頻譜**：週期訊號為離散柱狀諧波（$f, 3f, 5f\dots$）；非週期單脈衝為連續 $\text{sinc}$ 頻譜（P.15）。
-        * **有效頻寬 (Effective Bandwidth)**：忽略微弱旁瓣，保留主瓣約 $90\%$ 能量（P.16 ~ P.18）。
-        * **傅立葉轉換五大關鍵性質 (Properties of Fourier Transform)**（P.23 ~ P.28）：
-            1. **矩形函數轉換**：脈衝寬度 $\tau \downarrow \implies \text{有效頻寬 } \text{Effective BW} \uparrow$。
-            2. **時移性質 (Time Shift)**：$s(t)$ 與 $s(t + \Delta)$ 頻譜完全相同。
-            3. **時間縮放 (Time Scaling)**：壓縮 $\to$ Bit Rate 增加 $\to$ 頻寬增加；拉伸 $\to$ Bit Rate 降低 $\to$ 頻寬減少。
-            4. **線性相加 (Sum of Functions)**：連續傳輸的多個位元脈衝，整體頻寬等於單一脈衝之頻寬。
-            5. **餘弦相乘 (Multiplied by Cosine)**：$s(t)\cos(2\pi f_c t)$ 將基頻頻譜 $[0, f_s]$ 平移至 $[f_c - f_s, \, f_c + f_s]$。
-
-    * **3. [4. 無線傳輸、調變與解調機制](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/modulation.md)（對應投影片 P.19 ~ P.22, P.29 ~ P.33）**
-        * **無線不能直傳基頻的物理原因**：直流分量（DC Component）無法輻射、天線尺寸限制（$\approx \lambda/4$）、大氣頻譜共享（P.19）。
-        * **調變數學推導與積化和差**（P.20 ~ P.21, P.29 ~ P.30）：
-        $$\cos(2\pi f_1 t)\cos(2\pi f_2 t) = \frac{1}{2}\left[\cos(2\pi(f_1+f_2)t) + \cos(2\pi(f_1-f_2)t)\right]$$
-        完整收錄 $s(t) = \cos(2\pi \cdot 0 t) + 0.1\cos(2\pi \cdot 10 t)$ 乘以 $50\text{ kHz}$ 載波之展開計算，推導出新頻寬為 $20\text{ Hz}$（$49990\text{ Hz} \sim 50010\text{ Hz}$）。
-        * **通道參數設計計算實例**（P.22）：
-            * 指派頻段 $2.09\text{ GHz} \sim 2.11\text{ GHz}$（$f_c = 2.1\text{ GHz}, B = 0.02\text{ GHz}$）。
-            * 調變後頻寬 $\frac{4\pi}{\tau} = 0.02\text{ GHz} \implies \tau = \frac{4\pi}{0.02 \times 10^9}\text{ s}$。
-            * 最大傳輸速率 $\text{Bit Rate} = 1/\tau = \frac{0.01}{2\pi}\text{ Gbps} \approx 1.59\text{ Mbps}$。
-        * **接收端解調三步驟**（P.31）：
-            1. **Modulate（混頻）**：$r(t)\cos(2\pi f_c t) = 0.5s(t) + 0.5s(t)\cos(2\pi \cdot 2f_c t)$。
-            2. **Filter（低通濾波）**：濾除 $2f_c$ 超高頻倍頻成分。
-            3. **Amplify（放大）**：放大 2 倍完整還原 $s(t)$。
-        * **傳送端與接收端總結流程**（P.32 ~ P.33）：包含基地台指派、$\tau$ 決策、傳送 $I(t)\cos + Q(t)\sin$ 與接收端三步還原。
-
-    ---
-
-    * **4. 目錄與導覽同步更新**
-        * [mkdocs.yml](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/mkdocs.yml)、[docs/index.md](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/index.md) 與 [docs/physical-layer/index.md](file:///d:/university/%E7%B6%B2%E8%B7%AF%E9%80%9A%E8%A8%8A%E6%A6%82%E8%AB%96/network-notes/docs/physical-layer/index.md) 皆已同步更新為符合簡報脈絡的四大章節。
+| 日期 | 協作主題 | 主要使用模型 | 協作目標與成效 | 產出與查驗 |
+| :--- | :--- | :--- | :--- | :--- |
+| **09/07** | Textbook 模板建置與導覽架構 | Claude 3.5 Sonnet | 利用 MkDocs Material 建立教科書風格之筆記站台與架構 | [:material-open-in-new: 原始對話分享](https://claude.ai/share/688bd943-291f-4e4a-9c63-0b40591785b8) |
+| **09/14** | 實體層知識脈絡重構與 Q&A 擴充 | Gemini 3.7 Flash | 依課堂授課路徑建立連貫脈絡（正弦波 $\to$ 方波 $\to$ 傅立葉 $\to$ 頻寬 $\to$ 調變），增補初學者 Q&A | [實體層概論](physical-layer/index.md) |
+| **09/14** | 傅立葉教學降維與比喻精簡 | Gemini 3.7 Flash | 無工數基礎初學者降維；精簡日常比喻，保留和弦聯想並回歸通訊工程專業術語 | [方波與傅立葉](physical-layer/fourier-and-square-wave.md) |
+| **10/02** | 對照投影片精確收斂範圍 | Gemini 3.7 Flash | 逐頁對照 33 頁投影片，嚴格去除超綱內容，禁用 ASCII 圖，全面升級為 Mermaid 與向量圖 | [頻寬與容量](physical-layer/bandwidth-and-capacity.md) |
+| **10/02** | 數位調變專題深度擴充 | Gemini 3.7 Flash | 對照 35 頁調變簡報，以貨車比喻、I/Q 正交雙載波、幾何星座圖與 AMC 打造直觀教材 | [數位調變機制](physical-layer/modulation.md) |
+| **10/12** | OFDM/DFT 漸進式收斂與直覺教學 | Gemini 3.7 / Claude / Gemini 3.8 | 經 6 輪提示詞嚴格收斂至「保護時頻＋DFT」，以音叉共振直覺教學，收尾於正交性 | [:material-file-document: 完整 6 輪對話專頁](chat-history-10-12.md) |
+| **10/19** | OFDM 章節續寫：CP、FFT 與收發流程 | Deepseek v4 pro + Cline | 接續既有 OFDM 篇，補上循環前綴、快速傅立葉轉換與發送／接收流程，並重整版面 | [:material-file-document: 完整 3 輪對話專頁](chat-history-10-19.md) |
+| **11/02** | OFDM 章節對照講義擴充、公式統一與圖表升級 | Deepseek v4 pro + Cline | 對照課程 PDF 補齊循環卷積、DFT 矩陣、FFT 蝴蝶圖與設計版本，統一 $W_N$ 表示法，並將 ASCII 圖升級為 Mermaid + matplotlib | [:material-file-document: 完整 11/02 對話專頁](chat-history-11-02.md) |
 
 ---
 
-??? quote "10/2：依照簡報新增 Modulation 章節（ASK/PSK/QAM、星座圖、I/Q正交解調與AMC機制）"
-    - **使用模型**：Gemini 3.7 Flash
-    - **提問目的**：依照 35 頁調變專題簡報，完整建置 Modulation 章節，將抽象的調變概念（符號/位元轉換、I/Q 雙載波疊加、星座圖幾何判決、正交濾波還原、AMC 適應性調變與 Frame Header 機制）以圖像化流程圖、對照表與 step-by-step 實例推導詳細解說。
+## 📅 2026/09 基礎建設與脈絡重構
 
-    **提問 Prompt：**
-    > 「請幫我依照簡報安排新增modulation章節，抽象概念請以實例或圖像解釋」
+???+ note "09/07：Textbook 模板建置與導覽架構"
+    - **使用模型**：`Claude 3.5 Sonnet`
+    - **提問目的**：利用 MkDocs Material 建立基礎的 Textbook 教科書模板，並規劃主題分類與導覽架構。
+    - **協作成效**：
+        1. 建立 `mkdocs.yml` 配置檔，啟用數學公式 (`MathJax` / `arithmatex`)、程式碼高亮與 Mermaid 流程圖支援。
+        2. 規劃響應式教科書風格排版，設定中文化介面與深淺色主題切換。
+    - **原始對話紀錄**：
+        > [:material-link-variant: 查看 Claude 原始對話分享連結](https://claude.ai/share/688bd943-291f-4e4a-9c63-0b40591785b8)
 
-    **完整回覆: **
+???+ note "09/14：實體層知識脈絡重構與初學者 Q&A 擴充"
+    - **使用模型**：`Gemini 3.7 Flash`
+    - **提問目的**：依照課堂授課順序重構實體層架構，建立強連貫脈絡，並在各節末尾增設初學者常見問答 (Q&A)。
+    - **提問 Prompt**：
+        > 「實體層的部分老師是從以下路徑開始講解的，請修改實體層的內容，內容地須連貫有脈絡，並記錄並解答初學者看到該節可能產生的問題：  
+        > `sine wave的基本特性及通式 -> 方波的構成 -> 傅立葉轉換/性質/頻率與震幅的關係 -> 頻寬/有效頻寬/與其他參數的關係 -> 無線傳輸的modulation`」
+    - **協作成效**：
+        1. 重新梳理從時域波形到頻域調變的 5 大核心推進步驟。
+        2. 在各章節加入「初學者常見盲點與誤區」區塊，深入淺出解答常見疑惑。
+    - **對應成果**：
+        - [實體層全景導覽 (physical-layer/index.md)](physical-layer/index.md)
+        - [1. 正弦波特性與通式 (physical-layer/sine-wave.md)](physical-layer/sine-wave.md)
 
-    Viewed mkdocs.yml:1-63  
-    Listed directory physical-layer  
-    Viewed modulation.md:1-170  
-    Viewed bandwidth-and-capacity.md:1-131  
-    Viewed index.md:1-62  
-    Created modulation.md  
-    Viewed index.md:1-62  
-    Edited index.md  
-    Viewed mkdocs.yml:45-60  
-    Edited mkdocs.yml  
-    Viewed ai-collaboration.md:1-60  
-    Viewed ai-collaboration.md:60-126  
-    Edited ai-collaboration.md  
-    Viewed index.md:1-30  
-    Edited index.md  
-
-    已為您依照 35 頁投影片的教學進程，完整重構並擴充實體層的 [4. 數位調變、解調與適應性傳輸機制 (modulation.md)](file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/modulation.md)。所有抽象數學與物理概念均已透過 **Mermaid 流程圖、幾何星座圖、時序圖、對照表與具體計算範例** 進行直觀化拆解。
-
-    ---
-
-    **📖 本章核心架構與簡報頁數精確對應**
-
-    ```mermaid
-    graph TD
-        A["1. 導言：Bits → Wave 與 Symbol 概念 (P.1 ~ P.2, P.4)"] --> B["2. 振幅移鍵 ASK / BASK / 4-ASK (P.3 ~ P.8)"]
-        B --> C["3. 相位移鍵 BPSK 與 QPSK 正交雙載波 (P.9 ~ P.15)"]
-        C --> D["4. 振幅+相位：星座圖與 QAM 數學本質 (P.16 ~ P.22)"]
-        D --> E["5. 接收端解調：正交分離、低通濾波與最近鄰判決 (P.23 ~ P.28)"]
-        E --> F["6. 適應性機制：AMC 權衡、編碼率、ε-greedy 與 Frame 設計 (P.29 ~ P.35)"]
-        
-        style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px;
-        style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
-        style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px;
-        style D fill:#fce7f3,stroke:#db2777,stroke-width:2px;
-        style E fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
-        style F fill:#fef3c7,stroke:#d97706,stroke-width:2px;
-    ```
-
-    ---
-
-    **💡 各節抽象概念之直觀化解構亮點**
-
-    1. **位元 (Bit) vs 符號 (Symbol)**（投影片 P.2, P.4）：
-    * 以「貨車（符號）與貨物（位元）」作為實體直觀比喻：$\text{Bits per Symbol} = \log_2(\text{狀態總數})$。
-    * 解釋多階調變如何在相同載波頻率下倍增傳輸速率。
-
-    2. **振幅移鍵 (ASK / BASK / M-ASK)**（投影片 P.3 ~ P.8）：
-    * **BASK (OOK)**：Bit 1 有波形、Bit 0 無波形；以振盪器與乘法器硬體架構圖解。
-    * **頻寬與傳輸率反比規律**：脈衝時間 $\tau \downarrow \implies \text{Bit Rate } (1/\tau) \uparrow \implies \text{Effective BW } (1/\tau) \uparrow$。
-    * **多階 ASK (4-ASK)**：4 種振幅等級代表 2 bits/symbol，並剖析振幅上升帶來的功率代價（$P \propto A^2$）。
-
-    3. **相位移鍵 (BPSK / QPSK)**（投影片 P.9 ~ P.15）：
-    * **BPSK**：雙極性電位（$+1\text{V} / -1\text{V}$）調變，相位翻轉 $180^\circ$。
-    * **QPSK 數學疊加本質**：圖解 $\pm\cos(x) \pm\sin(x)$ 疊加後產生的 4 個正交相位（$45^\circ, 135^\circ, 225^\circ, 315^\circ$）。
-    * **硬體架構**：2-to-1 Demux 將位元串拆為 $I(t)$ 與 $Q(t)$，平行調變同相載波 $\cos(2\pi f_c t)$ 與正交載波 $-\sin(2\pi f_c t)$ 後相加發射。
-
-    4. **星座圖與正交振幅調變 (QAM)**（投影片 P.16 ~ P.22）：
-    * **星座圖幾何解讀**：距離原點長度 $= \text{振幅}$、夾角 $= \text{相位}$、X 軸投影 $= I$、Y 軸投影 $= Q$。
-    * **重要觀念澄清**：1024-QAM 與 16-QAM **佔用的頻寬 (Hz) 完全相同**，但前者位元速率（$10\text{ bits/symbol}$）是後者（$4\text{ bits/symbol}$）的 2.5 倍。
-    * **QAM 數學恆等式嚴謹推導**：
-        $$A\cos(2\pi f_c t + \theta) = \underbrace{[A\cos\theta]}_{I(t)} \cos(2\pi f_c t) + \underbrace{[A\sin\theta]}_{Q(t)} (-\sin(2\pi f_c t))$$
-        證明任何指定振幅與相位的電波皆可由兩組二維電壓座標直接合成。
-    * **16-QAM 具體範例**：以發送 `1101 0111 1100 0110` 為例，逐步查表映射至 $(1,1), (-1,-1), (1,3), (-1,-3)$ 並生成 $I(t), Q(t)$ 波形。
-
-    5. **接收端解調 (Demodulation) 與判決原則**（投影片 P.23 ~ P.28）：
-    * **正交性完美還原數學推導**：
-        * 乘 $\cos(2\pi f_c t) \implies 0.5 I(t) + \text{高頻 } 2f_c \implies \text{LPF 濾波} \implies 0.5 I(t) \implies \text{放大 2 倍還原 } I(t)$。
-        * 乘 $-\sin(2\pi f_c t) \implies 0.5 Q(t) + \text{高頻 } 2f_c \implies \text{LPF 濾波} \implies 0.5 Q(t) \implies \text{放大 2 倍還原 } Q(t)$。
-    * **幾何最近鄰判決 (Minimum Euclidean Distance)**：圖解雜訊如何使星座點偏離，說明 $\text{SNR} \downarrow \implies \text{偏離距離} \uparrow \implies \text{位元錯誤率 (BER)} \uparrow$。
-    * **16-QAM 判決實例**：展示雜訊導致點 $(1.9, 2.1)$ 誤判為 `1100` 的具體過程。
-
-    6. **適應性調變與編碼機制 (AMC)**（投影片 P.29 ~ P.35）：
-    * **SNR 與調變選擇權衡**：高 SNR 用 1024-QAM（衝高速）；低 SNR 用 BPSK（保證 0 錯誤）。
-    * **編碼率實例**：發送 `1101` 在 $R = 1/3$（12 bits，重複 3 次）與 $R = 1/5$（20 bits，重複 5 次）下的符號打包過程。
-    * **$\epsilon$-Greedy 策略**：$1-\epsilon$ 機率利用最佳 MCS、$\epsilon$ 機率探索環境變化。
-    * **訊框 (Frame) 設計核心機制**：Header 永遠使用最慢、最強固的 BPSK 傳送，確保接收端 100% 能解讀出 Payload 所指派的 MCS 等級。
-
-    ---
-
-    **🔗 相關檔案更新清單**
-
-    * 核心章節內容：[docs/physical-layer/modulation.md](file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/modulation.md)
-    * 實體層導覽索引：[docs/physical-layer/index.md](file:///d:/university/網路通訊概論/network-notes/docs/physical-layer/index.md)
-    * 網站導覽目錄：[mkdocs.yml](file:///d:/university/網路通訊概論/network-notes/mkdocs.yml)
-    * 首頁導覽：[docs/index.md](file:///d:/university/網路通訊概論/network-notes/docs/index.md)
-    * AI 協作紀錄：[docs/ai-collaboration.md](file:///d:/university/網路通訊概論/network-notes/docs/ai-collaboration.md)
+???+ note "09/14：傅立葉章節降維解說與比喻精簡"
+    - **使用模型**：`Gemini 3.7 Flash`
+    - **提問目的**：降低工程數學門檻，將傅立葉分析直觀化為正弦波分量疊加；同時避免過度比喻，精簡生活化例子以維持學術專業度。
+    - **關鍵引導 Prompts**：
+        > **輪次 1（降維教學）**：  
+        > 「傅立葉的地方對於沒學過工程數學的同學太難了 請從把訊號拆成n個頻率不同的sine cos來解釋」
+        > 
+        > **輪次 2（比喻收斂）**：  
+        > 「傅立葉那張的例子留音樂那個就好，並且不需要在每個地方都用音符比喻，在開頭作為聯想就好」
+    - **協作成效**：
+        1. 成功將高等微積分與工程數學公式「降維」為高中三角函數與向量合成直覺。
+        2. 僅保留開頭的「音樂和弦」比喻，後續公式、方波拆解與頻譜圖回歸清晰標準的通訊工程術語（基頻、諧波、頻率分量、振幅）。
+    - **對應成果**：
+        - [2. 方波構成與傅立葉分析 (physical-layer/fourier-and-square-wave.md)](physical-layer/fourier-and-square-wave.md)
 
 ---
 
-**新增對話紀錄範本（供後續擴充使用）**
+## 📅 2026/10 簡報精確對照與深度專章建置
 
-若後續有新的 AI 對話紀錄，可直接複製下方格式貼上新增：
+???+ note "10/02：對照投影片重構實體層核心（清除超綱內容與 ASCII 字符畫）"
+    - **使用模型**：`Gemini 3.7 Flash`
+    - **提問目的**：對照課堂 33 頁簡報重新校對各節內容，徹底移除未講授的額外延伸主題，並將粗糙的 ASCII 字符圖全面升級。
+    - **提問 Prompt**：
+        > 「請按照這個檔案提及的內容 幫我撰寫實體層的內容，其中「正弦波特性與通式0」、「方波構成與傅立葉分析」不須更動。其餘部分需有邏輯調理地涵蓋簡報內容，圖片部分不要用ascii」
+    - **協作成效與重構重點**：
+        1. **剔除超綱內容**：移除非簡報範疇的教科書額外延伸主題（如 Nyquist / Shannon 極限定理、雙絞線 / 光纖物理規格、曼徹斯特編碼等），聚焦課堂講授核心。
+        2. **圖像化規範**：全篇徹底去除 ASCII 字符畫，改以 Mermaid 狀態流程圖與清楚的排版呈現。
+        3. **章節內容精確落地**：
+            - 重構第 3 章：嚴格收錄頻寬定義（$B = f_{\max} - f_{\min}$）、時域壓縮與頻寬關係、非週期連續 sinc 頻譜、有效頻寬（90% 能量）及傅立葉轉換 5 大關鍵性質。
+            - 整理無線調變物理限制（直流分量、天線尺寸 $\approx \lambda/4$、大氣共享）與積化和差展開計算實例。
+    - **對應成果**：
+        - [3. 頻寬與傅立葉轉換性質 (physical-layer/bandwidth-and-capacity.md)](physical-layer/bandwidth-and-capacity.md)
+
+???+ note "10/02：依 35 頁簡報建立 Modulation 專章（星座圖、I/Q正交解調與AMC機制）"
+    - **使用模型**：`Gemini 3.7 Flash`
+    - **提問目的**：依據調變專題 35 頁簡報，建立完整「數位調變、解調與適應性傳輸機制」專章，要求抽象概念以具體幾何圖形與實例解說。
+    - **提問 Prompt**：
+        > 「請幫我依照簡報安排新增modulation章節，抽象概念請以實例或圖像解釋」
+    - **協作成效與核心解構亮點**：
+        1. **位元 (Bit) vs 符號 (Symbol)**：以「貨車（符號）與貨物（位元）」作為實體直觀比喻，說明多階調變如何在相同頻寬下倍增傳輸速率。
+        2. **振幅與相位移鍵 (ASK / BPSK / QPSK)**：以方塊圖解說 BASK 與乘法器架構；推導 QPSK 正交雙載波（$\pm\cos \pm\sin$）之合成原理。
+        3. **星座圖與正交振幅調變 (QAM)**：嚴格推導 $A\cos(2\pi f_c t + \theta) = I(t)\cos - Q(t)\sin$，並以具體位元串（如 `1101 0111 ...`）示範 16-QAM 星座映射。
+        4. **接收端正交解調三步驟**：乘載波混頻 $\to$ 低通濾波 (LPF) $\to$ 放大 2 倍還原，搭配幾何最近鄰判決 (Minimum Euclidean Distance)。
+        5. **適應性調變與編碼機制 (AMC)**：權衡 SNR 與階數、$\epsilon$-Greedy 探索策略，以及 Frame Header 永遠採用強固 BPSK 的保護機制。
+    - **對應成果**：
+        - [4. 數位調變、解調與適應性傳輸機制 (physical-layer/modulation.md)](physical-layer/modulation.md)
+
+???+ note "10/12：OFDM 章節範圍收斂、連貫脈絡重構與直覺教學化"
+    - **使用模型**：`Gemini 3.7 Flash` / `Claude 3.5 Sonnet` / `Gemini 3.8 Flash`
+    - **提問目的**：從保護頻帶與保護時間出發，嚴格收斂章節範圍至「僅保留 Guard Band/Time 與離散傅立葉轉換 (DFT)」，建立時頻物理制約與時域取樣之自然連貫，並引導以「音叉共振測試」等直觀教學切入，收尾於正交性 (Orthogonality)。
+    - **提示詞演進與收斂歷程（多輪引導展示）**：
+
+        | 輪次 | 使用者引導 Prompt | AI 反饋與調整成效 |
+        | :--- | :--- | :--- |
+        | **輪次 1** | 「請幫我新增OFDM章，從guard time/band講到 離散傅立葉就好」 | 初版建立了完整 OFDM 系統（含 CP、FFT 架構與多階調變等），範圍過度發散。 |
+        | **輪次 2** | 「從guard time/band講到 離散傅立葉就好，我暫時不需要其他節」 | 執行第一階段精簡，移除系統架構全圖與 Q&A。 |
+        | **輪次 3** | 「不對 就講guard time/band和 離散傅立葉，不要有其他東西」 | 第二階段精準收斂，嚴格鎖定保護機制與離散傅立葉兩大核心。 |
+        | **輪次 4** | 「離散傅立葉轉換的部分先講理論部分就好，還不要跨到OFDM應用部分，並且確保保護頻帶與保護時間和離散傅立葉之間的主題是連貫的，而不是分段論述」 | 移除 OFDM 調變應用；建立「串聯樞紐」：闡明保護時間將連續訊號切分為「有限時間區塊 ($T$)」加上接收端「$N$ 點數位取樣」，必然引導出離散傅立葉轉換的需求。 |
+        | **輪次 5** | 「講到正交性就好，再往後的都不要，然後離散傅立葉請從直覺、概念開始講，要像老師在教同學一樣，而不是數學教科書一上來就丟定義」 | 1. 裁切正交性之後的所有內容（移除週期延拓、FFT 複雜度等）。<br>2. 引入「耳朵聽和弦」、「音叉共鳴測試（相乘加總投影）」直覺解構公式。<br>3. 以平面投影與旋轉向量對稱抵消解釋正交性，完美收尾。 |
+        | **輪次 6** | 「請把本次「完整」對話內容一字不漏寫成.md，並在AI對話紀錄中插入該md」 | 生成逐字全紀錄專頁，並同步更新導覽與索引。 |
+
+    - **完整對話逐字紀錄專頁**：
+        > 📑 **查驗全文**：[點此檢視 10/12 完整 6 輪對話逐字全文紀錄 (chat-history-10-12.md)](chat-history-10-12.md)
+    - **對應成果**：
+        - [5. 正交分頻多工 (OFDM) 與離散傅立葉 (physical-layer/ofdm.md)](physical-layer/ofdm.md)
+
+???+ note "10/19：OFDM 章節續寫（循環前綴、FFT 與收發流程）"
+    - **使用模型**：`Deepseek v4 pro + Cline`
+    - **提問目的**：接續既有 OFDM 篇章，補上循環前綴 (CP)、快速傅立葉轉換 (FFT) 與 OFDM 發送／接收流程，並在保持邏輯連貫的前提下簡化敘述、重整版面。
+    - **提問 Prompt**：
+        > 「請幫我接續OFDM篇章，補上快速傅立葉轉換以及OFDM發送和接收的流程，邏輯上要保持連貫，呈現方式清晰 簡單 易懂，盡量不要像教科書堆砌定義，同時調整排版讓整個章節閱讀起來更加舒適」
+    - **協作成效**：
+        1. **循環前綴 (CP)**：從「空白保護時間會破壞正交性、引發 ICI」切入，說明複製符號尾巴如何讓延遲波形在 FFT 窗口內維持完整週期，並補上 $T_{cp} \ge \tau_{\max}$ 的設計原則。
+        2. **快速傅立葉轉換 (FFT)**：先量化 DFT 的 $N^2$ 運算量，再以奇偶拆半的分治樹說明 $\frac{N}{2}\log_2 N$ 的加速原理，附 21～682 倍對照表。
+        3. **OFDM 發送／接收流程**：以 Mermaid 流程圖呈現「位元 → 映射 → 串並 → IFFT → CP → DAC」與「ADC → 串並 → 去 CP → FFT → 等化 → 解映射」兩個方向的完整鏈路，並說明單抽頭等化。
+        4. **排版重整**：H1 加上章節編號、新增「核心觀念」與「本章地圖」、統一 Mermaid 流程圖、補上端到端總覽、Q&A、精華總結與章末收尾。
+    - **完整對話逐字紀錄專頁**：
+        > 📑 **查驗全文**：[點此檢視 10/19 完整 3 輪對話紀錄 (chat-history-10-19.md)](chat-history-10-19.md)
+    - **對應成果**：
+        - [5. 正交分頻多工 (OFDM)：保護頻帶、循環前綴與快速傅立葉轉換 (physical-layer/ofdm.md)](physical-layer/ofdm.md)
+
+---
+
+## 📅 2026/11 講義對照擴充與圖表升級
+
+???+ note "11/02：OFDM 章節對照講義擴充、公式統一與圖表升級"
+    - **使用模型**：`Deepseek v4 pro + Cline`
+    - **提問目的**：對照課程講義 (PDF) 校正並擴充「正交分頻多工 (OFDM)」章節，統一離散傅立葉公式表示法，將 ASCII 框線圖全面升級為 Mermaid 流程圖與 matplotlib 向量圖，並補齊講義中缺失的內容。
+    - **提問 Prompt**：
+        > 「請根據講義 PDF 擴充並修正 OFDM 教學頁，統一公式為 $W_N$ 表示法，將 ASCII 圖換成 Mermaid + matplotlib PNG，並補上循環卷積、DFT 矩陣、FFT 蝴蝶圖與設計版本等講義中缺失的內容」
+    - **協作成效**：
+        1. **表示法統一**：定義 $W_N \triangleq e^{-j2\pi/N}$，全章公式統一使用 $W_N$；DFT 不含 $1/N$、IDFT 含 $1/N$。
+        2. **圖表全面升級**：移除全部 ASCII 框線字元圖，改用 17 個 Mermaid 流程圖，並以 matplotlib 產生 3 張向量圖（OFDM sinc 頻譜、Guard Band vs OFDM 對照、循環卷積示意）。
+        3. **補齊講義缺失內容**：DFT/IDFT 矩陣形式（$N=4$）與矩陣正交性證明、OFDM sinc 頻譜、循環卷積與 LTI 單抽頭等化、符號內干擾 (Intra-Symbol Interference)、2 點 FFT 蝴蝶圖、$N$ 點 FFT/IFFT、OFDM 設計版本 v1/v2。
+        4. **收尾擴充**：新增複習重點、名詞解釋與精華總結表。
+        5. **品質驗證**：17/17 Mermaid 語法通過官方 parser、LaTeX 跳脫正確、`mkdocs build` 建置成功。
+    - **完整對話逐字紀錄專頁**：
+        > 📑 **查驗全文**：[點此檢視 11/02 完整對話紀錄 (chat-history-11-02.md)](chat-history-11-02.md)
+    - **對應成果**：
+        - [5. 正交分頻多工 (OFDM)：保護頻帶、循環前綴與快速傅立葉轉換 (physical-layer/ofdm.md)](physical-layer/ofdm.md)
+
+---
+
+## 📝 新增對話紀錄範本
+
+若後續有新的 AI 協作對話紀錄，請依照下方標準格式新增，以維持整體頁面排版一致：
 
 ```markdown
-??? quote "對話 X：[請填寫對話主題]"
-    - **使用模型**：[例如：ChatGPT-4o / Claude 3.5 Sonnet / Gemini]
-    - **提問目的**：[簡述提問目的]
-
-    **原始對話紀錄：**
-    > [在此貼上你的對話紀錄]
+???+ note "MM/DD：[對話主題與目標章節]"
+    - **使用模型**：[例如：Gemini 3.8 Flash / Claude 3.5 Sonnet]
+    - **提問目的**：[簡述本輪對話的核心目標與引導策略]
+    - **提問 Prompt**：
+        > 「[貼上關鍵 Prompt 或引導語]」
+    - **協作成效**：
+        1. [重點成效 1]
+        2. [重點成效 2]
+    - **對應成果**：
+        - [章節名稱 (路徑)](physical-layer/example.md)
 ```

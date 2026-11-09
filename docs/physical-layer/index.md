@@ -17,11 +17,13 @@ graph TD
     A["1. 正弦波 (Sine Wave)<br>物理界最純粹的連續訊號通式：A cos(2πft + θ)"] --> B["2. 方波的構成與傅立葉分析 (Fourier Analysis)<br>電腦的 0 與 1 方波由基頻與奇數次諧波疊加而成"]
     B --> C["3. 頻寬與傅立葉五大性質 (Bandwidth & Properties)<br>有效頻寬 (90%能量) ↔ 時移/縮放/相加/餘弦相乘性質"]
     C --> D["4. 數位調變、解調與適應性機制 (Modulation & AMC)<br>ASK/PSK/QAM 星座圖 ↔ I/Q 正交分解 ↔ 最近鄰判決與 AMC 策略"]
+    D --> E["5. 正交分頻多工與離散傅立葉 (OFDM & DFT)<br>多徑延遲 ↔ Guard Band/Time ↔ 循環前綴 CP ↔ 正交重疊 ↔ IDFT/FFT 數位實作"]
     
     style A fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#0f172a;
     style B fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#0f172a;
     style C fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#0f172a;
     style D fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#0f172a;
+    style E fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#0f172a;
 ```
 
 ---
@@ -36,6 +38,7 @@ graph TD
 | [2. 方波構成與傅立葉分析](fourier-and-square-wave.md) | 數位方波是怎麼生出來的？ | 透過傅立葉級數，方波其實是「基頻 + 奇數次諧波」的疊加。 |
 | [3. 頻寬與傅立葉轉換性質](bandwidth-and-capacity.md) | 什麼是頻寬？壓縮時間為何會展寬頻率？ | 頻寬以 Hz 為單位，矩形脈衝主瓣集中 90% 能量，掌握傅立葉五大物理性質。 |
 | [4. 數位調變、解調與適應性傳輸機制](modulation.md) | 如何利用正弦波傳送 0/1 並在雜訊中精準還原？ | ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調，以及依 SNR 動態調整的 AMC 策略。 |
+| [5. 正交分頻多工 (OFDM) 與離散傅立葉](ofdm.md) | 頻寬極大化時如何克服多徑 ISI 與硬體複雜度？ | 告別 Guard Band，善用 Guard Time 與循環前綴 (CP)，透過 IDFT/FFT 數位算法實現數千載波正交傳輸。 |
 
 ---
 

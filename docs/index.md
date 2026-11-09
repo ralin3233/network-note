@@ -21,6 +21,7 @@
   2. [方波構成與傅立葉分析](physical-layer/fourier-and-square-wave.md)：數位方波如何由基頻與奇數次諧波疊加而成？
   3. [頻寬與傅立葉轉換性質](physical-layer/bandwidth-and-capacity.md)：頻寬定義（Hz）、有效頻寬（90% 能量）與傅立葉五大關鍵性質。
   4. [數位調變、解調與適應性傳輸機制](physical-layer/modulation.md)：ASK/PSK/QAM 星座圖映射、I/Q 正交雙載波解調、雜訊判決與適應性 AMC / Header 設計。
+  5. [正交分頻多工 (OFDM) 與離散傅立葉](physical-layer/ofdm.md)：克服多徑 ISI、Guard Band/Time、循環前綴 (CP)、正交重疊頻譜與 IDFT/FFT 數位調變解調。
 
 ### [AI 協作與對話紀錄](ai-collaboration.md)
 記錄本網站製作期間使用 AI 輔助規劃、觀念釐清、計算驗證與排版之 Prompt 與對話歷程（供課程評分查驗）。

@@ -52,4 +52,9 @@ nav:
       - 2. 方波構成與傅立葉分析: physical-layer/fourier-and-square-wave.md
       - 3. 頻寬與傅立葉轉換性質: physical-layer/bandwidth-and-capacity.md
       - 4. 數位調變、解調與適應性傳輸機制: physical-layer/modulation.md
-  - AI 協作紀錄: ai-collaboration.md
+      - 5. 正交分頻多工 (OFDM) 與離散傅立葉: physical-layer/ofdm.md
+  - AI 協作紀錄:
+      - AI 協作總覽: ai-collaboration.md
+      - 10/12 完整對話紀錄: chat-history-10-12.md
+      - 10/19 完整對話紀錄: chat-history-10-19.md
+      - 11/02 完整對話紀錄: chat-history-11-02.md
